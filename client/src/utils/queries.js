@@ -6,15 +6,33 @@ export const GET_ME = gql`
       _id
       username
       email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
+      profile {
+        aboutMe
+        education
+        skills
+      }
+      projects {
         title
-        image
+        description
+        technologies
         link
       }
+      blogPosts {
+        title
+        content
+        date
+      }
+    }
+  }
+`;
+
+export const GET_ALL_BLOGS = gql`
+  query getAllBlogs {
+    getAllBlogs {
+      _id
+      title
+      content
+      date
     }
   }
 `;

@@ -8,15 +8,6 @@ export const LOGIN_USER = gql`
         _id
         username
         email
-        bookCount
-        savedBooks {
-          bookId
-          authors
-          description
-          title
-          image
-          link
-        }
       }
     }
   }
@@ -30,54 +21,50 @@ export const ADD_USER = gql`
         _id
         username
         email
-        bookCount
-        savedBooks {
-          bookId
-          authors
-          description
-          title
-          image
-          link
-        }
       }
     }
   }
 `;
 
-export const SAVE_BOOK = gql`
-  mutation saveBook($input: bookInput!) {
-    saveBook(input: $input) {
+export const UPDATE_USER = gql`
+  mutation updateUser($aboutMe: String, $education: String, $skills: String) {
+    updateUser(aboutMe: $aboutMe, education: $education, skills: $skills) {
       _id
-      username
-      email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
-        link
+      profile {
+        aboutMe
+        education
+        skills
       }
     }
   }
 `;
 
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: String!) {
-    removeBook(bookId: $bookId) {
+export const ADD_BLOG = gql`
+  mutation addBlog($title: String!, $content: String!) {
+    addBlog(title: $title, content: $content) {
       _id
-      username
-      email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
-        link
-      }
+      title
+      content
+      date
+    }
+  }
+`;
+
+export const UPDATE_BLOG = gql`
+  mutation updateBlog($blogId: ID!, $title: String, $content: String) {
+    updateBlog(blogId: $blogId, title: $title, content: $content) {
+      _id
+      title
+      content
+      date
+    }
+  }
+`;
+
+export const DELETE_BLOG = gql`
+  mutation deleteBlog($blogId: ID!) {
+    deleteBlog(blogId: $blogId) {
+      _id
     }
   }
 `;

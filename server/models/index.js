@@ -1,8 +1,8 @@
 const User = require('./User');
-const Skill = require('./Skill');
-const Project = require('./Project');
-const BlogPost = require('./BlogPost');
-const Testimonial = require('./Testimonial');
-const ContactMessage = require('./ContactMessage');
+const Skill = require('./Skills');
+const Projects = require('./Projects');
+const BlogPosts = require('./BlogPosts');
+const Testimonials = require('./Testimonials');
+const ContactMessages = require('./ContactMessages');
 
-module.exports = { User, Skill, Project, BlogPost, Testimonial, ContactMessage };
+module.exports = { User, Skill, Projects, BlogPosts, Testimonials, ContactMessages };
