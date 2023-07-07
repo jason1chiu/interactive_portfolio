@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Skill, Project, BlogPost, Testimonial, ContactMessage } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -9,11 +9,26 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select('-__v -password')
       
-      return userData;
+        return userData;
       }
 
       throw new AuthenticationError('Not logged in');
-    }
+    },
+    skills: async () => {
+      return Skill.find({});
+    },
+    projects: async () => {
+      return Project.find({});
+    },
+    blogPosts: async () => {
+      return BlogPost.find({});
+    },
+    testimonials: async () => {
+      return Testimonial.find({});
+    },
+    contactMessages: async () => {
+      return ContactMessage.find({});
+    },
   },
 
   Mutation: {
@@ -40,29 +55,46 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    saveBook: async (parent, { input }, context) => {
+    addSkill: async (parent, args, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { savedBooks: input } },
-          { new: true }
-        );
-        return updatedUser;
+        const skill = await Skill.create(args);
+        await User.findByIdAndUpdate(context.user._id, { $push: { skills: skill._id } });
+        return skill;
       }
-      throw new AuthenticationError('You need to be logged in!')
-    },    
-
-    removeBook: async (parent, args, context) => {
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addProject: async (parent, args, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { savedBooks: { bookId: args.bookId } } },
-          { new: true }
-        );
-        return updatedUser;
+        const project = await Project.create(args);
+        await User.findByIdAndUpdate(context.user._id, { $push: { projects: project._id } });
+        return project;
       }
-      throw new AuthenticationError('You need to be logged in!')
-    } 
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addBlogPost: async (parent, args, context) => {
+      if (context.user) {
+        const blogPost = await BlogPost.create(args);
+        await User.findByIdAndUpdate(context.user._id, { $push: { blogPosts: blogPost._id } });
+        return blogPost;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addTestimonial: async (parent, args, context) => {
+      if (context.user) {
+        const testimonial = await Testimonial.create(args);
+        await User.findByIdAndUpdate(context.user._id, { $push: { testimonials: testimonial._id } });
+        return testimonial;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addContactMessage: async (parent, args, context) => {
+      if (context.user) {
+        const contactMessage = await ContactMessage.create(args);
+        await User.findByIdAndUpdate(context.user._id, { $push: { contactMessages: contactMessage._id } });
+        return contactMessage;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   }
 };
 

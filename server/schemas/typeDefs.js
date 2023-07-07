@@ -1,22 +1,49 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  
   type User {
     _id: ID
     username: String
     email: String
-    bookCount: Int
-    savedBooks: [Book]
+    skills: [Skill]
+    projects: [Project]
+    blogPosts: [BlogPost]
+    testimonials: [Testimonial]
+    contactMessages: [ContactMessage]
   }
 
-  type Book {
-    bookId: String
-    authors: [String]
-    description: String
+  type Skill {
+    _id: ID
+    name: String
+    proficiency: String
+  }
+
+  type Project {
+    _id: ID
     title: String
-    image: String
+    description: String
     link: String
+    image: String
+  }
+
+  type BlogPost {
+    _id: ID
+    title: String
+    content: String
+    date: String
+  }
+
+  type Testimonial {
+    _id: ID
+    author: String
+    content: String
+  }
+
+  type ContactMessage {
+    _id: ID
+    name: String
+    email: String
+    message: String
   }
 
   type Auth {
@@ -24,27 +51,24 @@ const typeDefs = gql`
     user: User
   }
 
-  input bookInput {
-    bookId: String
-    authors: [String]
-    description: String
-    title: String
-    image: String
-    link: String
-  }
-
   type Query {
     me: User
+    skills: [Skill]
+    projects: [Project]
+    blogPosts: [BlogPost]
+    testimonials: [Testimonial]
+    contactMessages: [ContactMessage]
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveBook(input: bookInput): User
-    removeBook(bookId: String!): User
+    addSkill(name: String!, proficiency: String!): Skill
+    addProject(title: String!, description: String!, link: String!, image: String!): Project
+    addBlogPost(title: String!, content: String!, date: String!): BlogPost
+    addTestimonial(author: String!, content: String!): Testimonial
+    addContactMessage(name: String!, email: String!, message: String!): ContactMessage
   }
+`;
 
-  `;
-
-// export the typeDef
-module.exports = typeDefs; 
+module.exports = typeDefs;
