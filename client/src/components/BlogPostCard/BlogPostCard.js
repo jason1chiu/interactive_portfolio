@@ -3,7 +3,8 @@ import { Card, Button } from 'react-bootstrap';
 
 const BlogPostCard = ({ post }) => {
   return (
-    <Card className='col-12 col-md-6 d-flex justify-content-center align-items-center' style={{ width: '18rem' }}>
+    <Card className='my-3 shadow' style={{ maxWidth: '600px' }}>
+      <Card.Img variant="top" src={post.image || "https://via.placeholder.com/500"} alt={post.title}/>
       <Card.Body>
         <Card.Title>{post.title}</Card.Title>
         <Card.Text>{post.summary}</Card.Text>

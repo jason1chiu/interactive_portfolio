@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import SkillBadge from '../../../components/SkillBadge/SkillBadge'
 
 const Skills = () => {
@@ -6,10 +7,16 @@ const Skills = () => {
   const skills = ['JavaScript', 'React', 'Node.js'];
 
   return (
-    <div>
+    <Container id='skills-section' className="text-center">
       <h1>My Skills</h1>
-      {skills.map(skill => <SkillBadge skill={skill} />)}
-    </div>
+      <Row>
+        {skills.map((skill, idx) => (
+          <Col key={idx} xs={12} sm={6} md={4} lg={3}>
+            <SkillBadge skill={skill} />
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };
 

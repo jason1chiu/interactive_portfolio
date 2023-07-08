@@ -4,11 +4,10 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import HomePage from './pages/Home/HomePage'
 import Blog from './pages/Blog/Blog';
-import Navigation from './components/Navbar/Navbar';
+import Navigation from './components/Navbar/Navigation';
 import Footer from './components/Footer/Footer';
 import LoginPage from './pages/Login/LoginPage';
 import SignUp from './components/SignUpForm/SignUpForm';
-
 
 // Create an Apollo Client and specify the connection to your GraphQL API
 const client = new ApolloClient({
@@ -24,8 +23,8 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Navigation />
-        <HomePage />
-        <Routes>
+        <Routes>  
+          <Route path='/' element={<HomePage />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path="/signup" element={<SignUp />} />

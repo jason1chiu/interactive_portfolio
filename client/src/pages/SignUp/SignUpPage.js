@@ -1,12 +1,17 @@
 import React from 'react';
-import SignUp from '../components/SignUpForm/SignUpForm';
+import { Container, Row } from 'react-bootstrap';
+import SignUpForm from '../../components/SignUpForm/SignUpForm';
 
 function SignUpPage() {
   return (
-    <div>
-      <h1>Create Your Account</h1>
-      <SignUp />
-    </div>
+    <Container className='my-5'>
+      <Row className="justify-content-center">
+        <h1>Create Your Account</h1>
+      </Row>
+      <Row>
+        <SignUpForm />
+      </Row>
+    </Container>
   );
 }
 

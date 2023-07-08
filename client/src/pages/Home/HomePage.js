@@ -7,10 +7,18 @@ import Contact from './Contact/Contact'
 const HomePage = () => {
   return (
     <div>
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
+      <div className="my-5">
+        <About />
+      </div>
+      <div className="my-5">
+        <Skills />
+      </div>
+      <div className="my-5">
+        <Projects />
+      </div>
+      <div className="my-5">
+        <Contact />
+      </div>
     </div>
   );
 };
