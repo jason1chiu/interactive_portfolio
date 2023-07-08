@@ -2,7 +2,6 @@ import React from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import { Button } from 'react-bootstrap';
 import ProjectCard from '../../../components/ProjectCard/ProjectCard';
 
 const ProjectsPage = () => {
@@ -31,14 +30,7 @@ const ProjectsPage = () => {
       <Slider {...settings}>
         {projects.map((project) => (
           <div key={project.id}>
-            <h3>{project.title}</h3>
-            <img
-              className="d-block w-100"
-              src={project.img}
-              alt={project.title}
-            />
-            <p>{project.description}</p>
-            <Button href={project.link} variant="primary">View Project</Button>
+            <ProjectCard project={project} />
           </div>
         ))}
       </Slider>
