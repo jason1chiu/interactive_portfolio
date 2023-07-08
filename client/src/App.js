@@ -2,9 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-import SearchBooks from './pages/SearchBooks';
-import SavedBooks from './pages/SavedBooks';
-import Navbar from './components/Navbar';
+import HomePage from './pages/Home/HomePage'
+import Blog from './pages/Blog/Blog';
+import Navigation from './components/Navbar/Navigation';
+import Footer from './components/Footer/Footer';
+import LoginPage from './pages/Login/LoginPage';
+import SignUp from './components/SignUpForm/SignUpForm';
 
 // Create an Apollo Client and specify the connection to your GraphQL API
 const client = new ApolloClient({
@@ -19,23 +22,14 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <>
-          <Navbar />
-          <Routes>
-            <Route
-              path='/'
-              element={<SearchBooks />}
-            />
-            <Route
-              path='/saved'
-              element={<SavedBooks />}
-            />
-            <Route
-              path='*'
-              element={<h1 className='display-2'>Wrong page!</h1>}
-            />
-          </Routes>
-        </>
+        <Navigation />
+        <Routes>  
+          <Route path='/' element={<HomePage />} />
+          <Route path='/blog' element={<Blog />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+        <Footer />
       </Router>
     </ApolloProvider>
   );

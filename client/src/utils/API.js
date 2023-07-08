@@ -1,4 +1,3 @@
-// route to get logged in user's info (needs the token)
 export const getMe = (token) => {
   return fetch('/api/users/me', {
     headers: {
@@ -28,30 +27,52 @@ export const loginUser = (userData) => {
   });
 };
 
-// save book data for a logged in user
-export const saveBook = (bookData, token) => {
-  return fetch('/api/users', {
+export const updateUserProfile = (userData, token) => {
+  return fetch('/api/users/me', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(bookData),
+    body: JSON.stringify(userData),
   });
 };
 
-// remove saved book data for a logged in user
-export const deleteBook = (bookId, token) => {
-  return fetch(`/api/users/books/${bookId}`, {
+export const getProjects = () => {
+  return fetch('/api/projects');
+};
+
+export const getProject = (id) => {
+  return fetch(`/api/projects/${id}`);
+};
+
+export const createProject = (projectData, token) => {
+  return fetch('/api/projects', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(projectData),
+  });
+};
+
+export const updateProject = (id, projectData, token) => {
+  return fetch(`/api/projects/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(projectData),
+  });
+};
+
+export const deleteProject = (id, token) => {
+  return fetch(`/api/projects/${id}`, {
     method: 'DELETE',
     headers: {
       authorization: `Bearer ${token}`,
     },
   });
-};
-
-// make a search to google books api
-// https://www.googleapis.com/books/v1/volumes?q=harry+potter
-export const searchGoogleBooks = (query) => {
-  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
 };
