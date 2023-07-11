@@ -1,5 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #264653;
+  --secondary-color: #2a9d8f;
+  --accent-color: #e76f51;
+  --background-color: #f4f4f4;
+  --text-color: #333333;
+}
+
 body {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color)
 }
 
 h1,
@@ -8,10 +20,38 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Rubik Mono One', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .small {
   font-weight: 300;
   font-style: italic;
+}
+
+.custom-navbar,
+.custom-footer {
+  background-color: var(--primary-color);
+}
+
+.customNavbarBrand,
+.customNavLink,
+.subheading {
+  color: var(--secondary-color) !important;
+}
+
+.customNavbarBrand:hover,
+.customNavbarBrand:focus,
+.customNavLink:hover,
+.customNavLink:focus {
+  color: var(--accent-color) !important;
+}
+
+.custom-button {
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+
+.custom-button:hover {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
 }

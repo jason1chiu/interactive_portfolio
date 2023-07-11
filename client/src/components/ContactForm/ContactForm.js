@@ -52,7 +52,7 @@ const ContactForm = ({ handleContact }) => {
                   />
                 </Form.Group>
                 
-                <Button variant="primary" type="submit" block>
+                <Button className='custom-button' variant="primary" type="submit" block>
                   Send Message
                 </Button>
               </Form>

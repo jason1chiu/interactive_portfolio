@@ -9,8 +9,8 @@ const Contact = () => {
 
   return (
     <div id='contact-section' className="text-center">
-      <h1>Contact Me</h1>
-      <ContactForm handleContact={handleContact} />
+      <h1 className='subheading'>Contact Me</h1>
+      <ContactForm  handleContact={handleContact} />
     </div>
   );
 };
