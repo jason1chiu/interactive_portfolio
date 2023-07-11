@@ -30,6 +30,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .customNavbarBrand,
 .customNavLink,
+.customLink,
 .subheading {
   color: var(--secondary-color) !important;
 }
@@ -37,7 +38,9 @@ h1, h2, h3, h4, h5, h6 {
 .customNavbarBrand:hover,
 .customNavbarBrand:focus,
 .customNavLink:hover,
-.customNavLink:focus {
+.customNavLink:focus 
+.customLink:hover,
+.customLink:focus {
   color: var(--accent-color) !important;
 }
 
