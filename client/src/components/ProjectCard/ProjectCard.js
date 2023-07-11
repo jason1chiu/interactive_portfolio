@@ -8,7 +8,7 @@ const ProjectCard = ({ project }) => {
       <Card.Body>
         <Card.Title>{project.title}</Card.Title>
         <Card.Text>{project.summary}</Card.Text>
-        <Button className="custom-button" variant="primary" href={project.link} target="_blank">Go to Project</Button>
+        <Button className="customButton" variant="primary" href={project.link} target="_blank">Go to Project</Button>
       </Card.Body>
     </Card>
   );
