@@ -19,8 +19,8 @@ const Navigation = () => {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand as={Link} to="/">
+    <Navbar className="custom-navbar" expand="lg">
+      <Navbar.Brand as={Link} to="/" className="customNavbarBrand">
         My Portfolio
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -28,59 +28,59 @@ const Navigation = () => {
         <Nav className="ml-auto">
           {location.pathname === "/" && (
             <>
-              <Nav.Link onClick={event => handleScrollToSection(event, 'about-section')}>
+              <Nav.Link className="customNavLink" onClick={event => handleScrollToSection(event, 'about-section')}>
                 About Me
               </Nav.Link>
-              <Nav.Link onClick={event => handleScrollToSection(event, 'skills-section')}>
+              <Nav.Link className="customNavLink" onClick={event => handleScrollToSection(event, 'skills-section')}>
                 Skills
               </Nav.Link>
-              <Nav.Link onClick={event => handleScrollToSection(event, 'projects-section')}>
+              <Nav.Link className="customNavLink" onClick={event => handleScrollToSection(event, 'projects-section')}>
                 Projects
               </Nav.Link>
-              <Nav.Link as={Link} to="/blog">
+              <Nav.Link className="customNavLink" as={Link} to="/blog">
                 Blog
               </Nav.Link>
-              <Nav.Link as={Link} to="/signup">
+              <Nav.Link className="customNavLink" as={Link} to="/signup">
                 Sign Up
               </Nav.Link>
             </>
           )}
           {location.pathname === "/blog" && (
             <>
-              <Nav.Link as={Link} to="/">
+              <Nav.Link className="customNavLink" as={Link} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/signup">
+              <Nav.Link className="customNavLink" as={Link} to="/signup">
                 Sign Up
               </Nav.Link>
             </>
           )}
           {location.pathname === "/signup" && (
             <>
-              <Nav.Link as={Link} to="/">
+              <Nav.Link className="customNavLink" as={Link} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/blog">
+              <Nav.Link className="customNavLink" as={Link} to="/blog">
                 Blog
               </Nav.Link>
             </>
           )}
           {location.pathname === "/login" && (
             <>
-              <Nav.Link as={Link} to="/">
+              <Nav.Link className="customNavLink" as={Link} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/blog">
+              <Nav.Link className="customNavLink" as={Link} to="/blog">
                 Blog
               </Nav.Link>
-              <Nav.Link as={Link} to="/signup">
+              <Nav.Link className="customNavLink" as={Link} to="/signup">
                 Sign Up
               </Nav.Link>
             </>
           )}
           {Auth.loggedIn() && (
             <>
-              <Nav.Link as={Link} to="/admin">
+              <Nav.Link className="customNavLink" as={Link} to="/admin">
                 Admin
               </Nav.Link>
               <Button variant="link" onClick={logout}>
@@ -89,7 +89,7 @@ const Navigation = () => {
             </>
           )}
           {!Auth.loggedIn() && location.pathname !== "/login" && (
-            <Nav.Link as={Link} to="/login">
+            <Nav.Link className="customNavLink" as={Link} to="/login">
               Login
             </Nav.Link>
           )}

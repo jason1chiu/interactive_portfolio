@@ -22,7 +22,7 @@ const ProjectsPage = () => {
     <Container id='projects-section'>
       <Row className='justify-content-center'>
         <Col md={12}>
-          <h1 className='text-center'>My Projects</h1>
+          <h1 className='text-center subheading'>My Projects</h1>
           <Carousel>
             {chunkedProjects.map((projectsChunk, idx) => (
               <Carousel.Item key={idx}>

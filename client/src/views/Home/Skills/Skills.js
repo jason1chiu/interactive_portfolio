@@ -8,7 +8,7 @@ const Skills = () => {
 
   return (
     <Container id='skills-section' className="text-center">
-      <h1>My Skills</h1>
+      <h1 className='subheading'>My Skills</h1>
       <Row>
         {skills.map((skill, idx) => (
           <Col key={idx} xs={12} sm={6} md={4} lg={3}>
