@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import ProjectCard from '../../../components/ProjectCard/ProjectCard';
 
 const ProjectsPage = () => {
@@ -12,30 +12,18 @@ const ProjectsPage = () => {
     { id: 6, title: 'Project 6', description: 'This is project 6.', img: 'img6.jpg', link: '#' },
   ];
 
-  // We're going to group projects by 3
-  const chunkedProjects = [];
-  for (let i = 0; i < projects.length; i += 3) {
-    chunkedProjects.push(projects.slice(i, i+3));
-  }
-
   return (
     <Container id='projects-section'>
       <Row className='justify-content-center'>
         <Col md={12}>
           <h1 className='text-center subheading'>My Projects</h1>
-          <Carousel>
-            {chunkedProjects.map((projectsChunk, idx) => (
-              <Carousel.Item key={idx}>
-                <Row className='justify-content-center'>
-                  {projectsChunk.map((project) => (
-                    <Col md={4} key={project.id}>
-                      <ProjectCard project={project} />
-                    </Col>
-                  ))}
-                </Row>
-              </Carousel.Item>
+          <Row>
+            {projects.map((project) => (
+              <Col md={4} key={project.id}>
+                <ProjectCard project={project} />
+              </Col>
             ))}
-          </Carousel>
+          </Row>
         </Col>
       </Row>
     </Container>
