@@ -1,14 +1,14 @@
 import React from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
-import DetailInformationCard from '../../../components/DetailInformationCard/DetailInformationCard';
-import BackgroundCard from '../../../components/BackgroundCard/BackgroundCard';
-import EducationCard from '../../../components/EducationCard/EducationCard';
-import InterestsCard from '../../../components/InterestsCard/InterestsCard';
+import DetailInformationCard from './components/DetailInformationCard/DetailInformationCard';
+import BackgroundCard from './components/BackgroundCard/BackgroundCard';
+import EducationCard from './components/EducationCard/EducationCard';
+import InterestsCard from './components/InterestsCard/InterestsCard';
 
 const About = () => {
   return (
-    <Container className="text-center" id="about-section">
-      <h1>About Me</h1>
+    <Container id="about-section">
+      <h1 className="text-center">About Me</h1>
       <Row className="mt-4">
         <Col md={8}>
           <Row>

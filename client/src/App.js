@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-import HomePage from './pages/Home/HomePage'
-import Blog from './pages/Blog/Blog';
+import HomePage from './views/Home'
+import Blog from './views/Blog/Blog';
 import Navigation from './components/Navbar/Navigation';
 import Footer from './components/Footer/Footer';
-import LoginPage from './pages/Login/LoginPage';
+import LoginPage from './views/Login/LoginPage';
 import SignUp from './components/SignUpForm/SignUpForm';
 
 // Create an Apollo Client and specify the connection to your GraphQL API
