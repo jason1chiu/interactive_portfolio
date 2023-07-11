@@ -11,15 +11,10 @@
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: var(--background-color);
-  color: var(--text-color)
+  color: var(--text-color);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -46,12 +41,15 @@ h6 {
   color: var(--accent-color) !important;
 }
 
-.custom-button {
+.customButton {
   background-color: var(--secondary-color) !important;
   border-color: var(--secondary-color) !important;
+  color: var(--background-color) !important;
 }
 
-.custom-button:hover {
+.customButton:hover,
+.customButton:focus,
+.customButton:active {
   background-color: var(--accent-color) !important;
   border-color: var(--accent-color) !important;
 }
