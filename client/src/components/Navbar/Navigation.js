@@ -1,11 +1,11 @@
-import React from 'react';
-import { Navbar, Nav, Button } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom';
-import Auth from '../../utils/auth';
+import React from "react";
+import { Navbar, Nav, Button } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
+import Auth from "../../utils/auth";
 
 const Navigation = () => {
   const location = useLocation();
-  const logout = event => {
+  const logout = (event) => {
     event.preventDefault();
     Auth.logout();
   };
@@ -14,13 +14,13 @@ const Navigation = () => {
     event.preventDefault();
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      section.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <Navbar className="custom-navbar" expand="lg">
-      <Navbar.Brand as={Link} to="/" className="customNavbarBrand">
+    <Navbar className="custom-navbar py-3" expand="lg">
+      <Navbar.Brand className="customNavbarBrand">
         My Portfolio
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -28,13 +28,28 @@ const Navigation = () => {
         <Nav className="ml-auto">
           {location.pathname === "/" && (
             <>
-              <Nav.Link className="customNavLink" onClick={event => handleScrollToSection(event, 'about-section')}>
+              <Nav.Link
+                className="customNavLink"
+                onClick={(event) =>
+                  handleScrollToSection(event, "about-section")
+                }
+              >
                 About Me
               </Nav.Link>
-              <Nav.Link className="customNavLink" onClick={event => handleScrollToSection(event, 'skills-section')}>
+              <Nav.Link
+                className="customNavLink"
+                onClick={(event) =>
+                  handleScrollToSection(event, "skills-section")
+                }
+              >
                 Skills
               </Nav.Link>
-              <Nav.Link className="customNavLink" onClick={event => handleScrollToSection(event, 'projects-section')}>
+              <Nav.Link
+                className="customNavLink"
+                onClick={(event) =>
+                  handleScrollToSection(event, "projects-section")
+                }
+              >
                 Projects
               </Nav.Link>
               <Nav.Link className="customNavLink" as={Link} to="/blog">

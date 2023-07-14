@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import SkillBadge from "../../../components/SkillBadge/SkillBadge";
-import { MdAddCircle, MdEdit } from "react-icons/md";
+import { MdAddCircle } from "react-icons/md";
 
 const Skills = () => {
   // Replace this with your actual skills
@@ -14,11 +14,6 @@ const Skills = () => {
         <Col className="text-center">
           <Button className="customButton" variant="primary">
             <MdAddCircle />
-          </Button>
-        </Col>
-        <Col className="text-center">
-          <Button className="customButton" variant="primary">
-            <MdEdit />
           </Button>
         </Col>
       </Row>

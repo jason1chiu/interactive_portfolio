@@ -12,6 +12,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
+  font-size: 1.25rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -35,8 +36,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--secondary-color) !important;
 }
 
-.customNavbarBrand:hover,
-.customNavbarBrand:focus,
 .customNavLink:hover,
 .customNavLink:focus 
 .customLink:hover,
