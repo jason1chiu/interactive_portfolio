@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button } from 'react-bootstrap';
+import { MdUploadFile } from 'react-icons/md';
 import DetailInformationCard from './components/DetailInformationCard/DetailInformationCard';
 import BackgroundCard from './components/BackgroundCard/BackgroundCard';
 import EducationCard from './components/EducationCard/EducationCard';
@@ -30,7 +31,10 @@ const About = () => {
           </Row>
         </Col>
 
-        <Col md={4}>
+        <Col md={4} className="image-container">
+          <Button className="customButton overlay-button" variant="primary">
+            <MdUploadFile /> 
+          </Button>
           <Image src="your-image-url" alt="Your Description Here" fluid />
         </Col>
       </Row>
