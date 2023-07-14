@@ -8,7 +8,6 @@ import Blog from "./views/Blog/Blog";
 import Navigation from "./components/Navbar/Navigation";
 import Footer from "./components/Footer/Footer";
 import LoginPage from "./views/Login/LoginPage";
-import SignUp from "./components/SignUpForm/SignUpForm";
 
 // Create an Apollo Client and specify the connection to your GraphQL API
 const client = new ApolloClient({
@@ -37,7 +36,6 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignUp />} />
               </Routes>
             </Col>
           </Row>
