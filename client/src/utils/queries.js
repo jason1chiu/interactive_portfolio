@@ -4,12 +4,12 @@ export const GET_ME = gql`
   query me {
     me {
       _id
-      username
       email
-      profile {
-        aboutMe
+      about {
+        info
+        background
         education
-        skills
+        interests
       }
       projects {
         title
@@ -21,11 +21,6 @@ export const GET_ME = gql`
         title
         content
         date
-      }
-      testimonials {
-        _id
-        author
-        content
       }
     }
   }

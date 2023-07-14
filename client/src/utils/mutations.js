@@ -13,32 +13,6 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-        email
-      }
-    }
-  }
-`;
-
-export const UPDATE_USER = gql`
-  mutation updateUser($aboutMe: String, $education: String, $skills: String) {
-    updateUser(aboutMe: $aboutMe, education: $education, skills: $skills) {
-      _id
-      profile {
-        aboutMe
-        education
-        skills
-      }
-    }
-  }
-`;
-
 export const ADD_PROJECT = gql`
   mutation addProject(
     $title: String!
@@ -176,34 +150,6 @@ export const UPDATE_BLOG = gql`
 export const DELETE_BLOG = gql`
   mutation deleteBlog($blogId: ID!) {
     deleteBlog(blogId: $blogId) {
-      _id
-    }
-  }
-`;
-
-export const ADD_TESTIMONIAL = gql`
-  mutation addTestimonial($author: String!, $content: String!) {
-    addTestimonial(author: $author, content: $content) {
-      _id
-      author
-      content
-    }
-  }
-`;
-
-export const UPDATE_TESTIMONIAL = gql`
-  mutation updateTestimonial($id: ID!, $author: String!, $content: String!) {
-    updateTestimonial(id: $id, author: $author, content: $content) {
-      _id
-      author
-      content
-    }
-  }
-`;
-
-export const DELETE_TESTIMONIAL = gql`
-  mutation deleteTestimonial($id: ID!) {
-    deleteTestimonial(id: $id) {
       _id
     }
   }
