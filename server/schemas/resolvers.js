@@ -1,12 +1,7 @@
-const {
-  User,
-  Skill,
-  Project,
-  BlogPost,
-  ContactMessage,
-} = require("../models");
+const { User, Skill, Project, BlogPost, ContactMessage } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
+require('dotenv').config();
 
 const resolvers = {
   Query: {
@@ -36,29 +31,21 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
-      const token = signToken(user);
-
-      return { token, user };
-    },
-
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+      if (
+        email === process.env.PORTFOLIO_EMAIL &&
+        password === process.env.PORTFOLIO_PASSWORD
+      ) {
+        // create a simple token (you can use a library for this)
+        const token = signToken({ email: process.env.PORTFOLIO_EMAIL });
 
-      if (!user) {
+        // return an object that includes the token and user details
+        return { token, user: { email: process.env.PORTFOLIO_EMAIL } };
+      } else {
         throw new AuthenticationError("Incorrect credentials");
       }
-
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw new AuthenticationError("Incorrect credentials");
-      }
-
-      const token = signToken(user);
-      return { token, user };
     },
+
     addSkill: async (parent, args, context) => {
       if (context.user) {
         const skill = await Skill.create(args);
@@ -69,6 +56,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+
     addProject: async (parent, args, context) => {
       if (context.user) {
         const project = await Project.create(args);
@@ -79,6 +67,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+
     addBlogPost: async (parent, args, context) => {
       if (context.user) {
         const blogPost = await BlogPost.create(args);
@@ -89,6 +78,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+
     addContactMessage: async (parent, args, context) => {
       if (context.user) {
         const contactMessage = await ContactMessage.create(args);

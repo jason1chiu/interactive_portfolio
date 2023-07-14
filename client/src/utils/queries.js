@@ -56,13 +56,3 @@ export const GET_ALL_BLOGS = gql`
     }
   }
 `;
-
-export const GET_TESTIMONIALS = gql`
-  query getTestimonials {
-    testimonials {
-      _id
-      author
-      content
-    }
-  }
-`;
