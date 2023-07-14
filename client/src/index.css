@@ -56,3 +56,21 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--accent-color) !important;
   border-color: var(--accent-color) !important;
 }
+
+.image-container {
+  position: relative;
+}
+
+.overlay-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.carousel-item-padding-40-px {
+  padding: 0 15px; /* This adds a 15px space on the left and right of each card */
+}
+
+.carousel-container {
+  padding-bottom: 25px !important;
+}
