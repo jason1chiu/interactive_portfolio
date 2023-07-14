@@ -3,7 +3,6 @@ const {
   Skill,
   Project,
   BlogPost,
-  Testimonial,
   ContactMessage,
 } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
@@ -30,9 +29,6 @@ const resolvers = {
     },
     blogPosts: async () => {
       return BlogPost.find({});
-    },
-    testimonials: async () => {
-      return Testimonial.find({});
     },
     contactMessages: async () => {
       return ContactMessage.find({});
@@ -90,16 +86,6 @@ const resolvers = {
           $push: { blogPosts: blogPost._id },
         });
         return blogPost;
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-    addTestimonial: async (parent, args, context) => {
-      if (context.user) {
-        const testimonial = await Testimonial.create(args);
-        await User.findByIdAndUpdate(context.user._id, {
-          $push: { testimonials: testimonial._id },
-        });
-        return testimonial;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

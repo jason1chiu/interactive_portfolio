@@ -53,6 +53,9 @@ const Navigation = () => {
               <Nav.Link className="customNavLink" as={Link} to="/blog">
                 Blog
               </Nav.Link>
+              <Nav.Link className="customNavLink" as={Link} to="/blog">
+                Resume
+              </Nav.Link>
               <Nav.Link className="customNavLink" as={Link} to="/signup">
                 Sign Up
               </Nav.Link>
@@ -62,6 +65,9 @@ const Navigation = () => {
             <>
               <Nav.Link className="customNavLink" as={Link} to="/">
                 Home
+              </Nav.Link>
+              <Nav.Link className="customNavLink" as={Link} to="/blog">
+                Resume
               </Nav.Link>
               <Nav.Link className="customNavLink" as={Link} to="/signup">
                 Sign Up
@@ -76,6 +82,9 @@ const Navigation = () => {
               <Nav.Link className="customNavLink" as={Link} to="/blog">
                 Blog
               </Nav.Link>
+              <Nav.Link className="customNavLink" as={Link} to="/blog">
+                Resume
+              </Nav.Link>
             </>
           )}
           {location.pathname === "/login" && (
@@ -85,6 +94,9 @@ const Navigation = () => {
               </Nav.Link>
               <Nav.Link className="customNavLink" as={Link} to="/blog">
                 Blog
+              </Nav.Link>
+              <Nav.Link className="customNavLink" as={Link} to="/blog">
+                Resume
               </Nav.Link>
               <Nav.Link className="customNavLink" as={Link} to="/signup">
                 Sign Up

@@ -8,7 +8,6 @@ const typeDefs = gql`
     skills: [Skill]
     projects: [Project]
     blogPosts: [BlogPost]
-    testimonials: [Testimonial]
     contactMessages: [ContactMessage]
   }
 
@@ -33,12 +32,6 @@ const typeDefs = gql`
     date: String
   }
 
-  type Testimonial {
-    _id: ID
-    author: String
-    content: String
-  }
-
   type ContactMessage {
     _id: ID
     name: String
@@ -56,7 +49,6 @@ const typeDefs = gql`
     skills: [Skill]
     projects: [Project]
     blogPosts: [BlogPost]
-    testimonials: [Testimonial]
     contactMessages: [ContactMessage]
   }
 
@@ -71,7 +63,6 @@ const typeDefs = gql`
       image: String!
     ): Project
     addBlogPost(title: String!, content: String!, date: String!): BlogPost
-    addTestimonial(author: String!, content: String!): Testimonial
     addContactMessage(
       name: String!
       email: String!
