@@ -1,11 +1,11 @@
 {
-  "name": "googlebooks-app",
+  "name": "interactive-portfolio",
   "version": "1.0.0",
   "description": "",
   "engines": {"node": "16.x"},
   "main": "server/server.js",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start": "(if-env NODE_ENV=production && npm run start:prod) || (nvm use 16 && npm run start:dev) || (nvm use 18 && npm run start:dev)",
     "start:prod": "cd server && npm start",
     "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@work.github.com:arosenkranz/googlebooks-app.git"
+    "url": "git@work.github.com:arosenkranz/interactive-portfolio.git"
   },
   "keywords": [],
   "author": "",

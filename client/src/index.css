@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap");
 
 :root {
   --primary-color: #264653;
@@ -9,14 +9,19 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   font-size: 1.25rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
 }
 
 .small {
@@ -37,8 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .customNavLink:hover,
-.customNavLink:focus 
-.customLink:hover,
+.customNavLink:focus .customLink:hover,
 .customLink:focus {
   color: var(--accent-color) !important;
 }

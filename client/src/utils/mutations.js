@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
@@ -40,8 +40,18 @@ export const UPDATE_USER = gql`
 `;
 
 export const ADD_PROJECT = gql`
-  mutation addProject($title: String!, $description: String!, $technologies: String!, $link: String!) {
-    addProject(title: $title, description: $description, technologies: $technologies, link: $link) {
+  mutation addProject(
+    $title: String!
+    $description: String!
+    $technologies: String!
+    $link: String!
+  ) {
+    addProject(
+      title: $title
+      description: $description
+      technologies: $technologies
+      link: $link
+    ) {
       _id
       projects {
         title
@@ -54,8 +64,20 @@ export const ADD_PROJECT = gql`
 `;
 
 export const UPDATE_PROJECT = gql`
-  mutation updateProject($projectId: ID!, $title: String, $description: String, $technologies: String, $link: String) {
-    updateProject(projectId: $projectId, title: $title, description: $description, technologies: $technologies, link: $link) {
+  mutation updateProject(
+    $projectId: ID!
+    $title: String
+    $description: String
+    $technologies: String
+    $link: String
+  ) {
+    updateProject(
+      projectId: $projectId
+      title: $title
+      description: $description
+      technologies: $technologies
+      link: $link
+    ) {
       _id
       projects {
         title
@@ -82,8 +104,18 @@ export const DELETE_PROJECT = gql`
 `;
 
 export const UPDATE_CONTACT_INFO = gql`
-  mutation updateContactInfo($email: String!, $phoneNumber: String!, $linkedIn: String!, $github: String!) {
-    updateContactInfo(email: $email, phoneNumber: $phoneNumber, linkedIn: $linkedIn, github: $github) {
+  mutation updateContactInfo(
+    $email: String!
+    $phoneNumber: String!
+    $linkedIn: String!
+    $github: String!
+  ) {
+    updateContactInfo(
+      email: $email
+      phoneNumber: $phoneNumber
+      linkedIn: $linkedIn
+      github: $github
+    ) {
       email
       phoneNumber
       linkedIn

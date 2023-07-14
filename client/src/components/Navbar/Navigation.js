@@ -19,10 +19,8 @@ const Navigation = () => {
   };
 
   return (
-    <Navbar className="custom-navbar py-3" expand="lg">
-      <Navbar.Brand className="customNavbarBrand">
-        My Portfolio
-      </Navbar.Brand>
+    <Navbar className="custom-navbar p-3" expand="lg">
+      <Navbar.Brand className="customNavbarBrand">My Portfolio</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">

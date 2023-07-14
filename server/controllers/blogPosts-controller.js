@@ -1,5 +1,5 @@
 // import blog post model
-const { BlogPost } = require('../models');
+const { BlogPost } = require("../models");
 
 module.exports = {
   // get all blog posts
@@ -11,7 +11,9 @@ module.exports = {
   async getSingleBlogPost({ params }, res) {
     const blogPost = await BlogPost.findById(params.id);
     if (!blogPost) {
-      return res.status(400).json({ message: 'Cannot find a blog post with this id!' });
+      return res
+        .status(400)
+        .json({ message: "Cannot find a blog post with this id!" });
     }
     res.json(blogPost);
   },
@@ -19,15 +21,19 @@ module.exports = {
   async createBlogPost({ body }, res) {
     const blogPost = await BlogPost.create(body);
     if (!blogPost) {
-      return res.status(400).json({ message: 'Something is wrong!' });
+      return res.status(400).json({ message: "Something is wrong!" });
     }
     res.json(blogPost);
   },
   // update a blog post
   async updateBlogPost({ params, body }, res) {
-    const blogPost = await BlogPost.findByIdAndUpdate(params.id, body, { new: true });
+    const blogPost = await BlogPost.findByIdAndUpdate(params.id, body, {
+      new: true,
+    });
     if (!blogPost) {
-      return res.status(400).json({ message: 'Cannot find a blog post with this id!' });
+      return res
+        .status(400)
+        .json({ message: "Cannot find a blog post with this id!" });
     }
     res.json(blogPost);
   },
@@ -35,7 +41,9 @@ module.exports = {
   async deleteBlogPost({ params }, res) {
     const blogPost = await BlogPost.findByIdAndDelete(params.id);
     if (!blogPost) {
-      return res.status(400).json({ message: 'Cannot find a blog post with this id!' });
+      return res
+        .status(400)
+        .json({ message: "Cannot find a blog post with this id!" });
     }
     res.json(blogPost);
   },

@@ -1,14 +1,14 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/interactive-portfolio',
+  process.env.MONGODB_URI || "mongodb://localhost/interactive-portfolio",
   {
     useFindAndModify: false,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   }
 );
 
-mongoose.set('debug', true);
+mongoose.set("debug", true);
 
 module.exports = mongoose.connection;

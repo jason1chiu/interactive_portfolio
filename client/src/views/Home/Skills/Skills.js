@@ -19,7 +19,7 @@ const Skills = () => {
       </Row>
       <Row>
         {skills.map((skill, idx) => (
-          <Col key={idx} xs={12} sm={6} md={4} lg={3}>
+          <Col key={idx} sm={6} md={4} lg={3}>
             <SkillBadge skill={skill} />
           </Col>
         ))}

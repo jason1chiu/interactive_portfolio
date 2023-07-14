@@ -1,10 +1,10 @@
-import React from 'react';
-import { Container, Row, Col, Image, Button } from 'react-bootstrap';
-import { MdUploadFile } from 'react-icons/md';
-import DetailInformationCard from './components/DetailInformationCard/DetailInformationCard';
-import BackgroundCard from './components/BackgroundCard/BackgroundCard';
-import EducationCard from './components/EducationCard/EducationCard';
-import InterestsCard from './components/InterestsCard/InterestsCard';
+import React from "react";
+import { Container, Row, Col, Image, Button } from "react-bootstrap";
+import { MdUploadFile } from "react-icons/md";
+import DetailInformationCard from "./components/DetailInformationCard/DetailInformationCard";
+import BackgroundCard from "./components/BackgroundCard/BackgroundCard";
+import EducationCard from "./components/EducationCard/EducationCard";
+import InterestsCard from "./components/InterestsCard/InterestsCard";
 
 const About = () => {
   return (
@@ -13,7 +13,7 @@ const About = () => {
       <Row className="mt-4">
         <Col md={8}>
           <Row>
-            <Col md={6}>
+            <Col md={6} className="mb-4">
               <DetailInformationCard />
             </Col>
             <Col md={6}>
@@ -22,10 +22,10 @@ const About = () => {
           </Row>
 
           <Row className="mt-4">
-            <Col md={6}>
+            <Col md={6} className="mb-4">
               <EducationCard />
             </Col>
-            <Col md={6}>
+            <Col md={6} className="mb-4">
               <InterestsCard />
             </Col>
           </Row>
@@ -33,9 +33,9 @@ const About = () => {
 
         <Col md={4} className="image-container">
           <Button className="customButton overlay-button" variant="primary">
-            <MdUploadFile /> 
+            <MdUploadFile />
           </Button>
-          <Image src="your-image-url" alt="Your Description Here" fluid />
+          <Image src="" alt="Your Description Here" fluid />
         </Col>
       </Row>
     </Container>

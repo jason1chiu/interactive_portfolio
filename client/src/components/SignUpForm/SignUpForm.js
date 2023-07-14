@@ -76,7 +76,7 @@ function SignUpForm() {
                   />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" block>
+                <Button className="customButton" variant="primary" type="submit" block>
                   Sign Up
                 </Button>
                 {error && <div className="mt-3 text-danger">Sign up failed</div>}
