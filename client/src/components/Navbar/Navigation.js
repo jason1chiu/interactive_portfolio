@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, Button } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import Auth from "../../utils/auth";
 
@@ -83,9 +83,9 @@ const Navigation = () => {
           )}
           {Auth.loggedIn() && (
             <>
-              <Button variant="link" onClick={logout}>
+              <Nav.Link className="customNavLink" as={Link} onClick={logout}>
                 Logout
-              </Button>
+              </Nav.Link>
             </>
           )}
           {!Auth.loggedIn() && location.pathname !== "/login" && (
