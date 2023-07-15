@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { MdAddCircle } from "react-icons/md";
 import ProjectCard from "./components/ProjectCard/ProjectCard";
+import ProjectForm from "./components/ProjectForm/ProjectForm";
 import Auth from "../../../utils/auth";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -25,6 +26,11 @@ const responsive = {
 };
 
 const ProjectsPage = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+
   const projects = [
     {
       id: 1,
@@ -78,12 +84,17 @@ const ProjectsPage = () => {
           {Auth.loggedIn() && (
             <Row>
               <Col className="text-center">
-                <Button className="customButton" variant="primary">
+                <Button
+                  className="customButton"
+                  variant="primary"
+                  onClick={handleShowModal}
+                >
                   <MdAddCircle />
                 </Button>
               </Col>
             </Row>
           )}
+          <ProjectForm show={showModal} handleCloseModal={handleCloseModal} />
           <Carousel
             swipeable={false}
             draggable={false}
