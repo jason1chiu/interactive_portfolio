@@ -83,9 +83,6 @@ const Navigation = () => {
           )}
           {Auth.loggedIn() && (
             <>
-              <Nav.Link className="customNavLink" as={Link} to="/admin">
-                Admin
-              </Nav.Link>
               <Button variant="link" onClick={logout}>
                 Logout
               </Button>

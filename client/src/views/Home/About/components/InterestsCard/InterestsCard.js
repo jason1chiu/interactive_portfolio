@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { MdEdit } from "react-icons/md";
+import Auth from "../../../../../utils/auth";
 
 const InterestsCard = () => {
   return (
@@ -10,9 +11,11 @@ const InterestsCard = () => {
       </Card.Header>
       <Card.Body>
         <Card.Text>Your interests here...</Card.Text>
-        <Button className="customButton" variant="primary">
-          <MdEdit />
-        </Button>
+        {Auth.loggedIn() && (
+          <Button className="customButton" variant="primary">
+            <MdEdit />
+          </Button>
+        )}
       </Card.Body>
     </Card>
   );

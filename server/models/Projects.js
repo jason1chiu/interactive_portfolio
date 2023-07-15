@@ -9,8 +9,8 @@ const projectSchema = new Schema({
     type: String,
     required: true,
   },
-  technologies: {
-    type: [String],
+  image: {
+    type: String,
     required: true,
   },
   liveLink: {

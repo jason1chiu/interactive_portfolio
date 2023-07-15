@@ -1,7 +1,8 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { MdAddCircle } from "react-icons/md";
-import ProjectCard from "../../../components/ProjectCard/ProjectCard";
+import ProjectCard from "./components/ProjectCard/ProjectCard";
+import Auth from "../../../utils/auth";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -74,13 +75,15 @@ const ProjectsPage = () => {
       <Row className="justify-content-center">
         <Col md={12}>
           <h1 className="text-center subheading">My Projects</h1>
-          <Row>
-            <Col className="text-center">
-              <Button className="customButton" variant="primary">
-                <MdAddCircle />
-              </Button>
-            </Col>
-          </Row>
+          {Auth.loggedIn() && (
+            <Row>
+              <Col className="text-center">
+                <Button className="customButton" variant="primary">
+                  <MdAddCircle />
+                </Button>
+              </Col>
+            </Row>
+          )}
           <Carousel
             swipeable={false}
             draggable={false}

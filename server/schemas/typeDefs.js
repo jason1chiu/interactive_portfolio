@@ -17,12 +17,13 @@ const typeDefs = gql`
   }
 
   type Project {
-    _id: ID
-    title: String
-    description: String
-    link: String
-    image: String
-  }
+    _id: ID!
+    name: String!
+    description: String!
+    image: String!
+    liveLink: String
+    codeLink: String
+  }  
 
   type BlogPost {
     _id: ID
@@ -54,12 +55,7 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addSkill(name: String!, proficiency: String!): Skill
-    addProject(
-      title: String!
-      description: String!
-      link: String!
-      image: String!
-    ): Project
+    addProject(name: String!, description: String!, image: String!, liveLink: String, codeLink: String): Project
     addBlogPost(title: String!, content: String!, date: String!): BlogPost
     addContactMessage(
       name: String!

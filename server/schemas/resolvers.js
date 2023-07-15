@@ -66,7 +66,7 @@ const resolvers = {
         return project;
       }
       throw new AuthenticationError("You need to be logged in!");
-    },
+    },    
 
     addBlogPost: async (parent, args, context) => {
       if (context.user) {
