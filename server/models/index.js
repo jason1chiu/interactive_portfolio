@@ -1,7 +1,7 @@
 const User = require('./User');
 const Skill = require('./Skills');
-const Projects = require('./Projects');
-const BlogPosts = require('./BlogPosts');;
-const ContactMessages = require('./ContactMessages');
+const Project = require('./Project');
+const BlogPost = require('./BlogPost');;
+const ContactMessage = require('./ContactMessage');
 
-module.exports = { User, Skill, Projects, BlogPosts, ContactMessages };
+module.exports = { User, Skill, Project, BlogPost, ContactMessage };

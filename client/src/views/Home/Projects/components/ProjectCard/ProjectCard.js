@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { MdEdit } from "react-icons/md";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import Auth from "../../../../../utils/auth";
 
 const ProjectCard = ({ project }) => {
@@ -17,12 +18,20 @@ const ProjectCard = ({ project }) => {
         <Row>
           <Col className="text-left">
             <Button
+              className="customButton mr-2"
+              variant="primary"
+              href={project.githubLink}
+              target="_blank"
+            >
+              <FaGithub />
+            </Button>
+            <Button
               className="customButton"
               variant="primary"
               href={project.link}
               target="_blank"
             >
-              Go to Project
+              <FaExternalLinkAlt />
             </Button>
           </Col>
           {Auth.loggedIn() && (

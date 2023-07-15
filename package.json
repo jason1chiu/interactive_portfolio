@@ -2,7 +2,9 @@
   "name": "interactive-portfolio",
   "version": "1.0.0",
   "description": "",
-  "engines": {"node": "16.x"},
+  "engines": {
+    "node": "16.x"
+  },
   "main": "server/server.js",
   "scripts": {
     "start": "(if-env NODE_ENV=production && npm run start:prod) || (nvm use 16 && npm run start:dev) || (nvm use 18 && npm run start:dev)",

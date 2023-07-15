@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Card, Container, Row, Col } from "react-bootstrap";
 import { useMutation, useApolloClient } from "@apollo/client";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { LOGIN_USER } from "../../utils/mutations";
 
 const LoginForm = () => {
@@ -12,18 +12,18 @@ const LoginForm = () => {
   // Get access to Apollo Client instance
   const client = useApolloClient();
 
-  const [login, { loading, error }] = useMutation(LOGIN_USER, {
+  const [login] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
       // Store the token in the local storage
-      localStorage.setItem('id_token', data.login.token);
+      localStorage.setItem("id_token", data.login.token);
       // Force a refresh of all the current queries now that the user is
       // logged in
       client.resetStore();
-      navigate('/');
+      navigate("/");
     },
     onError: (error) => {
       console.log(error);
-    }
+    },
   });
 
   const handleSubmit = (event) => {
@@ -60,7 +60,12 @@ const LoginForm = () => {
                   />
                 </Form.Group>
 
-                <Button className="customButton" variant="primary" type="submit" block>
+                <Button
+                  className="customButton"
+                  variant="primary"
+                  type="submit"
+                  block
+                >
                   Login
                 </Button>
               </Form>
