@@ -5,6 +5,7 @@ import DetailInformationCard from "./components/DetailInformationCard/DetailInfo
 import BackgroundCard from "./components/BackgroundCard/BackgroundCard";
 import EducationCard from "./components/EducationCard/EducationCard";
 import InterestsCard from "./components/InterestsCard/InterestsCard";
+import Auth from "../../../utils/auth";
 
 const About = () => {
   return (
@@ -32,9 +33,11 @@ const About = () => {
         </Col>
 
         <Col md={4} className="image-container">
-          <Button className="customButton overlay-button" variant="primary">
-            <MdUploadFile />
-          </Button>
+          {Auth.loggedIn() && (
+            <Button className="customButton overlay-button" variant="primary">
+              <MdUploadFile />
+            </Button>
+          )}
           <Image src="" alt="Your Description Here" fluid />
         </Col>
       </Row>

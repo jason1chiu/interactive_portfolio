@@ -14,24 +14,25 @@ export const LOGIN_USER = gql`
 
 export const ADD_PROJECT = gql`
   mutation addProject(
-    $title: String!
+    $name: String!
     $description: String!
-    $technologies: String!
-    $link: String!
+    $image: String!
+    $liveLink: String
+    $codeLink: String
   ) {
     addProject(
-      title: $title
+      name: $name
       description: $description
-      technologies: $technologies
-      link: $link
+      image: $image
+      liveLink: $liveLink
+      codeLink: $codeLink
     ) {
       _id
-      projects {
-        title
-        description
-        technologies
-        link
-      }
+      name
+      description
+      image
+      liveLink
+      codeLink
     }
   }
 `;

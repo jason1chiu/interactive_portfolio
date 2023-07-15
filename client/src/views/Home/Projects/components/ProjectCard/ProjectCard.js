@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { MdEdit } from "react-icons/md";
+import Auth from "../../../../../utils/auth";
 
 const ProjectCard = ({ project }) => {
   return (
@@ -24,11 +25,13 @@ const ProjectCard = ({ project }) => {
               Go to Project
             </Button>
           </Col>
-          <Col className="text-right">
-            <Button className="customButton" variant="primary">
-              <MdEdit />
-            </Button>
-          </Col>
+          {Auth.loggedIn() && (
+            <Col className="text-right">
+              <Button className="customButton" variant="primary">
+                <MdEdit />
+              </Button>
+            </Col>
+          )}
         </Row>
       </Card.Body>
     </Card>
