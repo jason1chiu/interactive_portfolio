@@ -1,31 +1,36 @@
-import React from 'react';
-import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
+import React from "react";
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+  ApolloProvider,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
 
-import HomePage from './views/Home';
-import Blog from './views/Blog/Blog';
-import Navigation from './components/Navbar/Navigation';
-import Footer from './components/Footer/Footer';
-import LoginPage from './views/Login/LoginPage';
+import HomePage from "./views/Home";
+import Blog from "./views/Blog/Blog";
+import Navigation from "./components/Navbar/Navigation";
+import Footer from "./components/Footer/Footer";
+import LoginPage from "./views/Login/LoginPage";
 
 // Create an http link:
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 // Create the auth link:
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : "",
-    }
-  }
+    },
+  };
 });
 
 // Create the Apollo Client:
