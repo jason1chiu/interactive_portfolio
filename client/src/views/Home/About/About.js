@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import { MdUploadFile } from "react-icons/md";
-import DetailInformationCard from "./components/DetailInformationCard/DetailInformationCard";
-import BackgroundCard from "./components/BackgroundCard/BackgroundCard";
+import InformationCard from "./components/Information/InformationCard";
+import BackgroundCard from "./components/Background/BackgroundCard";
 import EducationCard from "./components/EducationCard/EducationCard";
 import InterestsCard from "./components/InterestsCard/InterestsCard";
 import Auth from "../../../utils/auth";
@@ -15,7 +15,7 @@ const About = () => {
         <Col md={8}>
           <Row>
             <Col md={6} className="mb-4">
-              <DetailInformationCard />
+              <InformationCard />
             </Col>
             <Col md={6}>
               <BackgroundCard />

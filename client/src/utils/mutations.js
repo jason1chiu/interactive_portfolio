@@ -12,6 +12,54 @@ export const LOGIN_USER = gql`
   }
 `;
 
+export const ADD_INFORMATION = gql`
+  mutation addInformation($information: String!) {
+    addInformation(information: $information) {
+      _id
+      information
+      education
+      interests
+      background
+    }
+  }
+`;
+
+export const ADD_EDUCATION = gql`
+  mutation addEducation($education: String!) {
+    addEducation(education: $education) {
+      _id
+      information
+      education
+      interests
+      background
+    }
+  }
+`;
+
+export const ADD_INTERESTS = gql`
+  mutation addInterests($interests: String!) {
+    addInterests(interests: $interests) {
+      _id
+      information
+      education
+      interests
+      background
+    }
+  }
+`;
+
+export const ADD_BACKGROUND = gql`
+  mutation addBackground($background: String!) {
+    addBackground(background: $background) {
+      _id
+      information
+      education
+      interests
+      background
+    }
+  }
+`;
+
 export const ADD_PROJECT = gql`
   mutation addProject(
     $name: String!
@@ -40,21 +88,21 @@ export const ADD_PROJECT = gql`
 export const UPDATE_PROJECT = gql`
   mutation updateProject(
     $projectId: ID!
-    $title: String
+    $name: String
     $description: String
     $technologies: String
     $link: String
   ) {
     updateProject(
       projectId: $projectId
-      title: $title
+      name: $name
       description: $description
       technologies: $technologies
       link: $link
     ) {
       _id
       projects {
-        title
+        name
         description
         technologies
         link
@@ -68,7 +116,7 @@ export const DELETE_PROJECT = gql`
     deleteProject(projectId: $projectId) {
       _id
       projects {
-        title
+        name
         description
         technologies
         link
