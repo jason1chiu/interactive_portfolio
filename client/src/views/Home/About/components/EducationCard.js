@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
 import { useQuery } from "@apollo/client";
 
 const EducationCard = () => {
-  const { loading, data } = useQuery(GET_PORTFOLIO);
+  const { loading, data, refetch } = useQuery(GET_PORTFOLIO);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  const education = data && data.getPortfolio.about && data.getPortfolio.about.length > 0 ? data.getPortfolio.about[0].education : "Education";
 
   return (
     <Card className="h-100">
@@ -16,7 +22,7 @@ const EducationCard = () => {
         <h3 className="subheading">Education</h3>
       </Card.Header>
       <Card.Body>
-        <Card.Text>{data.getPortfolio.about[0].education}</Card.Text>
+        <Card.Text>{education}</Card.Text>
       </Card.Body>
     </Card>
   );

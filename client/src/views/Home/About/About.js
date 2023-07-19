@@ -7,37 +7,46 @@ import EducationCard from "./components/EducationCard";
 import InterestsCard from "./components/InterestsCard";
 import AddAboutForm from "./components/AddAboutForm";
 import EditAboutForm from "./components/EditAboutForm";
+import { useQuery } from "@apollo/client";
+import { GET_PORTFOLIO } from "../../../utils/queries";
 import Auth from "../../../utils/auth";
 
 const About = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
 
+  const { data } = useQuery(GET_PORTFOLIO);
+
+  const hasData = data && data.getPortfolio.about && data.getPortfolio.about.length > 0;
+
   return (
     <Container id="about-section">
       <h1 className="text-center subheading">About Me</h1>
       {Auth.loggedIn() && (
         <Row>
-          <Col className="text-center">
-            <Button
-              className="customButton"
-              variant="primary"
-              onClick={() => setShowAdd(true)}
-            >
-              <MdAddCircle />
-            </Button>
-            <AddAboutForm show={showAdd} setShow={setShowAdd} />
-          </Col>
-          <Col className="text-center">
-            <Button
-              className="customButton"
-              variant="primary"
-              onClick={() => setShowEdit(true)}
-            >
-              <MdEdit />
-            </Button>
-            <EditAboutForm show={showEdit} setShow={setShowEdit} />
-          </Col>
+          {hasData ? (
+            <Col className="text-center">
+              <Button
+                className="customButton"
+                variant="primary"
+                onClick={() => setShowEdit(true)}
+              >
+                <MdEdit />
+              </Button>
+              <EditAboutForm show={showEdit} setShow={setShowEdit} />
+            </Col>
+          ) : (
+            <Col className="text-center">
+              <Button
+                className="customButton"
+                variant="primary"
+                onClick={() => setShowAdd(true)}
+              >
+                <MdAddCircle />
+              </Button>
+              <AddAboutForm show={showAdd} setShow={setShowAdd} />
+            </Col>
+          )}
 
           <Col className="text-center">
             <Button className="customButton" variant="primary">
@@ -46,6 +55,7 @@ const About = () => {
           </Col>
         </Row>
       )}
+
       <Row className="mt-4">
         <Col md={8}>
           <Row>

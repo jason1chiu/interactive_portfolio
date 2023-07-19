@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
+import { GET_PORTFOLIO } from '../../../../utils/queries';
 import { UPDATE_ABOUT } from '../../../../utils/mutations';
 import { Button, Modal, Form } from 'react-bootstrap';
 
@@ -11,7 +12,9 @@ const EditAboutForm = ({ show, setShow }) => {
     interests: '',
   });
 
-  const [editAbout, { error }] = useMutation(UPDATE_ABOUT);
+  const [updateAbout] = useMutation(UPDATE_ABOUT, {
+    refetchQueries: [{ query: GET_PORTFOLIO }]
+  });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -25,7 +28,7 @@ const EditAboutForm = ({ show, setShow }) => {
     event.preventDefault();
 
     try {
-      await editAbout({ variables: { input: about } });
+      await updateAbout({ variables: about });
 
       setAbout({
         information: '',
