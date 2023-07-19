@@ -12,55 +12,27 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const ADD_INFORMATION = gql`
-  mutation addInformation($information: String!) {
-    addInformation(information: $information) {
-      _id
+export const ADD_ABOUT = gql`
+  mutation addAbout($information: String!, $background: String!, $education: String!, $interests: String!) {
+    addAbout(information: $information, background: $background, education: $education, interests: $interests) {
       information
+      background
       education
       interests
-      background
     }
   }
 `;
 
-export const ADD_BACKGROUND = gql`
-  mutation addBackground($background: String!) {
-    addBackground(background: $background) {
-      _id
+export const UPDATE_ABOUT = gql`
+  mutation updateAbout($information: String!, $background: String!, $education: String!, $interests: String!) {
+    updateAbout(information: $information, background: $background, education: $education, interests: $interests) {
       information
+      background
       education
       interests
-      background
     }
   }
 `;
-
-export const ADD_EDUCATION = gql`
-  mutation addEducation($education: String!) {
-    addEducation(education: $education) {
-      _id
-      information
-      education
-      interests
-      background
-    }
-  }
-`;
-
-export const ADD_INTERESTS = gql`
-  mutation addInterests($interests: String!) {
-    addInterests(interests: $interests) {
-      _id
-      information
-      education
-      interests
-      background
-    }
-  }
-`;
-
-
 
 export const ADD_PROJECT = gql`
   mutation addProject(

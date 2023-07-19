@@ -10,13 +10,14 @@ const InformationCard = () => {
     return <div>Loading...</div>;
   }
 
+
   return (
     <Card className="h-100">
       <Card.Header>
         <h3 className="subheading">Information</h3>
       </Card.Header>
       <Card.Body>
-      <Card.Text>Information</Card.Text>
+      <Card.Text>{data.getPortfolio.about[0].information}</Card.Text>
       </Card.Body>
     </Card>
   );

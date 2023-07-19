@@ -16,7 +16,7 @@ const BackgroundCard = () => {
         <h3 className="subheading">Background</h3>
       </Card.Header>
       <Card.Body>
-        <Card.Text>Background</Card.Text>
+        <Card.Text>{data.getPortfolio.about[0].background}</Card.Text>
       </Card.Body>
     </Card>
   );

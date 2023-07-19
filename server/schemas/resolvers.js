@@ -14,15 +14,16 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id })
-          .select("-__v -password");
-    
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
+
         return userData;
       }
-    
+
       throw new AuthenticationError("Not logged in");
     },
-    
+
     about: async () => {
       return About.find({});
     },
@@ -64,9 +65,18 @@ const resolvers = {
       }
     },
 
-    addInformation: async (parent, { information }, context) => {
+    addAbout: async (
+      parent,
+      { information, background, education, interests },
+      context
+    ) => {
       if (context.user) {
-        const about = await About.create({ information });
+        const about = await About.create({
+          information,
+          background,
+          education,
+          interests,
+        });
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { about: about._id }
@@ -78,12 +88,16 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addBackground: async (parent, { background }, context) => {
+    updateAbout: async (
+      parent,
+      { information, background, education, interests },
+      context
+    ) => {
       if (context.user) {
-        const about = await About.create({ background });
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { about: about._id }
+        const about = await About.findOneAndUpdate(
+          { _id: context.user.about },
+          { information, background, education, interests },
+          { new: true }
         );
 
         return about;
@@ -91,36 +105,6 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-
-    addEducation: async (parent, { education }, context) => {
-      if (context.user) {
-        const about = await About.create({ education });
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { about: about._id }
-        );
-
-        return about;
-      }
-
-      throw new AuthenticationError("Not logged in");
-    },
-
-    addInterests: async (parent, { interests }, context) => {
-      if (context.user) {
-        const about = await About.create({ interests });
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { about: about._id }
-        );
-
-        return about;
-      }
-
-      throw new AuthenticationError("Not logged in");
-    },
-
-
   },
 };
 
