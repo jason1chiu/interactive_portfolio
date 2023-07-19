@@ -1,28 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import { MdUploadFile, MdAddCircle, MdEdit } from "react-icons/md";
 import InformationCard from "./components/InformationCard";
 import BackgroundCard from "./components/BackgroundCard";
 import EducationCard from "./components/EducationCard";
 import InterestsCard from "./components/InterestsCard";
+import AddAboutForm from "./components/AddAboutForm";
+import EditAboutForm from "./components/EditAboutForm";
 import Auth from "../../../utils/auth";
 
 const About = () => {
+  const [showAdd, setShowAdd] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+
   return (
     <Container id="about-section">
       <h1 className="text-center subheading">About Me</h1>
       {Auth.loggedIn() && (
         <Row>
           <Col className="text-center">
-            <Button className="customButton" variant="primary">
+            <Button
+              className="customButton"
+              variant="primary"
+              onClick={() => setShowAdd(true)}
+            >
               <MdAddCircle />
             </Button>
+            <AddAboutForm show={showAdd} setShow={setShowAdd} />
           </Col>
           <Col className="text-center">
-            <Button className="customButton" variant="primary">
+            <Button
+              className="customButton"
+              variant="primary"
+              onClick={() => setShowEdit(true)}
+            >
               <MdEdit />
             </Button>
+            <EditAboutForm show={showEdit} setShow={setShowEdit} />
           </Col>
+
           <Col className="text-center">
             <Button className="customButton" variant="primary">
               <MdUploadFile />
