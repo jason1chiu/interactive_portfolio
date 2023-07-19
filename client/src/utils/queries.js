@@ -6,16 +6,46 @@ export const GET_ME = gql`
       _id
       email
       about {
-        info
+        information
         background
         education
         interests
       }
       projects {
-        title
+        name
         description
-        technologies
-        link
+        image
+        liveLink
+        codeLink
+      }
+      blogPosts {
+        title
+        content
+        date
+      }
+    }
+  }
+`;
+
+export const GET_PORTFOLIO = gql`
+  query getPortfolio {
+    getPortfolio {
+      about {
+        information
+        background
+        education
+        interests
+      }
+      skills {
+        name
+        proficiency
+      }
+      projects {
+        name
+        description
+        image
+        liveLink
+        codeLink
       }
       blogPosts {
         title

@@ -1,20 +1,30 @@
-const { User, Skill, Project, BlogPost, ContactMessage } = require("../models");
+const {
+  User,
+  About,
+  Skill,
+  Project,
+  BlogPost,
+  ContactMessage,
+} = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-require('dotenv').config();
+require("dotenv").config();
 
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
-
+        const userData = await User.findOne({ _id: context.user._id })
+          .select("-__v -password");
+    
         return userData;
       }
-
+    
       throw new AuthenticationError("Not logged in");
+    },
+    
+    about: async () => {
+      return About.find({});
     },
     skills: async () => {
       return Skill.find({});
@@ -27,6 +37,14 @@ const resolvers = {
     },
     contactMessages: async () => {
       return ContactMessage.find({});
+    },
+    getPortfolio: async () => {
+      const about = await About.find({});
+      const skills = await Skill.find({});
+      const projects = await Project.find({});
+      const blogPosts = await BlogPost.find({});
+
+      return { about, skills, projects, blogPosts };
     },
   },
 
@@ -46,49 +64,63 @@ const resolvers = {
       }
     },
 
-    addSkill: async (parent, args, context) => {
+    addInformation: async (parent, { information }, context) => {
       if (context.user) {
-        const skill = await Skill.create(args);
-        await User.findByIdAndUpdate(context.user._id, {
-          $push: { skills: skill._id },
-        });
-        return skill;
+        const about = await About.create({ information });
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { about: about._id }
+        );
+
+        return about;
       }
-      throw new AuthenticationError("You need to be logged in!");
+
+      throw new AuthenticationError("Not logged in");
     },
 
-    addProject: async (parent, args, context) => {
+    addBackground: async (parent, { background }, context) => {
       if (context.user) {
-        const project = await Project.create(args);
-        await User.findByIdAndUpdate(context.user._id, {
-          $push: { projects: project._id },
-        });
-        return project;
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },    
+        const about = await About.create({ background });
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { about: about._id }
+        );
 
-    addBlogPost: async (parent, args, context) => {
-      if (context.user) {
-        const blogPost = await BlogPost.create(args);
-        await User.findByIdAndUpdate(context.user._id, {
-          $push: { blogPosts: blogPost._id },
-        });
-        return blogPost;
+        return about;
       }
-      throw new AuthenticationError("You need to be logged in!");
+
+      throw new AuthenticationError("Not logged in");
     },
 
-    addContactMessage: async (parent, args, context) => {
+    addEducation: async (parent, { education }, context) => {
       if (context.user) {
-        const contactMessage = await ContactMessage.create(args);
-        await User.findByIdAndUpdate(context.user._id, {
-          $push: { contactMessages: contactMessage._id },
-        });
-        return contactMessage;
+        const about = await About.create({ education });
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { about: about._id }
+        );
+
+        return about;
       }
-      throw new AuthenticationError("You need to be logged in!");
+
+      throw new AuthenticationError("Not logged in");
     },
+
+    addInterests: async (parent, { interests }, context) => {
+      if (context.user) {
+        const about = await About.create({ interests });
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { about: about._id }
+        );
+
+        return about;
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
+
+
   },
 };
 
