@@ -78,6 +78,20 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
+    addBackground: async (parent, { background }, context) => {
+      if (context.user) {
+        const about = await About.create({ background });
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { about: about._id }
+        );
+
+        return about;
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
+
     addEducation: async (parent, { education }, context) => {
       if (context.user) {
         const about = await About.create({ education });
@@ -106,19 +120,7 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addBackground: async (parent, { background }, context) => {
-      if (context.user) {
-        const about = await About.create({ background });
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { about: about._id }
-        );
 
-        return about;
-      }
-
-      throw new AuthenticationError("Not logged in");
-    },
   },
 };
 

@@ -14,9 +14,9 @@ const typeDefs = gql`
   type About {
     _id: ID
     information: String
+    background: String
     education: String
     interests: String
-    background: String
   }
 
   type Skill {
@@ -73,9 +73,9 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addInformation(information: String!): About
+    addBackground(background: String!): About
     addEducation(education: String!): About
     addInterests(interests: String!): About
-    addBackground(background: String!): About
     addSkill(name: String!, proficiency: String!): Skill
     addProject(name: String!, description: String!, image: String!, liveLink: String, codeLink: String): Project
     addBlogPost(title: String!, content: String!, date: String!): BlogPost

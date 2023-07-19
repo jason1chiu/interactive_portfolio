@@ -24,6 +24,18 @@ export const ADD_INFORMATION = gql`
   }
 `;
 
+export const ADD_BACKGROUND = gql`
+  mutation addBackground($background: String!) {
+    addBackground(background: $background) {
+      _id
+      information
+      education
+      interests
+      background
+    }
+  }
+`;
+
 export const ADD_EDUCATION = gql`
   mutation addEducation($education: String!) {
     addEducation(education: $education) {
@@ -48,17 +60,7 @@ export const ADD_INTERESTS = gql`
   }
 `;
 
-export const ADD_BACKGROUND = gql`
-  mutation addBackground($background: String!) {
-    addBackground(background: $background) {
-      _id
-      information
-      education
-      interests
-      background
-    }
-  }
-`;
+
 
 export const ADD_PROJECT = gql`
   mutation addProject(
