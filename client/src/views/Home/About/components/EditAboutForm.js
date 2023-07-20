@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { GET_PORTFOLIO } from '../../../../utils/queries';
-import { UPDATE_ABOUT } from '../../../../utils/mutations';
-import { Button, Modal, Form } from 'react-bootstrap';
+import React, { useState } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_PORTFOLIO } from "../../../../utils/queries";
+import { UPDATE_ABOUT } from "../../../../utils/mutations";
+import { Button, Modal, Form } from "react-bootstrap";
 
 const EditAboutForm = ({ show, setShow }) => {
+  const { loading, data, refetch } = useQuery(GET_PORTFOLIO);
+
   const [about, setAbout] = useState({
-    information: '',
-    background: '',
-    education: '',
-    interests: '',
+    information: data.getPortfolio.about.information,
+    background: data.getPortfolio.about.background,
+    education: data.getPortfolio.about.education,
+    interests: data.getPortfolio.about.interests,
   });
 
   const [updateAbout] = useMutation(UPDATE_ABOUT, {
-    refetchQueries: [{ query: GET_PORTFOLIO }]
+    refetchQueries: [{ query: GET_PORTFOLIO }],
   });
 
   const handleInputChange = (event) => {
@@ -31,10 +33,10 @@ const EditAboutForm = ({ show, setShow }) => {
       await updateAbout({ variables: about });
 
       setAbout({
-        information: '',
-        background: '',
-        education: '',
-        interests: '',
+        information: about.information,
+        background: about.background,
+        education: about.education,
+        interests: about.interests,
       });
 
       setShow(false);
@@ -55,9 +57,8 @@ const EditAboutForm = ({ show, setShow }) => {
               <Form.Label>Information</Form.Label>
               <Form.Control
                 type="text"
-                as={'textarea'}
+                as={"textarea"}
                 rows={3}
-                placeholder="Information"
                 name="information"
                 value={about.information}
                 onChange={handleInputChange}
@@ -67,9 +68,9 @@ const EditAboutForm = ({ show, setShow }) => {
               <Form.Label>Background</Form.Label>
               <Form.Control
                 type="text"
-                as={'textarea'}
+                as={"textarea"}
                 rows={3}
-                placeholder="Background"
+                placeholder={about.background}
                 name="background"
                 value={about.background}
                 onChange={handleInputChange}
@@ -79,9 +80,8 @@ const EditAboutForm = ({ show, setShow }) => {
               <Form.Label>Education</Form.Label>
               <Form.Control
                 type="text"
-                as={'textarea'}
+                as={"textarea"}
                 rows={3}
-                placeholder="Education"
                 name="education"
                 value={about.education}
                 onChange={handleInputChange}
@@ -91,9 +91,8 @@ const EditAboutForm = ({ show, setShow }) => {
               <Form.Label>Interests</Form.Label>
               <Form.Control
                 type="text"
-                as={'textarea'}
+                as={"textarea"}
                 rows={3}
-                placeholder="Interests"
                 name="interests"
                 value={about.interests}
                 onChange={handleInputChange}

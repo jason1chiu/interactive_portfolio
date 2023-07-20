@@ -40,7 +40,7 @@ const resolvers = {
       return ContactMessage.find({});
     },
     getPortfolio: async () => {
-      const about = await About.find({});
+      const about = await About.findOne();
       const skills = await Skill.find({});
       const projects = await Project.find({});
       const blogPosts = await BlogPost.find({});
@@ -95,7 +95,7 @@ const resolvers = {
     ) => {
       if (context.user) {
         const about = await About.findOneAndUpdate(
-          { _id: context.user.about },
+          {},
           { information, background, education, interests },
           { new: true }
         );

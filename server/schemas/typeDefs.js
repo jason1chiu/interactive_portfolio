@@ -4,7 +4,7 @@ const typeDefs = gql`
   type User {
     _id: ID
     email: String
-    about: [About]
+    about: About
     skills: [Skill]
     projects: [Project]
     blogPosts: [BlogPost]
@@ -53,16 +53,16 @@ const typeDefs = gql`
   }
 
   type Portfolio {
-    about: [About]
+    about: About
     skills: [Skill]
     projects: [Project]
     blogPosts: [BlogPost]
-  }
+}
 
   type Query {
     me: User
     getPortfolio: Portfolio
-    about: [About]
+    about: About
     skills: [Skill]
     projects: [Project]
     blogPosts: [BlogPost]
