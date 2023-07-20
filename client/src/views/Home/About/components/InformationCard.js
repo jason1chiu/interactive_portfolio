@@ -14,10 +14,7 @@ const InformationCard = () => {
     return <div>Loading...</div>;
   }
 
-  const information =
-    data && data.getPortfolio.about && data.getPortfolio.about.length > 0
-      ? data.getPortfolio.about[0].information
-      : "information";
+  const information = data && data.getPortfolio.about ? data.getPortfolio.about.information : "information";
 
   return (
     <Card className="h-100">

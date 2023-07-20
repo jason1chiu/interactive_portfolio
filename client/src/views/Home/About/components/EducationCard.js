@@ -14,7 +14,7 @@ const EducationCard = () => {
     return <div>Loading...</div>;
   }
 
-  const education = data && data.getPortfolio.about && data.getPortfolio.about.length > 0 ? data.getPortfolio.about[0].education : "Education";
+  const education = data && data.getPortfolio.about ? data.getPortfolio.about.education : "education";
 
   return (
     <Card className="h-100">

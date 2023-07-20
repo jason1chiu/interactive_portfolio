@@ -14,7 +14,7 @@ const BackgroundCard = () => {
     return <div>Loading...</div>;
   }
 
-  const background = data && data.getPortfolio.about && data.getPortfolio.about.length > 0 ? data.getPortfolio.about[0].background : "background";
+  const background = data && data.getPortfolio.about ? data.getPortfolio.about.background : "background";
 
   return (
     <Card className="h-100">

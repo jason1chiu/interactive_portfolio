@@ -17,7 +17,7 @@ const About = () => {
 
   const { data } = useQuery(GET_PORTFOLIO);
 
-  const hasData = data && data.getPortfolio.about && data.getPortfolio.about.length > 0;
+  const hasData = data && data.getPortfolio.about;
 
   return (
     <Container id="about-section">
