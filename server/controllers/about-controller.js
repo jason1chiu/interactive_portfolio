@@ -1,3 +1,6 @@
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+const cloudinary = require('cloudinary').v2;
 const { About } = require("../models");
 
 const getAbout = async (req, res) => {
@@ -23,4 +26,35 @@ const deleteAbout = async (req, res) => {
   res.json(deletedAbout);
 };
 
-module.exports = { getAbout, addAbout, updateAbout, deleteAbout };
+// Configure cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+const uploadAvatar = (req, res, next) => {
+  upload.single('avatar')(req, res, (err) => {
+    if (err) {
+      return res.status(500).send("Error uploading file");
+    }
+    // Upload the avatar to cloudinary
+    cloudinary.uploader.upload(req.file.path, function(error, result) {
+      if (error) {
+        return res.status(500).send(error.message);
+      }
+      
+      // Update the avatar field of the About document
+      About.findOneAndUpdate({}, { avatar: result.url }, function(err, about) {
+        if (err) {
+          return res.status(500).send(err.message);
+        }
+        
+        res.send("Uploaded!");
+      });
+    });
+  });
+};
+
+
+module.exports = { getAbout, addAbout, updateAbout, deleteAbout, uploadAvatar };

@@ -17,6 +17,9 @@ const aboutSchema = new Schema({
     type: String,
     required: true,
   },
+  avatar: {
+    type: String,
+  }
 });
 
 const About = model('About', aboutSchema);

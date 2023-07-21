@@ -13,23 +13,34 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_ABOUT = gql`
-  mutation addAbout($information: String!, $background: String!, $education: String!, $interests: String!) {
-    addAbout(information: $information, background: $background, education: $education, interests: $interests) {
+  mutation addAbout($information: String!, $background: String!, $education: String!, $interests: String!, $avatar: String!) {
+    addAbout(information: $information, background: $background, education: $education, interests: $interests, avatar: $avatar) {
       information
       background
       education
       interests
+      avatar
     }
   }
 `;
 
 export const UPDATE_ABOUT = gql`
-  mutation updateAbout($information: String!, $background: String!, $education: String!, $interests: String!) {
-    updateAbout(information: $information, background: $background, education: $education, interests: $interests) {
+  mutation updateAbout($information: String!, $background: String!, $education: String!, $interests: String!, $avatar: String!) {
+    updateAbout(information: $information, background: $background, education: $education, interests: $interests, avatar: $avatar) {
       information
       background
       education
       interests
+      avatar
+    }
+  }
+`;
+
+export const UPLOAD_AVATAR = gql`
+  mutation uploadAvatar($avatar: String!) {
+    uploadAvatar(avatar: $avatar) {
+      _id
+      avatar
     }
   }
 `;

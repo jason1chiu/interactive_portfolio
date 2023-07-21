@@ -42,8 +42,7 @@ h6 {
 }
 
 .customNavLink:hover,
-.customNavLink:focus .customLink:hover,
-.customLink:focus {
+.customLink:hover {
   color: var(--accent-color) !important;
 }
 
@@ -53,9 +52,7 @@ h6 {
   color: var(--background-color) !important;
 }
 
-.customButton:hover,
-.customButton:focus,
-.customButton:active {
+.customButton:hover {
   background-color: var(--accent-color) !important;
   border-color: var(--accent-color) !important;
 }
