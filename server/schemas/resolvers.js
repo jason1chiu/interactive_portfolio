@@ -8,7 +8,17 @@ const {
 } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+const cloudinary = require('cloudinary').v2;
 require("dotenv").config();
+
+// Configure cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 const resolvers = {
   Query: {
@@ -67,36 +77,47 @@ const resolvers = {
 
     addAbout: async (
       parent,
-      { information, background, education, interests },
-      context
+      { information, background, education, interests, avatar }, context
     ) => {
       if (context.user) {
+        let result = await cloudinary.uploader.upload(avatar)
+        
+        if (result.error) {
+          return res.status(500).send(error.message);
+        }
+        
         const about = await About.create({
           information,
           background,
           education,
           interests,
-        });
+          avatar: result.url,
+        })
+
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { about: about._id }
         );
 
-        return about;
+        return about; 
       }
-
-      throw new AuthenticationError("Not logged in");
     },
 
     updateAbout: async (
       parent,
-      { information, background, education, interests },
+      { information, background, education, interests, avatar },
       context
     ) => {
       if (context.user) {
+        let result = await cloudinary.uploader.upload(avatar)
+
+        if (result.error) {
+          return res.status(500).send(error.message);
+        }
+
         const about = await About.findOneAndUpdate(
           {},
-          { information, background, education, interests },
+          { information, background, education, interests, avatar: result.url },
           { new: true }
         );
 
@@ -105,6 +126,7 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+
   },
 };
 

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
-import { MdUploadFile, MdAddCircle, MdEdit } from "react-icons/md";
+import { MdAddCircle, MdEdit } from "react-icons/md";
 import InformationCard from "./components/InformationCard";
 import BackgroundCard from "./components/BackgroundCard";
 import EducationCard from "./components/EducationCard";
 import InterestsCard from "./components/InterestsCard";
-import AddAboutForm from "./components/AddAboutForm";
-import EditAboutForm from "./components/EditAboutForm";
+import AddProfileForm from "./components/AddProfileForm";
+import EditProfileForm from "./components/EditProfileForm";
 import { useQuery } from "@apollo/client";
 import { GET_PORTFOLIO } from "../../../utils/queries";
 import Auth from "../../../utils/auth";
@@ -15,9 +15,21 @@ const About = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
 
-  const { data } = useQuery(GET_PORTFOLIO);
+  const { loading, data, refetch } = useQuery(GET_PORTFOLIO);
 
   const hasData = data && data.getPortfolio.about;
+  const avatar =
+    data && data.getPortfolio.about
+      ? data.getPortfolio.about.avatar
+      : "https://via.placeholder.com/300";
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Container id="about-section">
@@ -33,7 +45,7 @@ const About = () => {
               >
                 <MdEdit />
               </Button>
-              <EditAboutForm show={showEdit} setShow={setShowEdit} />
+              <EditProfileForm show={showEdit} setShow={setShowEdit} />
             </Col>
           ) : (
             <Col className="text-center">
@@ -44,15 +56,9 @@ const About = () => {
               >
                 <MdAddCircle />
               </Button>
-              <AddAboutForm show={showAdd} setShow={setShowAdd} />
+              <AddProfileForm show={showAdd} setShow={setShowAdd} />
             </Col>
           )}
-
-          <Col className="text-center">
-            <Button className="customButton" variant="primary">
-              <MdUploadFile />
-            </Button>
-          </Col>
         </Row>
       )}
 
@@ -78,7 +84,7 @@ const About = () => {
         </Col>
 
         <Col md={4} className="image-container">
-          <Image src="" alt="Your Description Here" fluid />
+          <Image src={avatar} alt="Your Description Here" fluid />
         </Col>
       </Row>
     </Container>

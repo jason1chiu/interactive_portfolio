@@ -2,17 +2,21 @@ import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
 import { UPDATE_ABOUT } from "../../../../utils/mutations";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Image } from "react-bootstrap";
 
 const EditAboutForm = ({ show, setShow }) => {
-  const { loading, data, refetch } = useQuery(GET_PORTFOLIO);
+  const { data } = useQuery(GET_PORTFOLIO);
 
   const [about, setAbout] = useState({
     information: data.getPortfolio.about.information,
     background: data.getPortfolio.about.background,
     education: data.getPortfolio.about.education,
     interests: data.getPortfolio.about.interests,
+    avatar: data.getPortfolio.about.avatar,
   });
+
+  const [file, setFile] = useState();
+  const [fileName, setFileName] = useState("");
 
   const [updateAbout] = useMutation(UPDATE_ABOUT, {
     refetchQueries: [{ query: GET_PORTFOLIO }],
@@ -26,17 +30,32 @@ const EditAboutForm = ({ show, setShow }) => {
     });
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    let reader = new FileReader();
+    reader.onload = () => {
+      about.avatar = reader.result;
+      setAbout({ ...about });
+    }
+    reader.readAsDataURL(file);
+    setFile(file);
+    setFileName(file.name);
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      await updateAbout({ variables: about });
+      let result = await updateAbout({ variables: about });
+
+      setFile(result.data.updateAbout.avatar);
 
       setAbout({
         information: about.information,
         background: about.background,
         education: about.education,
         interests: about.interests,
+        avatar: result.data.updateAbout.avatar,
       });
 
       setShow(false);
@@ -98,7 +117,17 @@ const EditAboutForm = ({ show, setShow }) => {
                 onChange={handleInputChange}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Form.Group>
+              <Form.Label>Avatar</Form.Label>
+              <Form.File
+                id="custom-file"
+                label={fileName || "Upload a file" }
+                custom
+                onChange={handleFileChange}
+              />
+              <Image style={{width:"50px"}} src={about.avatar} alt="avatar" />
+            </Form.Group>
+            <Button className="customButton" variant="primary" type="submit">
               Submit
             </Button>
           </Form>

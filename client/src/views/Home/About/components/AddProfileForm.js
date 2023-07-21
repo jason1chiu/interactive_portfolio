@@ -5,15 +5,19 @@ import { GET_PORTFOLIO } from "../../../../utils/queries";
 import { Button, Modal, Form } from "react-bootstrap";
 
 const AddAboutForm = ({ show, setShow }) => {
+
   const [about, setAbout] = useState({
     information: "",
     background: "",
     education: "",
     interests: "",
+    avatar: "",
   });
+  const [file, setFile] = useState();
+  const [fileName, setFileName] = useState("");
 
   const [addAbout] = useMutation(ADD_ABOUT, {
-    refetchQueries: [{ query: GET_PORTFOLIO }]
+    refetchQueries: [{ query: GET_PORTFOLIO }],
   });
 
   const handleInputChange = (event) => {
@@ -22,6 +26,18 @@ const AddAboutForm = ({ show, setShow }) => {
       ...about,
       [name]: value,
     });
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    let reader = new FileReader();
+    reader.onload = () => {
+      about.avatar = reader.result;
+      setAbout({ ...about });
+    }
+    reader.readAsDataURL(file);
+    setFile(file);
+    setFileName(file.name);
   };
 
   const handleFormSubmit = async (event) => {
@@ -35,6 +51,7 @@ const AddAboutForm = ({ show, setShow }) => {
         background: "",
         education: "",
         interests: "",
+        avatar: "",
       });
 
       setShow(false);
@@ -97,6 +114,15 @@ const AddAboutForm = ({ show, setShow }) => {
                 name="interests"
                 value={about.interests}
                 onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Avatar</Form.Label>
+              <Form.File
+                id="custom-file"
+                label={fileName || "Upload an image"}
+                custom
+                onChange={handleFileChange}
               />
             </Form.Group>
             <Button className="customButton" variant="primary" type="submit">

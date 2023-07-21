@@ -10,6 +10,7 @@ export const GET_ME = gql`
         background
         education
         interests
+        avatar
       }
       projects {
         name
@@ -35,6 +36,7 @@ export const GET_PORTFOLIO = gql`
         background
         education
         interests
+        avatar
       }
       skills {
         name
