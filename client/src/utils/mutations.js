@@ -71,27 +71,14 @@ export const ADD_PROJECT = gql`
 `;
 
 export const UPDATE_PROJECT = gql`
-  mutation updateProject(
-    $projectId: ID!
-    $name: String
-    $description: String
-    $technologies: String
-    $link: String
-  ) {
-    updateProject(
-      projectId: $projectId
-      name: $name
-      description: $description
-      technologies: $technologies
-      link: $link
-    ) {
+  mutation updateProject( $projectId: ID!, $name: String!, $description: String!, $image: String!, $liveLink: String, $codeLink: String) {
+    updateProject( projectId: $projectId, name: $name, description: $description, image: $image, liveLink: $liveLink, codeLink: $codeLink) {
       _id
-      projects {
-        name
-        description
-        technologies
-        link
-      }
+      name
+      description
+      image
+      liveLink
+      codeLink
     }
   }
 `;
@@ -100,12 +87,15 @@ export const DELETE_PROJECT = gql`
   mutation deleteProject($projectId: ID!) {
     deleteProject(projectId: $projectId) {
       _id
-      projects {
-        name
-        description
-        technologies
-        link
-      }
+    }
+  }
+`;
+
+export const UPLOAD_IMAGE = gql`
+  mutation uploadImage($image: String!) {
+    uploadImage(image: $image) {
+      _id
+      image
     }
   }
 `;
