@@ -1,31 +1,37 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { ADD_PROJECT } from "../../../../utils/mutations";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
-import { UPDATE_ABOUT } from "../../../../utils/mutations";
-import { Button, Modal, Form, Image } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 
-const EditProfileForm = ({ show, setShow }) => {
-  const { data } = useQuery(GET_PORTFOLIO);
+const AddProjectForm = ({ show, setShow }) => {
 
-  const [about, setAbout] = useState({
-    information: data.getPortfolio.about.information,
-    background: data.getPortfolio.about.background,
-    education: data.getPortfolio.about.education,
-    interests: data.getPortfolio.about.interests,
-    avatar: data.getPortfolio.about.avatar,
+  const [project, setProject] = useState({
+    name: "",
+    description: "",
+    image: "",
+    liveLink: "",
+    codeLink: "",
   });
-
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState("");
 
-  const [updateAbout] = useMutation(UPDATE_ABOUT, {
+  const [addProject, { loading, error }] = useMutation(ADD_PROJECT, {
+    onCompleted: (data) => {
+      // handle when mutation is complete
+      console.log(data);
+    },
+    onError: (error) => {
+      // handle errors
+      console.error(error);
+    },
     refetchQueries: [{ query: GET_PORTFOLIO }],
-  });
+  });  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setAbout({
-      ...about,
+    setProject({
+      ...project,
       [name]: value,
     });
   };
@@ -34,8 +40,8 @@ const EditProfileForm = ({ show, setShow }) => {
     const file = event.target.files[0];
     let reader = new FileReader();
     reader.onload = () => {
-      about.avatar = reader.result;
-      setAbout({ ...about });
+      project.image = reader.result;
+      setProject({ ...project });
     }
     reader.readAsDataURL(file);
     setFile(file);
@@ -46,16 +52,14 @@ const EditProfileForm = ({ show, setShow }) => {
     event.preventDefault();
 
     try {
-      let result = await updateAbout({ variables: about });
+      await addProject({ variables: project });
 
-      setFile(result.data.updateAbout.avatar);
-
-      setAbout({
-        information: about.information,
-        background: about.background,
-        education: about.education,
-        interests: about.interests,
-        avatar: result.data.updateAbout.avatar,
+      setProject({
+        name: "",
+        description: "",
+        image: "",
+        liveLink: "",
+        codeLink: "",
       });
 
       setShow(false);
@@ -68,64 +72,60 @@ const EditProfileForm = ({ show, setShow }) => {
     <>
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit About</Modal.Title>
+          <Modal.Title>Add Project</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleFormSubmit}>
             <Form.Group>
-              <Form.Label>Information</Form.Label>
+              <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
-                as={"textarea"}
-                rows={3}
-                name="information"
-                value={about.information}
+                placeholder="Title"
+                name="name"
+                value={project.name}
                 onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Background</Form.Label>
+              <Form.Label>Description</Form.Label>
               <Form.Control
                 type="text"
                 as={"textarea"}
                 rows={3}
-                placeholder={about.background}
-                name="background"
-                value={about.background}
+                placeholder="Description"
+                name="description"
+                value={project.description}
                 onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Education</Form.Label>
+              <Form.Label>Code Link</Form.Label>
               <Form.Control
                 type="text"
-                as={"textarea"}
-                rows={3}
-                name="education"
-                value={about.education}
+                placeholder="Code Link"
+                name="codeLink"
+                value={project.codeLink}
                 onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Interests</Form.Label>
+              <Form.Label>Live Link</Form.Label>
               <Form.Control
                 type="text"
-                as={"textarea"}
-                rows={3}
-                name="interests"
-                value={about.interests}
+                placeholder="Live Link"
+                name="liveLink"
+                value={project.liveLink}
                 onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Avatar</Form.Label>
+              <Form.Label>Image</Form.Label>
               <Form.File
                 id="custom-file"
-                label={fileName || "Upload a file" }
+                label={fileName || "Upload a project image"}
                 custom
                 onChange={handleFileChange}
               />
-              <Image style={{width:"50px"}} src={about.avatar} alt="avatar" />
             </Form.Group>
             <Button className="customButton" variant="primary" type="submit">
               Submit
@@ -137,4 +137,4 @@ const EditProfileForm = ({ show, setShow }) => {
   );
 };
 
-export default EditProfileForm;
+export default AddProjectForm;

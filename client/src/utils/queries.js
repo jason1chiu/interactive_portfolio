@@ -58,6 +58,18 @@ export const GET_PORTFOLIO = gql`
   }
 `;
 
+export const GET_PROJECTS = gql`
+  query getProjects {
+    getProjects {
+      name
+      description
+      image
+      liveLink
+      codeLink
+    }
+  }
+`;
+
 export const GET_CONTACT_INFO = gql`
   query getContactInfo {
     getContactInfo {

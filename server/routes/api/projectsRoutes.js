@@ -1,23 +1,31 @@
-const router = require('express').Router();
+const router = require("express").Router();
+const { authMiddleware } = require("../../utils/auth");
+const { uploadImage } = require("../../controllers/projects-controller");
 
 const {
   getProjects,
-  getSingleProject,
-  createProject,
+  getProject,
+  addProject,
   updateProject,
   deleteProject,
-} = require('../../controllers/projects-controller');
+} = require("../../controllers/projects-controller");
 
-// import middleware
-const { authMiddleware } = require('../../utils/auth');
-
-router.route('/')
+// Route to get all Projects information
+router
+  .route("/")
   .get(getProjects)
-  .post(authMiddleware, createProject);
+  .post(authMiddleware, addProject);
 
-router.route('/:id')
-  .get(getSingleProject)
+// Route to handle operations on a single project specified by ID
+router
+  .route("/:id")
+  .get(getProject)
   .put(authMiddleware, updateProject)
   .delete(authMiddleware, deleteProject);
+
+// Separate route for uploading image
+router
+  .route("/:id/uploadImage")
+  .post(authMiddleware, uploadImage);
 
 module.exports = router;

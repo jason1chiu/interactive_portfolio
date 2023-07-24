@@ -2,25 +2,33 @@ import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { MdEdit } from "react-icons/md";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import Auth from "../../../../../utils/auth";
+import Auth from "../../../../utils/auth";
 
 const ProjectCard = ({ project }) => {
+  const {
+    name = "Project Name",
+    description = "Project Description",
+    image = "https://via.placeholder.com/500",
+    liveLink = "https://github.com",
+    codeLink = "https://github.com"
+  } = project || {};
+
   return (
     <Card className="my-3 shadow" style={{ maxWidth: "600px" }}>
       <Card.Img
         variant="top"
-        src={project.image || "https://via.placeholder.com/500"}
-        alt={project.image}
+        src={image}
+        alt={name}
       />
       <Card.Body>
-        <Card.Title>{project.title}</Card.Title>
-        <Card.Text>{project.summary}</Card.Text>
+        <Card.Title>{name}</Card.Title>
+        <Card.Text>{description}</Card.Text>
         <Row>
           <Col className="text-left">
             <Button
               className="customButton mr-2"
               variant="primary"
-              href={project.githubLink}
+              href={codeLink}
               target="_blank"
             >
               <FaGithub />
@@ -28,7 +36,7 @@ const ProjectCard = ({ project }) => {
             <Button
               className="customButton"
               variant="primary"
-              href={project.link}
+              href={liveLink}
               target="_blank"
             >
               <FaExternalLinkAlt />
