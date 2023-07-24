@@ -1,55 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { MdEdit } from "react-icons/md";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import Auth from "../../../../utils/auth";
-import { useQuery } from "@apollo/client";
-import { GET_PORTFOLIO } from "../../../../utils/queries";
 
-const ProjectCard = ({ projects }) => {
-  const [showAdd, setShowAdd] = useState(false);
-
-  const { loading, data, refetch } = useQuery(GET_PORTFOLIO);
-
-  const title =
-    data && data.getPortfolio.projects
-      ? data.getPortfolio.projects.title
-      : "Project Title";
-  const description =
-    data && data.getPortfolio.projects
-      ? data.getPortfolio.projects.description
-      : "Project Description";
-  const codeLink =
-    data && data.getPortfolio.projects
-      ? data.getPortfolio.projects.codeLink
-      : "https://github.com";
-  const liveLink =
-    data && data.getPortfolio.projects
-      ? data.getPortfolio.projects.liveLink
-      : "https://github.com";
-
-  const image =
-    data && data.getPortfolio.projects
-      ? data.getPortfolio.projects.image
-      : "https://via.placeholder.com/300";
-
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+const ProjectCard = ({ project }) => {
+  const {
+    name = "Project Name",
+    description = "Project Description",
+    image = "https://via.placeholder.com/500",
+    liveLink = "https://github.com",
+    codeLink = "https://github.com"
+  } = project || {};
 
   return (
     <Card className="my-3 shadow" style={{ maxWidth: "600px" }}>
       <Card.Img
         variant="top"
-        src={image || "https://via.placeholder.com/500"}
-        alt={image}
+        src={image}
+        alt={name}
       />
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
+        <Card.Title>{name}</Card.Title>
         <Card.Text>{description}</Card.Text>
         <Row>
           <Col className="text-left">

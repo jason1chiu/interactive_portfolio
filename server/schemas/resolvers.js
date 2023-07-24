@@ -8,16 +8,16 @@ const {
 } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
-const cloudinary = require('cloudinary').v2;
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
 // Configure cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 const resolvers = {
@@ -77,29 +77,30 @@ const resolvers = {
 
     addAbout: async (
       parent,
-      { information, background, education, interests, avatar }, context
+      { information, background, education, interests, avatar },
+      context
     ) => {
       if (context.user) {
-        let result = await cloudinary.uploader.upload(avatar)
-        
+        let result = await cloudinary.uploader.upload(avatar);
+
         if (result.error) {
           return res.status(500).send(error.message);
         }
-        
+
         const about = await About.create({
           information,
           background,
           education,
           interests,
           avatar: result.url,
-        })
+        });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { about: about._id }
         );
 
-        return about; 
+        return about;
       }
     },
 
@@ -109,7 +110,7 @@ const resolvers = {
       context
     ) => {
       if (context.user) {
-        let result = await cloudinary.uploader.upload(avatar)
+        let result = await cloudinary.uploader.upload(avatar);
 
         if (result.error) {
           return res.status(500).send(error.message);
@@ -127,6 +128,34 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
+    addProject: async (
+      parent,
+      { name, description, image, liveLink, codeLink },
+      context
+    ) => {
+      if (context.user) {
+        let result = await cloudinary.uploader.upload(image);
+
+        if (result.error) {
+          return res.status(500).send(error.message);
+        }
+
+        const project = await Project.create({
+          name,
+          description,
+          image: result.url,
+          liveLink,
+          codeLink,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { projects: project._id } }
+        );
+
+        return project;
+      }
+    },
   },
 };
 

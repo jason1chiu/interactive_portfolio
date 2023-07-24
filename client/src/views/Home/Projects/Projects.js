@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { MdAddCircle } from "react-icons/md";
-import ProjectCard from "./components/ProjectCard/ProjectCard";
-import ProjectForm from "./components/ProjectForm/ProjectForm";
+import ProjectCard from "./components/ProjectCard";
+import { useQuery } from "@apollo/client";
+import { GET_PORTFOLIO } from "../../../utils/queries";
+import AddProjectForm from "./components/AddProjectForm";
 import Auth from "../../../utils/auth";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -26,55 +28,19 @@ const responsive = {
 };
 
 const ProjectsPage = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
 
-  const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => setShowModal(true);
+  const { loading, data, refetch } = useQuery(GET_PORTFOLIO);
 
-  const projects = [
-    {
-      id: 1,
-      title: "Project 1",
-      description: "This is project 1.",
-      img: "img1.jpg",
-      link: "#",
-    },
-    {
-      id: 2,
-      title: "Project 2",
-      description: "This is project 2.",
-      img: "img2.jpg",
-      link: "#",
-    },
-    {
-      id: 3,
-      title: "Project 3",
-      description: "This is project 3.",
-      img: "img3.jpg",
-      link: "#",
-    },
-    {
-      id: 4,
-      title: "Project 4",
-      description: "This is project 4.",
-      img: "img4.jpg",
-      link: "#",
-    },
-    {
-      id: 5,
-      title: "Project 5",
-      description: "This is project 5.",
-      img: "img5.jpg",
-      link: "#",
-    },
-    {
-      id: 6,
-      title: "Project 6",
-      description: "This is project 6.",
-      img: "img6.jpg",
-      link: "#",
-    },
-  ];
+  console.log(data);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Container id="projects-section">
@@ -87,14 +53,14 @@ const ProjectsPage = () => {
                 <Button
                   className="customButton"
                   variant="primary"
-                  onClick={handleShowModal}
+                  onClick={() => setShowAdd(true)}
                 >
                   <MdAddCircle />
                 </Button>
               </Col>
             </Row>
           )}
-          <ProjectForm show={showModal} handleCloseModal={handleCloseModal} />
+          <AddProjectForm show={showAdd} setShow={setShowAdd} />
           <Carousel
             swipeable={false}
             draggable={false}
@@ -111,8 +77,8 @@ const ProjectsPage = () => {
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-40-px"
           >
-            {projects.map((project) => (
-              <ProjectCard project={project} key={project.id} />
+            {(data?.getPortfolio?.projects || []).map((project) => (
+              <ProjectCard project={project} key={project._id} />
             ))}
           </Carousel>
         </Col>

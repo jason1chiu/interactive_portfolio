@@ -7,7 +7,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 const AddProjectForm = ({ show, setShow }) => {
 
   const [project, setProject] = useState({
-    title: "",
+    name: "",
     description: "",
     image: "",
     liveLink: "",
@@ -16,9 +16,17 @@ const AddProjectForm = ({ show, setShow }) => {
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState("");
 
-  const [addProject] = useMutation(ADD_PROJECT, {
+  const [addProject, { loading, error }] = useMutation(ADD_PROJECT, {
+    onCompleted: (data) => {
+      // handle when mutation is complete
+      console.log(data);
+    },
+    onError: (error) => {
+      // handle errors
+      console.error(error);
+    },
     refetchQueries: [{ query: GET_PORTFOLIO }],
-  });
+  });  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -47,7 +55,7 @@ const AddProjectForm = ({ show, setShow }) => {
       await addProject({ variables: project });
 
       setProject({
-        title: "",
+        name: "",
         description: "",
         image: "",
         liveLink: "",
@@ -73,8 +81,8 @@ const AddProjectForm = ({ show, setShow }) => {
               <Form.Control
                 type="text"
                 placeholder="Title"
-                name="title"
-                value={project.title}
+                name="name"
+                value={project.name}
                 onChange={handleInputChange}
               />
             </Form.Group>

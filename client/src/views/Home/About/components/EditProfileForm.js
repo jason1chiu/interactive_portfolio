@@ -4,7 +4,7 @@ import { GET_PORTFOLIO } from "../../../../utils/queries";
 import { UPDATE_ABOUT } from "../../../../utils/mutations";
 import { Button, Modal, Form, Image } from "react-bootstrap";
 
-const EditAboutForm = ({ show, setShow }) => {
+const EditProfileForm = ({ show, setShow }) => {
   const { data } = useQuery(GET_PORTFOLIO);
 
   const [about, setAbout] = useState({
@@ -137,4 +137,4 @@ const EditAboutForm = ({ show, setShow }) => {
   );
 };
 
-export default EditAboutForm;
+export default EditProfileForm;
