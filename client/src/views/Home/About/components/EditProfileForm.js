@@ -36,7 +36,7 @@ const EditProfileForm = ({ show, setShow }) => {
     reader.onload = () => {
       about.avatar = reader.result;
       setAbout({ ...about });
-    }
+    };
     reader.readAsDataURL(file);
     setFile(file);
     setFileName(file.name);
@@ -121,11 +121,16 @@ const EditProfileForm = ({ show, setShow }) => {
               <Form.Label>Avatar</Form.Label>
               <Form.File
                 id="custom-file"
-                label={fileName || "Upload a file" }
+                label={fileName || "Upload a file"}
                 custom
                 onChange={handleFileChange}
+                className="mb-3"
               />
-              <Image style={{width:"50px"}} src={about.avatar} alt="avatar" />
+              <Image
+                style={{ width: "100px", borderRadius: "5%" }}
+                src={about.avatar}
+                alt="avatar"
+              />
             </Form.Group>
             <Button className="customButton" variant="primary" type="submit">
               Submit

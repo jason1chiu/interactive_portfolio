@@ -84,7 +84,17 @@ const About = () => {
         </Col>
 
         <Col md={4} className="image-container">
-          <Image src={avatar} alt="Your Description Here" fluid />
+          <Image
+            src={avatar}
+            alt="Your Description Here"
+            fluid
+            style={{
+              borderRadius: "10%", // This will give the image slightly rounded corners
+              border: "2px solid black", // This will add a 2px black border around the image
+              boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)", // This will add a slight shadow around the image
+              objectFit: "cover", // This will make sure the image covers the full width and height of its container, while maintaining its aspect ratio
+            }}
+          />
         </Col>
       </Row>
     </Container>

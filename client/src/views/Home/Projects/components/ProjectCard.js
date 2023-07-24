@@ -18,7 +18,13 @@ const ProjectCard = ({ project }) => {
       <Card.Img
         variant="top"
         src={image}
-        alt={name}
+        alt={image}
+        style={{
+          width: '100%', // This will make the image take up the full width of the card
+          maxHeight: '300px', // This will set a maximum height for the image
+          objectFit: 'cover', // This will make sure the image covers the full width and height of its container, while maintaining its aspect ratio
+          borderRadius: 'calc(.25rem - 1px)', // This will round the top left corner of the image to match the card's border radius
+        }}
       />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
