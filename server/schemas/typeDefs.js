@@ -26,7 +26,7 @@ const typeDefs = gql`
   }
 
   type Project {
-    _id: ID!
+    _id: ID
     name: String!
     description: String!
     image: String!
@@ -76,12 +76,10 @@ const typeDefs = gql`
     updateAbout(information: String!, background: String!, education: String!, interests: String!, avatar: String!): About
     addSkill(name: String!, proficiency: String!): Skill
     addProject(name: String!, description: String!, image: String!, liveLink: String, codeLink: String): Project
+    updateProject(_id: ID!, name: String!, description: String!, image: String!, liveLink: String, codeLink: String): Project
+    deleteProject(_id: ID!): Project
     addBlogPost(title: String!, content: String!, date: String!): BlogPost
-    addContactMessage(
-      name: String!
-      email: String!
-      message: String!
-    ): ContactMessage
+    addContactMessage(name: String!, email: String!, message: String!): ContactMessage
   }
 `;
 

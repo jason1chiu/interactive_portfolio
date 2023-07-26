@@ -32,8 +32,6 @@ const ProjectsPage = () => {
 
   const { loading, data, refetch } = useQuery(GET_PORTFOLIO);
 
-  console.log(data);
-
   useEffect(() => {
     refetch();
   }, [refetch]);

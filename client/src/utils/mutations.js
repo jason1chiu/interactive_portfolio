@@ -13,8 +13,20 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_ABOUT = gql`
-  mutation addAbout($information: String!, $background: String!, $education: String!, $interests: String!, $avatar: String!) {
-    addAbout(information: $information, background: $background, education: $education, interests: $interests, avatar: $avatar) {
+  mutation addAbout(
+    $information: String!
+    $background: String!
+    $education: String!
+    $interests: String!
+    $avatar: String!
+  ) {
+    addAbout(
+      information: $information
+      background: $background
+      education: $education
+      interests: $interests
+      avatar: $avatar
+    ) {
       information
       background
       education
@@ -25,8 +37,20 @@ export const ADD_ABOUT = gql`
 `;
 
 export const UPDATE_ABOUT = gql`
-  mutation updateAbout($information: String!, $background: String!, $education: String!, $interests: String!, $avatar: String!) {
-    updateAbout(information: $information, background: $background, education: $education, interests: $interests, avatar: $avatar) {
+  mutation updateAbout(
+    $information: String!
+    $background: String!
+    $education: String!
+    $interests: String!
+    $avatar: String!
+  ) {
+    updateAbout(
+      information: $information
+      background: $background
+      education: $education
+      interests: $interests
+      avatar: $avatar
+    ) {
       information
       background
       education
@@ -60,7 +84,6 @@ export const ADD_PROJECT = gql`
       liveLink: $liveLink
       codeLink: $codeLink
     ) {
-      _id
       name
       description
       image
@@ -71,8 +94,22 @@ export const ADD_PROJECT = gql`
 `;
 
 export const UPDATE_PROJECT = gql`
-  mutation updateProject( $projectId: ID!, $name: String!, $description: String!, $image: String!, $liveLink: String, $codeLink: String) {
-    updateProject( projectId: $projectId, name: $name, description: $description, image: $image, liveLink: $liveLink, codeLink: $codeLink) {
+  mutation updateProject(
+    $_id: ID!
+    $name: String!
+    $description: String!
+    $image: String!
+    $liveLink: String
+    $codeLink: String
+  ) {
+    updateProject(
+      _id: $_id
+      name: $name
+      description: $description
+      image: $image
+      liveLink: $liveLink
+      codeLink: $codeLink
+    ) {
       _id
       name
       description
@@ -84,8 +121,8 @@ export const UPDATE_PROJECT = gql`
 `;
 
 export const DELETE_PROJECT = gql`
-  mutation deleteProject($projectId: ID!) {
-    deleteProject(projectId: $projectId) {
+  mutation deleteProject($_id: ID!) {
+    deleteProject(_id: $_id) {
       _id
     }
   }

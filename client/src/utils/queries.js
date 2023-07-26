@@ -13,6 +13,7 @@ export const GET_ME = gql`
         avatar
       }
       projects {
+        _id
         name
         description
         image
@@ -43,6 +44,7 @@ export const GET_PORTFOLIO = gql`
         proficiency
       }
       projects {
+        _id
         name
         description
         image
@@ -58,9 +60,10 @@ export const GET_PORTFOLIO = gql`
   }
 `;
 
-export const GET_PROJECTS = gql`
-  query getProjects {
-    getProjects {
+export const GET_PROJECT = gql`
+  query {
+    projects {
+      _id
       name
       description
       image

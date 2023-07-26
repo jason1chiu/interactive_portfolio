@@ -156,6 +156,45 @@ const resolvers = {
         return project;
       }
     },
+
+    updateProject: async (
+      parent,
+      { _id, name, description, image, liveLink, codeLink },
+      context
+    ) => {
+      if (context.user) {
+        // Upload the image to Cloudinary and get the resulting URL
+        let result = await cloudinary.uploader.upload(image);
+        if (result.error) {
+          throw new Error("Failed to upload image to Cloudinary");
+        }
+    
+        // Update the project with the new data and image URL
+        let project = await Project.findByIdAndUpdate(
+          _id,
+          {
+            name,
+            description,
+            image: result.url,
+            liveLink,
+            codeLink,
+          },
+          { new: true }
+        );
+    
+        return project;
+      }
+      throw new AuthenticationError("Not logged in");
+    },    
+
+    deleteProject: async (parent, { _id }, context) => {
+      if (context.user) {
+        // Assuming you have a function in your controller to handle deleting a project
+        let project = await deleteProject(_id);
+        return project;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
   },
 };
 
