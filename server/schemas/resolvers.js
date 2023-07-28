@@ -11,6 +11,7 @@ const { signToken } = require("../utils/auth");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const cloudinary = require("cloudinary").v2;
+const sharp = require("sharp");
 require("dotenv").config();
 
 // Configure cloudinary
@@ -81,7 +82,13 @@ const resolvers = {
       context
     ) => {
       if (context.user) {
-        let result = await cloudinary.uploader.upload(avatar);
+        // Resize the avatar using sharp
+        const outputPath = `resized_${avatar}`;
+        await sharp(avatar)
+          .resize(200, 200) // Resize to 200x200 pixels
+          .toFile(outputPath);
+
+        let result = await cloudinary.uploader.upload(outputPath);
 
         if (result.error) {
           return res.status(500).send(error.message);
@@ -168,7 +175,7 @@ const resolvers = {
         if (result.error) {
           throw new Error("Failed to upload image to Cloudinary");
         }
-    
+
         // Update the project with the new data and image URL
         let project = await Project.findByIdAndUpdate(
           _id,
@@ -181,16 +188,16 @@ const resolvers = {
           },
           { new: true }
         );
-    
+
         return project;
       }
       throw new AuthenticationError("Not logged in");
-    },    
+    },
 
     deleteProject: async (parent, { _id }, context) => {
       if (context.user) {
         // Assuming you have a function in your controller to handle deleting a project
-        let project = await deleteProject(_id);
+        let project = await Project.findByIdAndDelete(_id);
         return project;
       }
       throw new AuthenticationError("Not logged in");

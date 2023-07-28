@@ -9,25 +9,14 @@ import {
 } from "react-bootstrap";
 import Typist from "react-typist";
 import EditProjectForm from "./EditProjectForm";
-import { GET_PORTFOLIO } from "../../../../utils/queries";
 import { MdEdit } from "react-icons/md";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { useQuery } from "@apollo/client";
+import { GET_PORTFOLIO } from "../../../../utils/queries";
 import Auth from "../../../../utils/auth";
 
 const ProjectCard = ({ project }) => {
   const [showEditModal, setShowEditModal] = useState(false);
-
-  const { loading, data, refetch } = useQuery(GET_PORTFOLIO);
-  console.log(data.getPortfolio.projects);
-
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   const handleEditClick = () => {
     setShowEditModal(true);
@@ -56,10 +45,10 @@ const ProjectCard = ({ project }) => {
       />
       <Card.Body>
         <Card.Title style={{ fontSize: "1rem", fontWeight: "bold" }}>
-          <Typist cursor={{ hideWhenDone: true }}>{name}</Typist>
+          <Typist key={name} cursor={{ hideWhenDone: true }}>{name}</Typist>
         </Card.Title>
         <Card.Text style={{ fontSize: "1rem" }}>
-          <Typist cursor={{ hideWhenDone: true }}>{description}</Typist>
+          <Typist key={description} cursor={{ hideWhenDone: true }}>{description}</Typist>
         </Card.Text>
         <Row>
           <Col className="text-left">
@@ -107,6 +96,7 @@ const ProjectCard = ({ project }) => {
         </Row>
       </Card.Body>
       <EditProjectForm
+        // refetch={refetch}
         projectId={project._id}
         show={showEditModal}
         setShow={setShowEditModal}

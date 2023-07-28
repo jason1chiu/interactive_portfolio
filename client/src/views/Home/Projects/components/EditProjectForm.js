@@ -26,9 +26,8 @@ const EditProjectForm = ({ projectId, show, setShow }) => {
     onError: (err) => {
       console.error(err);
     },
-    refetchQueries: [{ query: GET_PORTFOLIO }],
   });
-  
+
   const [deleteProject] = useMutation(DELETE_PROJECT, {
     refetchQueries: [{ query: GET_PORTFOLIO }],
   });
@@ -91,8 +90,6 @@ const EditProjectForm = ({ projectId, show, setShow }) => {
     setFile(file);
     setFileName(file.name);
   };
-
-
 
   return (
     <Modal show={show} onHide={() => setShow(false)}>

@@ -29,12 +29,7 @@ const responsive = {
 
 const ProjectsPage = () => {
   const [showAdd, setShowAdd] = useState(false);
-
-  const { loading, data, refetch } = useQuery(GET_PORTFOLIO);
-
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
+  const { loading, data } = useQuery(GET_PORTFOLIO);
 
   if (loading) {
     return <div>Loading...</div>;
