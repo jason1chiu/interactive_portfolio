@@ -1,4 +1,5 @@
 const multer = require('multer');
+const sharp = require('sharp');
 const upload = multer({ dest: 'uploads/' });
 const cloudinary = require('cloudinary').v2;
 const { About } = require("../models");
@@ -34,12 +35,19 @@ cloudinary.config({
 });
 
 const uploadAvatar = (req, res, next) => {
-  upload.single('avatar')(req, res, (err) => {
+  upload.single('avatar')(req, res, async (err) => {
     if (err) {
       return res.status(500).send("Error uploading file");
     }
-    // Upload the avatar to cloudinary
-    cloudinary.uploader.upload(req.file.path, function(error, result) {
+
+    // Resize the avatar using sharp
+    const outputPath = `resized_${req.file.path}`;
+    await sharp(req.file.path)
+      .resize(200, 200)  // Resize to 200x200 pixels
+      .toFile(outputPath);
+
+    // Upload the resized avatar to cloudinary
+    cloudinary.uploader.upload(outputPath, function(error, result) {
       if (error) {
         return res.status(500).send(error.message);
       }

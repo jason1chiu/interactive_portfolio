@@ -21,7 +21,8 @@
     "react-icons": "^4.10.1",
     "react-multi-carousel": "^2.8.4",
     "react-router-dom": "^6.11.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-typist": "^2.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
