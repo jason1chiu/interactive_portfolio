@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap");
+
+:root {
+  --primary-color: #264653;
+  --secondary-color: #2a9d8f;
+  --accent-color: #e76f51;
+  --background-color: #f4f4f4;
+  --text-color: #333333;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 1.25rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+}
+
+.small {
+  font-weight: 300;
+  font-style: italic;
+}
+
+.custom-navbar,
+.custom-footer {
+  background-color: var(--primary-color);
+}
+
+.customNavbarBrand,
+.customNavLink,
+.customLink,
+.subheading {
+  color: var(--secondary-color) !important;
+}
+
+.customNavLink:hover,
+.customLink:hover {
+  color: var(--accent-color) !important;
+}
+
+.customButton {
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+  color: var(--background-color) !important;
+}
+
+.customButton:hover {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+}
+
+.image-container {
+  position: relative;
+}
+
+.overlay-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.carousel-item-padding-40-px {
+  padding: 0 15px; /* This adds a 15px space on the left and right of each card */
+}
+
+.carousel-container {
+  padding-bottom: 25px !important;
+}
+
+
