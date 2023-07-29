@@ -15,7 +15,7 @@ const EditProfileForm = ({ show, setShow }) => {
     avatar: data.getPortfolio.about.avatar,
   });
 
-  const [file, setFile] = useState();
+  const [, setFile] = useState();
   const [fileName, setFileName] = useState("");
 
   const [updateAbout] = useMutation(UPDATE_ABOUT, {

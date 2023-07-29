@@ -3,7 +3,7 @@ const router = require('express').Router();
 const {
   getSkills,
   getSingleSkill,
-  createSkill,
+  addSkill,
   updateSkill,
   deleteSkill,
 } = require('../../controllers/skills-controller');
@@ -13,7 +13,7 @@ const { authMiddleware } = require('../../utils/auth');
 
 router.route('/')
   .get(getSkills)
-  .post(authMiddleware, createSkill);
+  .post(authMiddleware, addSkill);
 
 router.route('/:id')
   .get(getSingleSkill)

@@ -12,6 +12,11 @@ export const GET_ME = gql`
         interests
         avatar
       }
+      skills {
+        _id
+        name
+        iconClassName
+      }
       projects {
         _id
         name
@@ -40,8 +45,9 @@ export const GET_PORTFOLIO = gql`
         avatar
       }
       skills {
+        _id
         name
-        proficiency
+        iconClassName
       }
       projects {
         _id
@@ -86,20 +92,10 @@ export const GET_CONTACT_INFO = gql`
 
 export const GET_SKILLS = gql`
   query getSkills {
-    getSkills {
-      skill
-      level
-    }
-  }
-`;
-
-export const GET_ALL_BLOGS = gql`
-  query getAllBlogs {
-    getAllBlogs {
+    skills {
       _id
-      title
-      content
-      date
+      name
+      iconClassName
     }
   }
 `;

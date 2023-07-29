@@ -14,12 +14,12 @@ const EditProjectForm = ({ projectId, show, setShow }) => {
     codeLink: "",
   });
 
-  const [file, setFile] = useState();
+  const [, setFile] = useState();
   const [fileName, setFileName] = useState("Upload a project image");
 
-  const { loading, data } = useQuery(GET_PROJECT);
+  const { data } = useQuery(GET_PROJECT);
 
-  const [updateProject, { error }] = useMutation(UPDATE_PROJECT, {
+  const [updateProject] = useMutation(UPDATE_PROJECT, {
     onCompleted: (data) => {
       console.log(data);
     },

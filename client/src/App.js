@@ -10,7 +10,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 
 import HomePage from "./views/Home";
-import Blog from "./views/Blog/Blog";
 import Navigation from "./components/Navbar/Navigation";
 import Footer from "./components/Footer/Footer";
 import LoginPage from "./views/Login/LoginPage";
@@ -53,7 +52,6 @@ function App() {
             <Col>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/blog" element={<Blog />} />
                 <Route path="/login" element={<LoginPage />} />
               </Routes>
             </Col>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Card,
   Button,
@@ -11,8 +11,6 @@ import Typist from "react-typist";
 import EditProjectForm from "./EditProjectForm";
 import { MdEdit } from "react-icons/md";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import { useQuery } from "@apollo/client";
-import { GET_PORTFOLIO } from "../../../../utils/queries";
 import Auth from "../../../../utils/auth";
 
 const ProjectCard = ({ project }) => {
@@ -44,16 +42,15 @@ const ProjectCard = ({ project }) => {
         }}
       />
       <Card.Body>
-        <Card.Title style={{ fontSize: "1rem", fontWeight: "bold" }}>
+        <Card.Title as={"div"} style={{ fontSize: "1rem", fontWeight: "bold" }}>
           <Typist key={name} cursor={{ hideWhenDone: true }}>{name}</Typist>
         </Card.Title>
-        <Card.Text style={{ fontSize: "1rem" }}>
+        <Card.Text as={"div"} style={{ fontSize: "1rem", marginBottom: "1rem" }}>
           <Typist key={description} cursor={{ hideWhenDone: true }}>{description}</Typist>
         </Card.Text>
         <Row>
           <Col className="text-left">
             <OverlayTrigger
-              key="bottom"
               placement="bottom"
               overlay={<Tooltip id={`tooltip-bottom`}>{codeLink}</Tooltip>}
             >
@@ -68,7 +65,6 @@ const ProjectCard = ({ project }) => {
             </OverlayTrigger>
 
             <OverlayTrigger
-              key="bottom"
               placement="bottom"
               overlay={<Tooltip id={`tooltip-bottom`}>{liveLink}</Tooltip>}
             >
