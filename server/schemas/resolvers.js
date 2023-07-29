@@ -202,6 +202,16 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+
+    addSkill: async (
+      parent, 
+      { name, iconClassName }, 
+      context) => {
+      if (context.user) {
+        return Skill.create({ name, iconClassName });
+      }
+      throw new AuthenticationError("Not logged in");
+    },
   },
 };
 

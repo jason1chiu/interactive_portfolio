@@ -13,10 +13,10 @@ const AddProjectForm = ({ show, setShow }) => {
     liveLink: "",
     codeLink: "",
   });
-  const [file, setFile] = useState();
+  const [, setFile] = useState();
   const [fileName, setFileName] = useState("");
 
-  const [addProject, { loading, error }] = useMutation(ADD_PROJECT, {
+  const [addProject] = useMutation(ADD_PROJECT, {
     onCompleted: (data) => {
       // handle when mutation is complete
       console.log(data);

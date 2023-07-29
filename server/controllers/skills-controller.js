@@ -16,7 +16,7 @@ module.exports = {
     res.json(skill);
   },
   // create a new skill
-  async createSkill({ body }, res) {
+  async addSkill({ body }, res) {
     const skill = await Skill.create(body);
     if (!skill) {
       return res.status(400).json({ message: 'Something is wrong!' });

@@ -159,10 +159,9 @@ export const UPDATE_CONTACT_INFO = gql`
 `;
 
 export const ADD_SKILL = gql`
-  mutation addSkill($skill: String!, $level: String!) {
-    addSkill(skill: $skill, level: $level) {
-      skill
-      level
+  mutation addSkill($name: String!, $iconClassName: String!) {
+    addSkill(name: $name, iconClassName: $iconClassName) {
+      iconClassName
     }
   }
 `;
@@ -181,36 +180,6 @@ export const DELETE_SKILL = gql`
     deleteSkill(id: $id) {
       skill
       level
-    }
-  }
-`;
-
-export const ADD_BLOG = gql`
-  mutation addBlog($title: String!, $content: String!) {
-    addBlog(title: $title, content: $content) {
-      _id
-      title
-      content
-      date
-    }
-  }
-`;
-
-export const UPDATE_BLOG = gql`
-  mutation updateBlog($blogId: ID!, $title: String, $content: String) {
-    updateBlog(blogId: $blogId, title: $title, content: $content) {
-      _id
-      title
-      content
-      date
-    }
-  }
-`;
-
-export const DELETE_BLOG = gql`
-  mutation deleteBlog($blogId: ID!) {
-    deleteBlog(blogId: $blogId) {
-      _id
     }
   }
 `;

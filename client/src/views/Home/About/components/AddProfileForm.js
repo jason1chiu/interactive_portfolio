@@ -13,7 +13,7 @@ const AddAboutForm = ({ show, setShow }) => {
     interests: "",
     avatar: "",
   });
-  const [file, setFile] = useState();
+  const [, setFile] = useState();
   const [fileName, setFileName] = useState("");
 
   const [addAbout] = useMutation(ADD_ABOUT, {

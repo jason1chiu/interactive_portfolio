@@ -4,8 +4,9 @@ const skillSchema = new Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
-  level: {
+  iconClassName: {
     type: String,
     required: true,
   },

@@ -22,7 +22,7 @@ const typeDefs = gql`
   type Skill {
     _id: ID
     name: String
-    proficiency: String
+    iconClassName: String
   }
 
   type Project {
@@ -58,7 +58,7 @@ const typeDefs = gql`
     skills: [Skill]
     projects: [Project]
     blogPosts: [BlogPost]
-}
+  }
 
   type Query {
     me: User
@@ -72,14 +72,43 @@ const typeDefs = gql`
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    addAbout(information: String!, background: String!, education: String!, interests: String!, avatar: String!): About
-    updateAbout(information: String!, background: String!, education: String!, interests: String!, avatar: String!): About
-    addSkill(name: String!, proficiency: String!): Skill
-    addProject(name: String!, description: String!, image: String!, liveLink: String, codeLink: String): Project
-    updateProject(_id: ID!, name: String!, description: String!, image: String!, liveLink: String, codeLink: String): Project
+    addAbout(
+      information: String!
+      background: String!
+      education: String!
+      interests: String!
+      avatar: String!
+    ): About
+    updateAbout(
+      information: String!
+      background: String!
+      education: String!
+      interests: String!
+      avatar: String!
+    ): About
+    addSkill(name: String!, iconClassName: String!): Skill
+    addProject(
+      name: String!
+      description: String!
+      image: String!
+      liveLink: String
+      codeLink: String
+    ): Project
+    updateProject(
+      _id: ID!
+      name: String!
+      description: String!
+      image: String!
+      liveLink: String
+      codeLink: String
+    ): Project
     deleteProject(_id: ID!): Project
     addBlogPost(title: String!, content: String!, date: String!): BlogPost
-    addContactMessage(name: String!, email: String!, message: String!): ContactMessage
+    addContactMessage(
+      name: String!
+      email: String!
+      message: String!
+    ): ContactMessage
   }
 `;
 

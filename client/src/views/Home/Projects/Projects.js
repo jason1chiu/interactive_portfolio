@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { MdAddCircle } from "react-icons/md";
 import ProjectCard from "./components/ProjectCard";
@@ -39,7 +39,7 @@ const ProjectsPage = () => {
     <Container id="projects-section">
       <Row className="justify-content-center">
         <Col md={12}>
-          <h1 className="text-center subheading">My Projects</h1>
+          <h1 className="text-center subheading">Projects</h1>
           {Auth.loggedIn() && (
             <Row>
               <Col className="text-center">

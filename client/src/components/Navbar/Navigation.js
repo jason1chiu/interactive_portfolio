@@ -50,22 +50,6 @@ const Navigation = () => {
               >
                 Projects
               </Nav.Link>
-              <Nav.Link className="customNavLink" as={Link} to="/blog">
-                Blog
-              </Nav.Link>
-              <Nav.Link className="customNavLink" as={Link} to="/blog">
-                Resume
-              </Nav.Link>
-            </>
-          )}
-          {location.pathname === "/blog" && (
-            <>
-              <Nav.Link className="customNavLink" as={Link} to="/">
-                Home
-              </Nav.Link>
-              <Nav.Link className="customNavLink" as={Link} to="/blog">
-                Resume
-              </Nav.Link>
             </>
           )}
           {location.pathname === "/login" && (
@@ -73,11 +57,12 @@ const Navigation = () => {
               <Nav.Link className="customNavLink" as={Link} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link className="customNavLink" as={Link} to="/blog">
-                Blog
-              </Nav.Link>
-              <Nav.Link className="customNavLink" as={Link} to="/blog">
-                Resume
+            </>
+          )}
+          {location.pathname === "/resume" && (
+            <>
+              <Nav.Link className="customNavLink" as={Link} to="/">
+                Home
               </Nav.Link>
             </>
           )}
