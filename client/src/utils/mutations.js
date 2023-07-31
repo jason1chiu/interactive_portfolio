@@ -60,15 +60,6 @@ export const UPDATE_ABOUT = gql`
   }
 `;
 
-export const UPLOAD_AVATAR = gql`
-  mutation uploadAvatar($avatar: String!) {
-    uploadAvatar(avatar: $avatar) {
-      _id
-      avatar
-    }
-  }
-`;
-
 export const ADD_PROJECT = gql`
   mutation addProject(
     $name: String!
@@ -124,15 +115,6 @@ export const DELETE_PROJECT = gql`
   mutation deleteProject($_id: ID!) {
     deleteProject(_id: $_id) {
       _id
-    }
-  }
-`;
-
-export const UPLOAD_IMAGE = gql`
-  mutation uploadImage($image: String!) {
-    uploadImage(image: $image) {
-      _id
-      image
     }
   }
 `;
