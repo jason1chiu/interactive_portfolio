@@ -120,7 +120,16 @@ const resolvers = {
       context
     ) => {
       if (context.user) {
-        let result = await cloudinary.uploader.upload(avatar);
+        const matches = avatar.match(/^data:.+\/(.+);base64,(.*)$/);
+        const buffer = Buffer.from(matches[2], "base64");
+
+        // Resize the avatar using sharp
+        const outputPath = `resized_avatar.jpg`;
+        await sharp(buffer)
+          .resize(500)
+          .toFile(outputPath);
+
+        let result = await cloudinary.uploader.upload(outputPath);
 
         if (result.error) {
           return res.status(500).send(error.message);
