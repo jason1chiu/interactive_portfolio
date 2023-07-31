@@ -34,28 +34,4 @@ const deleteProject = async (req, res) => {
   res.json(deletedProject);
 };
 
-const uploadImage = (req, res, next) => {
-  upload.single('image')(req, res, (err) => {
-    if (err) {
-      return res.status(500).send("Error uploading file");
-    }
-    // Upload the image to cloudinary
-    cloudinary.uploader.upload(req.file.path, function(error, result) {
-      if (error) {
-        return res.status(500).send(error.message);
-      }
-      
-      // Update the image field of the Project document
-      const { id } = req.params;
-      Project.findByIdAndUpdate(id, { image: result.url }, function(err, project) {
-        if (err) {
-          return res.status(500).send(err.message);
-        }
-        
-        res.send("Uploaded!");
-      });
-    });
-  });
-};
-
-module.exports = { getProjects, getProject, addProject, updateProject, deleteProject, uploadImage };
+module.exports = { getProjects, getProject, addProject, updateProject, deleteProject };
