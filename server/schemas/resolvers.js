@@ -88,7 +88,7 @@ const resolvers = {
         // Resize the avatar using sharp
         const outputPath = `resized_avatar.jpg`;
         await sharp(buffer)
-          .resize(300, 300) // Resize to 200x200 pixels
+          .resize(500)
           .toFile(outputPath);
 
         let result = await cloudinary.uploader.upload(outputPath);
@@ -121,8 +121,6 @@ const resolvers = {
     ) => {
       if (context.user) {
         let result = await cloudinary.uploader.upload(avatar);
-
-        console.log(avatar);
 
         if (result.error) {
           return res.status(500).send(error.message);
