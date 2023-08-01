@@ -1,9 +1,11 @@
 const {
   User,
-  About,
+  Information,
+  Education,
+  Interests,
+  Background,
   Skill,
   Project,
-  BlogPost,
   ContactMessage,
 } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
@@ -34,9 +36,17 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-
-    about: async () => {
-      return About.find({});
+    information: async () => {
+      return Information.findOne({});
+    },
+    education: async () => {
+      return Education.find({});
+    },
+    interests: async () => {
+      return Interests.find({});
+    },
+    background: async () => {
+      return Background.find({});
     },
     skills: async () => {
       return Skill.find({});
@@ -44,19 +54,25 @@ const resolvers = {
     projects: async () => {
       return Project.find({});
     },
-    blogPosts: async () => {
-      return BlogPost.find({});
-    },
     contactMessages: async () => {
       return ContactMessage.find({});
     },
     getPortfolio: async () => {
-      const about = await About.findOne();
+      const information = await Information.findOne({});
+      const background = await Background.find({});
+      const education = await Education.find({});
+      const interests = await Interests.find({});
       const skills = await Skill.find({});
       const projects = await Project.find({});
-      const blogPosts = await BlogPost.find({});
 
-      return { about, skills, projects, blogPosts };
+      return {
+        information,
+        background,
+        education,
+        interests,
+        skills,
+        projects,
+      };
     },
   },
 
@@ -66,27 +82,27 @@ const resolvers = {
         email === process.env.PORTFOLIO_EMAIL &&
         password === process.env.PORTFOLIO_PASSWORD
       ) {
-        // create a simple token (you can use a library for this)
         const token = signToken({ email: process.env.PORTFOLIO_EMAIL });
 
-        // return an object that includes the token and user details
         return { token, user: { email: process.env.PORTFOLIO_EMAIL } };
       } else {
         throw new AuthenticationError("Incorrect credentials");
       }
     },
 
-    addAbout: async (
+    addInformation: async (
       parent,
-      { information, background, education, interests, avatar },
+      { name, title, location, avatar },
       context
     ) => {
       if (context.user) {
+        // Convert the data URL to a Buffer
+        const matches = avatar.match(/^data:.+\/(.+);base64,(.*)$/);
+        const buffer = Buffer.from(matches[2], "base64");
+
         // Resize the avatar using sharp
-        const outputPath = `resized_${avatar}`;
-        await sharp(avatar)
-          .resize(200, 200) // Resize to 200x200 pixels
-          .toFile(outputPath);
+        const outputPath = `resized_avatar.jpg`;
+        await sharp(buffer).resize(500).toFile(outputPath);
 
         let result = await cloudinary.uploader.upload(outputPath);
 
@@ -94,26 +110,25 @@ const resolvers = {
           return res.status(500).send(error.message);
         }
 
-        const about = await About.create({
-          information,
-          background,
-          education,
-          interests,
+        const information = await Information.create({
+          name,
+          title,
+          location,
           avatar: result.url,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { about: about._id }
+          { $push: { information: information._id } }
         );
 
-        return about;
+        return information;
       }
     },
 
-    updateAbout: async (
+    updateInformation: async (
       parent,
-      { information, background, education, interests, avatar },
+      { name, title, location, avatar },
       context
     ) => {
       if (context.user) {
@@ -123,17 +138,130 @@ const resolvers = {
           return res.status(500).send(error.message);
         }
 
-        const about = await About.findOneAndUpdate(
+        const information = await Information.findOneAndUpdate(
           {},
-          { information, background, education, interests, avatar: result.url },
+          { name, title, location, avatar: result.url },
           { new: true }
         );
 
-        return about;
+        return information;
       }
 
       throw new AuthenticationError("Not logged in");
     },
+
+    addBackground: async (
+      parent,
+      { jobTitle, company, startYear, endYear, description },
+      context
+    ) => {
+      if (context.user) {
+        const background = await Background.create({
+          jobTitle,
+          company,
+          startYear,
+          endYear,
+          description,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { background: background._id } }
+        );
+
+        return background;
+      }
+    },
+
+    updateBackground: async (
+      parent,
+      { _id, jobTitle, company, startYear, endYear, description },
+      context
+    ) => {
+      if (context.user) {
+        const background = await Background.findOneAndUpdate(
+          { _id },
+          { jobTitle, company, startYear, endYear, description },
+          { new: true }
+        );
+
+        return background;
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
+
+    addEducation: async (
+      parent,
+      { school, degree, fieldOfStudy, startYear, endYear },
+      context
+    ) => {
+      if (context.user) {
+        const education = await Education.create({
+          school,
+          degree,
+          fieldOfStudy,
+          startYear,
+          endYear,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { education: education._id } }
+        );
+
+        return education;
+      }
+    },
+
+    updateEducation: async (
+      parent,
+      { _id, school, degree, startYear, endYear, description },
+      context
+    ) => {
+      if (context.user) {
+        const education = await Education.findOneAndUpdate(
+          { _id },
+          { school, degree, startYear, endYear, description },
+          { new: true }
+        );
+
+        return education;
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
+
+    addInterest: async (parent, { interest }, context) => {
+      if (context.user) {
+        const newInterest = await Interests.create({
+          interest: interest,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { interests: newInterest._id } }
+        );
+
+        return newInterest;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    // updateInterests: async (parent, { interests }, context) => {
+    //   if (context.user) {
+    //     const interest = await Interests.findByIdAndUpdate(
+    //       {},
+    //       { interests },
+    //       { new: true }
+    //     );
+
+    //     return interest;
+    //   }
+
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
 
     addProject: async (
       parent,
@@ -203,10 +331,7 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addSkill: async (
-      parent, 
-      { name, iconClassName }, 
-      context) => {
+    addSkill: async (parent, { name, iconClassName }, context) => {
       if (context.user) {
         return Skill.create({ name, iconClassName });
       }
