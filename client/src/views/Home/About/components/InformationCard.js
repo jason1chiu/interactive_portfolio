@@ -16,17 +16,17 @@ const InformationCard = () => {
   }
 
   const name =
-    data && data.getPortfolio 
+    data && data.getPortfolio && data.getPortfolio.information && data.getPortfolio.information.name
       ? data.getPortfolio.information.name
       : "name";
 
   const title =
-    data && data.getPortfolio
+    data && data.getPortfolio && data.getPortfolio.information && data.getPortfolio.information.title
       ? data.getPortfolio.information.title
       : "title";
 
   const location = 
-    data && data.getPortfolio
+    data && data.getPortfolio && data.getPortfolio.information && data.getPortfolio.information.location
       ? data.getPortfolio.information.location
       : "location";
   
