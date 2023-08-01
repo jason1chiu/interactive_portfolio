@@ -35,14 +35,12 @@ export const ADD_INFORMATION = gql`
 
 export const UPDATE_INFORMATION = gql`
   mutation updateInformation(
-    $_id: ID!
     $name: String!
     $title: String!
     $location: String!
     $avatar: String!
   ) {
     updateInformation(
-      _id: $_id
       name: $name
       title: $title
       location: $location
@@ -164,13 +162,13 @@ export const ADD_INTEREST = gql`
 `;
 
 
-// export const UPDATE_INTERESTS = gql`
-//   mutation updateInterests($_id: ID!, $interests: [String]!) {
-//     updateInterests(_id: $_id, interests: $interest) {
-//       interests
-//     }
-//   }
-// `;
+export const UPDATE_INTEREST = gql`
+  mutation updateInterest($_id: ID!, $interest: String!) {
+    updateInterest(_id: $_id, interest: $interest) {
+      interest
+    }
+  }
+`;
 
 export const ADD_PROJECT = gql`
   mutation addProject(

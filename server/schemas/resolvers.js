@@ -255,20 +255,24 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    // updateInterests: async (parent, { interests }, context) => {
-    //   if (context.user) {
-    //     const interest = await Interests.findByIdAndUpdate(
-    //       {},
-    //       { interests },
-    //       { new: true }
-    //     );
-
-    //     return interest;
-    //   }
-
-    //   throw new AuthenticationError("You need to be logged in!");
-    // },
-
+    updateInterest: async (parent, { _id, interest }, context) => {
+      if (context.user) {
+        const updatedInterest = await Interests.findByIdAndUpdate(
+          _id,
+          { interest },
+          { new: true }
+        );
+    
+        if (!updatedInterest) {
+          throw new AuthenticationError('No interest found with this id');
+        }
+    
+        return updatedInterest;
+      }
+    
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    
     addProject: async (
       parent,
       { name, description, image, liveLink, codeLink },
