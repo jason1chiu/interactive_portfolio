@@ -20,7 +20,7 @@ module.exports = () => {
       //Webpack plug to generate html files & injects the bundles
       new HtmlWebpackPlugin({
         template: "./index.html",
-        title: "Tiny Squares",
+        title: "Interactive Portfolio",
         favicon: "favicon.ico",
       }),
 
@@ -34,9 +34,9 @@ module.exports = () => {
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: "Tiny Squares",
-        short_name: "Tiny Squares",
-        description: "Tiny Squares",
+        name: "Interactive Portfolio",
+        short_name: "Interactive Portfolio",
+        description: "Interactive Portfolio",
         background_color: "#225ca3",
         theme_color: "#225ca3",
         start_url: "/",
