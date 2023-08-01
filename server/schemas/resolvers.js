@@ -11,7 +11,6 @@ const {
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
 const cloudinary = require("cloudinary").v2;
 const sharp = require("sharp");
 require("dotenv").config();
@@ -280,7 +279,14 @@ const resolvers = {
       context
     ) => {
       if (context.user) {
-        let result = await cloudinary.uploader.upload(image);
+        const matches = image.match(/^data:.+\/(.+);base64,(.*)$/);
+        const buffer = Buffer.from(matches[2], "base64");
+
+        // Resize the image using sharp
+        const outputPath = `resized_image.jpg`;
+        await sharp(buffer).resize(500).toFile(outputPath);
+
+        let result = await cloudinary.uploader.upload(outputPath);
 
         if (result.error) {
           return res.status(500).send(error.message);
@@ -309,8 +315,14 @@ const resolvers = {
       context
     ) => {
       if (context.user) {
-        // Upload the image to Cloudinary and get the resulting URL
-        let result = await cloudinary.uploader.upload(image);
+        const matches = image.match(/^data:.+\/(.+);base64,(.*)$/);
+        const buffer = Buffer.from(matches[2], "base64");
+
+        // Resize the image using sharp
+        const outputPath = `resized_image.jpg`;
+        await sharp(buffer).resize(500).toFile(outputPath);
+
+        let result = await cloudinary.uploader.upload(outputPath);
         if (result.error) {
           throw new Error("Failed to upload image to Cloudinary");
         }
