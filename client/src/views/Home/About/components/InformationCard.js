@@ -15,10 +15,21 @@ const InformationCard = () => {
     return <div>Loading...</div>;
   }
 
-  const information =
+  const name =
+    data && data.getPortfolio 
+      ? data.getPortfolio.information.name
+      : "name";
+
+  const title =
     data && data.getPortfolio
-      ? data.getPortfolio.information
-      : "information";
+      ? data.getPortfolio.information.title
+      : "title";
+
+  const location = 
+    data && data.getPortfolio
+      ? data.getPortfolio.information.location
+      : "location";
+  
 
   return (
     <Card className="h-100">
@@ -29,9 +40,9 @@ const InformationCard = () => {
         </Button>
       </Card.Header>
       <Card.Body>
-        <Card.Text>Name: {information.name}</Card.Text>
-        <Card.Text>Title: {information.title}</Card.Text>
-        <Card.Text>Location: {information.location}</Card.Text>
+        <Card.Text>Name: {name}</Card.Text>
+        <Card.Text>Title: {title}</Card.Text>
+        <Card.Text>Location: {location}</Card.Text>
       </Card.Body>
     </Card>
   );
