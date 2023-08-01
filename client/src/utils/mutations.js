@@ -164,4 +164,291 @@ export const DELETE_SKILL = gql`
       level
     }
   }
+`;import { gql } from "@apollo/client";
+
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
+        email
+      }
+    }
+  }
+`;
+
+export const ADD_INFORMATION = gql`
+  mutation addInformation(
+    $name: String!
+    $title: String!
+    $location: String!
+    $avatar: String!
+  ) {
+    addInformation(
+      name: $name
+      title: $title
+      location: $location
+      avatar: $avatar
+    ) {
+      name
+      title
+      location
+      avatar
+    }
+  }
+`;
+
+export const UPDATE_INFORMATION = gql`
+  mutation updateInformation(
+    $_id: ID!
+    $name: String!
+    $title: String!
+    $location: String!
+    $avatar: String!
+  ) {
+    updateInformation(
+      _id: $_id
+      name: $name
+      title: $title
+      location: $location
+      avatar: $avatar
+    ) {
+      name
+      title
+      location
+      avatar
+    }
+  }
+`;
+export const ADD_BACKGROUND = gql`
+  mutation addBackground(
+    $jobTitle: String!
+    $company: String!
+    $startYear: Int!
+    $endYear: Int!
+    $description: String!
+  ) {
+    addBackground(
+      jobTitle: $jobTitle
+      company: $company
+      startYear: $startYear
+      endYear: $endYear
+      description: $description
+    ) {
+      jobTitle
+      company
+      startYear
+      endYear
+      description
+    }
+  }
+`;
+
+export const UPDATE_BACKGROUND = gql`
+  mutation updateBackground(
+    $_id: ID!
+    $jobTitle: String!
+    $company: String!
+    $startYear: Int!
+    $endYear: Int!
+    $description: String!
+  ) {
+    updateBackground(
+      _id: $_id
+      jobTitle: $jobTitle
+      company: $company
+      startYear: $startYear
+      endYear: $endYear
+      description: $description
+    ) {
+      jobTitle
+      company
+      startYear
+      endYear
+      description
+    }
+  }
+`;
+
+export const ADD_EDUCATION = gql`
+  mutation addEducation(
+    $school: String!
+    $degree: String!
+    $fieldOfStudy: String!
+    $startYear: Int!
+    $endYear: Int!
+  ) {
+    addEducation(
+      school: $school
+      degree: $degree
+      fieldOfStudy: $fieldOfStudy
+      startYear: $startYear
+      endYear: $endYear
+    ) {
+      school
+      degree
+      fieldOfStudy
+      startYear
+      endYear
+    }
+  }
+`;
+
+export const UPDATE_EDUCATION = gql`
+  mutation updateEducation(
+    $_id: ID!
+    $school: String!
+    $degree: String!
+    $fieldOfStudy: String!
+    $startYear: Int!
+    $endYear: Int!
+  ) {
+    updateEducation(
+      _id: $_id
+      school: $school
+      degree: $degree
+      fieldOfStudy: $fieldOfStudy
+      startYear: $startYear
+      endYear: $endYear
+    ) {
+      school
+      degree
+      fieldOfStudy
+      startYear
+      endYear
+    }
+  }
+`;
+
+export const ADD_INTEREST = gql`
+  mutation addInterest($interest: String!) {
+    addInterest(interest: $interest) {
+      interest
+    }
+  }
+`;
+
+
+// export const UPDATE_INTERESTS = gql`
+//   mutation updateInterests($_id: ID!, $interests: [String]!) {
+//     updateInterests(_id: $_id, interests: $interest) {
+//       interests
+//     }
+//   }
+// `;
+
+export const ADD_PROJECT = gql`
+  mutation addProject(
+    $name: String!
+    $description: String!
+    $image: String!
+    $liveLink: String
+    $codeLink: String
+  ) {
+    addProject(
+      name: $name
+      description: $description
+      image: $image
+      liveLink: $liveLink
+      codeLink: $codeLink
+    ) {
+      name
+      description
+      image
+      liveLink
+      codeLink
+    }
+  }
+`;
+
+export const UPDATE_PROJECT = gql`
+  mutation updateProject(
+    $_id: ID!
+    $name: String!
+    $description: String!
+    $image: String!
+    $liveLink: String
+    $codeLink: String
+  ) {
+    updateProject(
+      _id: $_id
+      name: $name
+      description: $description
+      image: $image
+      liveLink: $liveLink
+      codeLink: $codeLink
+    ) {
+      _id
+      name
+      description
+      image
+      liveLink
+      codeLink
+    }
+  }
+`;
+
+export const DELETE_PROJECT = gql`
+  mutation deleteProject($_id: ID!) {
+    deleteProject(_id: $_id) {
+      _id
+    }
+  }
+`;
+
+export const UPLOAD_IMAGE = gql`
+  mutation uploadImage($image: String!) {
+    uploadImage(image: $image) {
+      _id
+      image
+    }
+  }
+`;
+
+export const UPDATE_CONTACT_INFO = gql`
+  mutation updateContactInfo(
+    $email: String!
+    $phoneNumber: String!
+    $linkedIn: String!
+    $github: String!
+  ) {
+    updateContactInfo(
+      email: $email
+      phoneNumber: $phoneNumber
+      linkedIn: $linkedIn
+      github: $github
+    ) {
+      email
+      phoneNumber
+      linkedIn
+      github
+    }
+  }
+`;
+
+export const ADD_SKILL = gql`
+  mutation addSkill($name: String!, $iconClassName: String!) {
+    addSkill(name: $name, iconClassName: $iconClassName) {
+      iconClassName
+    }
+  }
+`;
+
+export const UPDATE_SKILL = gql`
+  mutation updateSkill($id: ID!, $skill: String!, $level: String!) {
+    updateSkill(id: $id, skill: $skill, level: $level) {
+      skill
+      level
+    }
+  }
+`;
+
+export const DELETE_SKILL = gql`
+  mutation deleteSkill($id: ID!) {
+    deleteSkill(id: $id) {
+      skill
+      level
+    }
+  }
 `;
