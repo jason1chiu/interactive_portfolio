@@ -1,30 +1,46 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADD_ABOUT } from "../../../../utils/mutations";
+import {
+  ADD_INFORMATION,
+  ADD_BACKGROUND,
+  ADD_EDUCATION,
+  ADD_INTEREST,
+} from "../../../../utils/mutations";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Image } from "react-bootstrap";
 
-const AddAboutForm = ({ show, setShow }) => {
-
-  const [about, setAbout] = useState({
-    information: "",
-    background: "",
-    education: "",
-    interests: "",
-    avatar: "",
-  });
+const AddProfileForm = ({ show, setShow }) => {
+  const [formType, setFormType] = useState("");
+  const [formData, setFormData] = useState({});
   const [, setFile] = useState();
   const [fileName, setFileName] = useState("");
 
-  const [addAbout] = useMutation(ADD_ABOUT, {
+  const [addInformation] = useMutation(ADD_INFORMATION, {
     refetchQueries: [{ query: GET_PORTFOLIO }],
   });
 
+  const [addBackground] = useMutation(ADD_BACKGROUND, {
+    refetchQueries: [{ query: GET_PORTFOLIO }],
+  });
+
+  const [addEducation] = useMutation(ADD_EDUCATION, {
+    refetchQueries: [{ query: GET_PORTFOLIO }],
+  });
+
+  const [addInterest] = useMutation(ADD_INTEREST, {
+    refetchQueries: [{ query: GET_PORTFOLIO }],
+  });
+
+  const handleFormTypeChange = (event) => {
+    setFormType(event.target.value);
+  };
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setAbout({
-      ...about,
-      [name]: value,
+    setFormData({
+      ...formData,
+      [name]:
+        name === "startYear" || name === "endYear" ? parseInt(value) : value,
     });
   };
 
@@ -32,9 +48,9 @@ const AddAboutForm = ({ show, setShow }) => {
     const file = event.target.files[0];
     let reader = new FileReader();
     reader.onload = () => {
-      about.avatar = reader.result;
-      setAbout({ ...about });
-    }
+      formData.avatar = reader.result;
+      setFormData({ ...formData });
+    };
     reader.readAsDataURL(file);
     setFile(file);
     setFileName(file.name);
@@ -44,75 +60,64 @@ const AddAboutForm = ({ show, setShow }) => {
     event.preventDefault();
 
     try {
-      await addAbout({ variables: about });
+      switch (formType) {
+        case "Information":
+          await addInformation({ variables: formData });
+          break;
+        case "Background":
+          await addBackground({ variables: formData });
+          break;
+        case "Education":
+          await addEducation({ variables: formData });
+          break;
+        case "Interests":
+          await addInterest({
+            variables: { interest: formData.interest },
+          });
+          break;
+        default:
+          break;
+      }
 
-      setAbout({
-        information: "",
-        background: "",
-        education: "",
-        interests: "",
-        avatar: "",
-      });
-
+      setFormData({});
       setShow(false);
     } catch (e) {
       console.error(e);
     }
   };
 
-  return (
-    <>
-      <Modal show={show} onHide={() => setShow(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add About</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleFormSubmit}>
+  const renderForm = () => {
+    switch (formType) {
+      case "Information":
+        return (
+          <>
             <Form.Group>
-              <Form.Label>Information</Form.Label>
+              <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
-                as={"textarea"}
-                rows={3}
-                placeholder="Information"
-                name="information"
-                value={about.information}
+                placeholder="Name"
+                name="name"
+                value={formData.name || ""}
                 onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Background</Form.Label>
+              <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
-                as={"textarea"}
-                rows={3}
-                placeholder="Background"
-                name="background"
-                value={about.background}
+                placeholder="Title"
+                name="title"
+                value={formData.title || ""}
                 onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Education</Form.Label>
+              <Form.Label>Location</Form.Label>
               <Form.Control
                 type="text"
-                as={"textarea"}
-                rows={3}
-                placeholder="Education"
-                name="education"
-                value={about.education}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Interests</Form.Label>
-              <Form.Control
-                type="text"
-                as={"textarea"}
-                rows={3}
-                placeholder="Interests"
-                name="interests"
-                value={about.interests}
+                placeholder="Location"
+                name="location"
+                value={formData.location || ""}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -120,19 +125,176 @@ const AddAboutForm = ({ show, setShow }) => {
               <Form.Label>Avatar</Form.Label>
               <Form.File
                 id="custom-file"
-                label={fileName || "Upload an image"}
+                label="Upload an image"
                 custom
                 onChange={handleFileChange}
               />
+              <Image
+                style={{ width: "100px", borderRadius: "5%" }}
+                src={formData.avatar}
+                alt="avatar"
+              />
             </Form.Group>
-            <Button className="customButton" variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
-    </>
+          </>
+        );
+      case "Background":
+        return (
+          <>
+            <Form.Group>
+              <Form.Label>Job Title</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Job Title"
+                name="jobTitle"
+                value={formData.jobTitle || ""}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Company</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Company"
+                name="company"
+                value={formData.company || ""}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Start Year</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Start Year"
+                name="startYear"
+                value={formData.startYear || ""}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>End Year</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="End Year"
+                name="endYear"
+                value={formData.endYear || ""}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                placeholder="Description"
+                name="description"
+                value={formData.description || ""}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+          </>
+        );
+      case "Education":
+        return (
+          <>
+            <Form.Group>
+              <Form.Label>School</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="School"
+                name="school"
+                value={formData.school || ""}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Degree</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Degree"
+                name="degree"
+                value={formData.degree || ""}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Field of Study</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Field of Study"
+                name="fieldOfStudy"
+                value={formData.fieldOfStudy || ""}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Start Year</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Start Year"
+                name="startYear"
+                value={formData.startYear || ""}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>End Year</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="End Year"
+                name="endYear"
+                value={formData.endYear || ""}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+          </>
+        );
+      case "Interests":
+        return (
+          <Form.Group>
+            <Form.Label>Interest</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Interest"
+              name="interest"
+              value={formData.interest || ""}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <Modal show={show} onHide={() => setShow(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>Add Profile Section</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={handleFormSubmit}>
+          <Form.Group>
+            <Form.Label>Profile Section</Form.Label>
+            <Form.Control
+              as="select"
+              value={formType}
+              onChange={handleFormTypeChange}
+            >
+              <option value="">--Select a profile section--</option>
+              <option value="Information">Information</option>
+              <option value="Background">Background</option>
+              <option value="Education">Education</option>
+              <option value="Interests">Interests</option>
+            </Form.Control>
+          </Form.Group>
+          {renderForm()}
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </Modal.Body>
+    </Modal>
   );
 };
 
-export default AddAboutForm;
+export default AddProfileForm;

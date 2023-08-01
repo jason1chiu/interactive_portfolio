@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
+import { MdEdit } from "react-icons/md";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
 
 const InformationCard = () => {
@@ -14,15 +15,23 @@ const InformationCard = () => {
     return <div>Loading...</div>;
   }
 
-  const information = data && data.getPortfolio.about ? data.getPortfolio.about.information : "information";
+  const information =
+    data && data.getPortfolio
+      ? data.getPortfolio.information
+      : "information";
 
   return (
     <Card className="h-100">
-      <Card.Header>
+      <Card.Header className="d-flex justify-content-between align-items-center">
         <h3 className="subheading">Information</h3>
+        <Button className="customButton" variant="outline-primary" size="md">
+          <MdEdit />
+        </Button>
       </Card.Header>
       <Card.Body>
-        <Card.Text>{information}</Card.Text>
+        <Card.Text>Name: {information.name}</Card.Text>
+        <Card.Text>Title: {information.title}</Card.Text>
+        <Card.Text>Location: {information.location}</Card.Text>
       </Card.Body>
     </Card>
   );

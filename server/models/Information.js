@@ -1,19 +1,15 @@
 const { Schema, model } = require('mongoose');
 
-const aboutSchema = new Schema({
-  information: {
+const informationSchema = new Schema({
+  name: {
     type: String,
     required: true,
   },
-  education: {
+  title: {
     type: String,
     required: true,
   },
-  interests: {
-    type: String,
-    required: true,
-  },
-  background: {
+  location: {
     type: String,
     required: true,
   },
@@ -22,6 +18,6 @@ const aboutSchema = new Schema({
   }
 });
 
-const About = model('About', aboutSchema);
+const Information = model('Information', informationSchema);
 
-module.exports = About;
+module.exports = Information;
