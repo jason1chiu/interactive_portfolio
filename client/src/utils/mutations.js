@@ -12,62 +12,165 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const ADD_ABOUT = gql`
-  mutation addAbout(
-    $information: String!
-    $background: String!
-    $education: String!
-    $interests: String!
+export const ADD_INFORMATION = gql`
+  mutation addInformation(
+    $name: String!
+    $title: String!
+    $location: String!
     $avatar: String!
   ) {
-    addAbout(
-      information: $information
-      background: $background
-      education: $education
-      interests: $interests
+    addInformation(
+      name: $name
+      title: $title
+      location: $location
       avatar: $avatar
     ) {
-      information
-      background
-      education
-      interests
+      name
+      title
+      location
       avatar
     }
   }
 `;
 
-export const UPDATE_ABOUT = gql`
-  mutation updateAbout(
-    $information: String!
-    $background: String!
-    $education: String!
-    $interests: String!
+export const UPDATE_INFORMATION = gql`
+  mutation updateInformation(
+    $_id: ID!
+    $name: String!
+    $title: String!
+    $location: String!
     $avatar: String!
   ) {
-    updateAbout(
-      information: $information
-      background: $background
-      education: $education
-      interests: $interests
+    updateInformation(
+      _id: $_id
+      name: $name
+      title: $title
+      location: $location
       avatar: $avatar
     ) {
-      information
-      background
-      education
-      interests
+      name
+      title
+      location
       avatar
+    }
+  }
+`;
+export const ADD_BACKGROUND = gql`
+  mutation addBackground(
+    $jobTitle: String!
+    $company: String!
+    $startYear: Int!
+    $endYear: Int!
+    $description: String!
+  ) {
+    addBackground(
+      jobTitle: $jobTitle
+      company: $company
+      startYear: $startYear
+      endYear: $endYear
+      description: $description
+    ) {
+      jobTitle
+      company
+      startYear
+      endYear
+      description
     }
   }
 `;
 
-export const UPLOAD_AVATAR = gql`
-  mutation uploadAvatar($avatar: String!) {
-    uploadAvatar(avatar: $avatar) {
-      _id
-      avatar
+export const UPDATE_BACKGROUND = gql`
+  mutation updateBackground(
+    $_id: ID!
+    $jobTitle: String!
+    $company: String!
+    $startYear: Int!
+    $endYear: Int!
+    $description: String!
+  ) {
+    updateBackground(
+      _id: $_id
+      jobTitle: $jobTitle
+      company: $company
+      startYear: $startYear
+      endYear: $endYear
+      description: $description
+    ) {
+      jobTitle
+      company
+      startYear
+      endYear
+      description
     }
   }
 `;
+
+export const ADD_EDUCATION = gql`
+  mutation addEducation(
+    $school: String!
+    $degree: String!
+    $fieldOfStudy: String!
+    $startYear: Int!
+    $endYear: Int!
+  ) {
+    addEducation(
+      school: $school
+      degree: $degree
+      fieldOfStudy: $fieldOfStudy
+      startYear: $startYear
+      endYear: $endYear
+    ) {
+      school
+      degree
+      fieldOfStudy
+      startYear
+      endYear
+    }
+  }
+`;
+
+export const UPDATE_EDUCATION = gql`
+  mutation updateEducation(
+    $_id: ID!
+    $school: String!
+    $degree: String!
+    $fieldOfStudy: String!
+    $startYear: Int!
+    $endYear: Int!
+  ) {
+    updateEducation(
+      _id: $_id
+      school: $school
+      degree: $degree
+      fieldOfStudy: $fieldOfStudy
+      startYear: $startYear
+      endYear: $endYear
+    ) {
+      school
+      degree
+      fieldOfStudy
+      startYear
+      endYear
+    }
+  }
+`;
+
+export const ADD_INTEREST = gql`
+  mutation addInterest($interest: String!) {
+    addInterest(interest: $interest) {
+      interest
+    }
+  }
+`;
+
+
+// export const UPDATE_INTERESTS = gql`
+//   mutation updateInterests($_id: ID!, $interests: [String]!) {
+//     updateInterests(_id: $_id, interests: $interest) {
+//       interests
+//     }
+//   }
+// `;
 
 export const ADD_PROJECT = gql`
   mutation addProject(

@@ -7,33 +7,40 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\\..+/, 'Must use a valid email address'],
+      match: [/.+@.+\.+.+/, 'Must use a valid email address'],
     },
     password: {
       type: String,
       required: true,
     },
-    about: {
+    information: {
       type: Schema.Types.ObjectId,
-      ref: 'About',
+      ref: 'Information',
     },
-    skills: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Skill',
-      },
-    ],
-    projects: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Project',
-      },
-    ],
+    education: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Education',
+    }],
+    interests: {
+      type: Schema.Types.ObjectId,
+      ref: 'Interests',
+    },
+    background: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Background',
+    }],
+    skills: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Skill',
+    }],
+    projects: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Project',
+    }],
     contact: {
       type: String,
     },
   },
-  // set this to use virtual below
   {
     toJSON: {
       virtuals: true,

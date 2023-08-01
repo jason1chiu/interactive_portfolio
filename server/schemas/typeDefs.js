@@ -4,19 +4,44 @@ const typeDefs = gql`
   type User {
     _id: ID
     email: String
-    about: About
+    information: Information
+    education: [Education]
+    interests: [Interest]
+    background: [Background]
     skills: [Skill]
     projects: [Project]
-    blogPosts: [BlogPost]
     contactMessages: [ContactMessage]
   }
 
-  type About {
-    information: String
-    background: String
-    education: String
-    interests: String
+  type Information {
+    _id: ID
+    name: String
+    title: String
+    location: String
     avatar: String
+  }
+
+  type Education {
+    _id: ID
+    school: String
+    degree: String
+    fieldOfStudy: String
+    startYear: Float
+    endYear: Float
+  }
+
+  type Interest {
+    _id: ID
+    interest: String
+  }
+
+  type Background {
+    _id: ID
+    jobTitle: String
+    company: String
+    startYear: Int
+    endYear: Int
+    description: String
   }
 
   type Skill {
@@ -27,18 +52,11 @@ const typeDefs = gql`
 
   type Project {
     _id: ID
-    name: String!
-    description: String!
-    image: String!
+    name: String
+    description: String
+    image: String
     liveLink: String
     codeLink: String
-  }
-
-  type BlogPost {
-    _id: ID
-    title: String
-    content: String
-    date: String
   }
 
   type ContactMessage {
@@ -54,38 +72,72 @@ const typeDefs = gql`
   }
 
   type Portfolio {
-    about: About
+    information: Information
+    education: [Education]
+    interests: [Interest]
+    background: [Background]
     skills: [Skill]
     projects: [Project]
-    blogPosts: [BlogPost]
   }
 
   type Query {
     me: User
     getPortfolio: Portfolio
-    about: About
+    information: Information
+    education: [Education]
+    interests: [Interest]
+    background: [Background]
     skills: [Skill]
     projects: [Project]
-    blogPosts: [BlogPost]
     contactMessages: [ContactMessage]
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    addAbout(
-      information: String!
-      background: String!
-      education: String!
-      interests: String!
+    addInformation(
+      name: String!
+      title: String!
+      location: String!
       avatar: String!
-    ): About
-    updateAbout(
-      information: String!
-      background: String!
-      education: String!
-      interests: String!
+    ): Information
+    updateInformation(
+      name: String!
+      title: String!
+      location: String!
       avatar: String!
-    ): About
+    ): Information
+    addEducation(
+      school: String!
+      degree: String!
+      fieldOfStudy: String!
+      startYear: Int!
+      endYear: Int!
+    ): Education
+    updateEducation(
+      _id: ID!
+      school: String!
+      degree: String!
+      fieldOfStudy: String!
+      startYear: Int!
+      endYear: Int!
+    ): Education
+    addInterest(interest: String!): Interest
+    updateInterest(_id: ID!, interest: String!): Interest
+    addBackground(
+      jobTitle: String!
+      company: String!
+      startYear: Int!
+      endYear: Int!
+      description: String!
+    ): Background
+    updateBackground(
+      _id: ID!
+      jobTitle: String!
+      company: String!
+      startYear: Int!
+      endYear: Int!
+      description: String!
+    ): Background
     addSkill(name: String!, iconClassName: String!): Skill
     addProject(
       name: String!
@@ -103,7 +155,6 @@ const typeDefs = gql`
       codeLink: String
     ): Project
     deleteProject(_id: ID!): Project
-    addBlogPost(title: String!, content: String!, date: String!): BlogPost
     addContactMessage(
       name: String!
       email: String!
