@@ -59,20 +59,17 @@ export const ADD_BACKGROUND = gql`
     $company: String!
     $startYear: Int!
     $endYear: Int!
-    $description: String!
   ) {
     addBackground(
       jobTitle: $jobTitle
       company: $company
       startYear: $startYear
       endYear: $endYear
-      description: $description
     ) {
       jobTitle
       company
       startYear
       endYear
-      description
     }
   }
 `;
@@ -84,7 +81,6 @@ export const UPDATE_BACKGROUND = gql`
     $company: String!
     $startYear: Int!
     $endYear: Int!
-    $description: String!
   ) {
     updateBackground(
       _id: $_id
@@ -92,13 +88,11 @@ export const UPDATE_BACKGROUND = gql`
       company: $company
       startYear: $startYear
       endYear: $endYear
-      description: $description
     ) {
       jobTitle
       company
       startYear
       endYear
-      description
     }
   }
 `;

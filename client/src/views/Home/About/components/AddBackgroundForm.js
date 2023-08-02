@@ -79,16 +79,6 @@ const AddBackgroundForm = ({ show, setShow }) => {
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              placeholder="Description"
-              name="description"
-              value={formData.description || ""}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
           <Button className="customButton" variant="primary" type="submit">
             <MdAddCircle />
           </Button>

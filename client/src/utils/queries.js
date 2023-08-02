@@ -65,7 +65,6 @@ export const GET_PORTFOLIO = gql`
         company
         startYear
         endYear
-        description
       }
       education {
         _id
@@ -129,7 +128,6 @@ export const GET_BACKGROUND = gql`
       company
       startYear
       endYear
-      description
     }
   }
 `;

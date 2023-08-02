@@ -158,7 +158,7 @@ const resolvers = {
 
     addBackground: async (
       parent,
-      { jobTitle, company, startYear, endYear, description },
+      { jobTitle, company, startYear, endYear },
       context
     ) => {
       if (context.user) {
@@ -167,7 +167,6 @@ const resolvers = {
           company,
           startYear,
           endYear,
-          description,
         });
 
         await User.findOneAndUpdate(
@@ -181,13 +180,13 @@ const resolvers = {
 
     updateBackground: async (
       parent,
-      { _id, jobTitle, company, startYear, endYear, description },
+      { _id, jobTitle, company, startYear, endYear },
       context
     ) => {
       if (context.user) {
         const background = await Background.findOneAndUpdate(
           { _id },
-          { jobTitle, company, startYear, endYear, description },
+          { jobTitle, company, startYear, endYear },
           { new: true }
         );
 

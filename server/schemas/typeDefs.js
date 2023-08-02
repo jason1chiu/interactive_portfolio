@@ -41,7 +41,6 @@ const typeDefs = gql`
     company: String
     startYear: Int
     endYear: Int
-    description: String
   }
 
   type Skill {
@@ -130,7 +129,6 @@ const typeDefs = gql`
       company: String!
       startYear: Int!
       endYear: Int!
-      description: String!
     ): Background
     updateBackground(
       _id: ID!
@@ -138,7 +136,6 @@ const typeDefs = gql`
       company: String!
       startYear: Int!
       endYear: Int!
-      description: String!
     ): Background
     deleteBackground( _id: ID!): Background
     addSkill(name: String!, iconClassName: String!): Skill

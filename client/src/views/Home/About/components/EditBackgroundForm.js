@@ -95,16 +95,6 @@ const EditBackgroundForm = ({ show, setShow, id }) => {
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              name="description"
-              value={formData.description || ""}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
           <Button className="customButton mr-2" variant="primary" type="submit">
             <MdUpdate />
           </Button>

@@ -50,7 +50,6 @@ const BackgroundTable = () => {
               <th>Company</th>
               <th>Start</th>
               <th>End</th>
-              <th>Description</th>
               {Auth.loggedIn() && <th></th>}
             </tr>
           </thead>
@@ -61,7 +60,6 @@ const BackgroundTable = () => {
                 <td>{bg.company}</td>
                 <td>{bg.startYear}</td>
                 <td>{bg.endYear}</td>
-                <td>{bg.description}</td>
                 {Auth.loggedIn() && (
                   <td>
                     <Button
