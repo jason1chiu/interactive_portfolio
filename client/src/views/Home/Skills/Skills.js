@@ -1,11 +1,31 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import SkillBadge from "./components/SkillBadge";
-import AddSkillForm from "./components/AddSkillForm"; // new import
+import AddSkillForm from "./components/AddSkillForm";
 import Auth from "../../../utils/auth";
 import { MdAddCircle } from "react-icons/md";
 import { useQuery } from "@apollo/client";
 import { GET_PORTFOLIO } from "../../../utils/queries";
+
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4,
+    slidesToSlide: 4,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    slidesToSlide: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1,
+  },
+};
 
 const Skills = () => {
   const [showAdd, setShowAdd] = useState(false);
@@ -22,26 +42,39 @@ const Skills = () => {
     <Container id="skills-section" className="text-center">
       <h1 className="subheading">My Skills</h1>
       {Auth.loggedIn() && (
-        <Row>
-          <Col className="text-center">
-            <Button
-              className="customButton"
-              variant="primary"
-              onClick={() => setShowAdd(true)}
-            >
-              <MdAddCircle />
-            </Button>
-            <AddSkillForm show={showAdd} setShow={setShowAdd} />
-          </Col>
-        </Row>
+        <div className="text-center">
+          <Button
+            className="customButton"
+            variant="primary"
+            onClick={() => setShowAdd(true)}
+          >
+            <MdAddCircle />
+          </Button>
+          <AddSkillForm show={showAdd} setShow={setShowAdd} />
+        </div>
       )}
-      <Row>
+      <Carousel
+        swipeable={true}
+        draggable={true}
+        showDots={true}
+        responsive={responsive}
+        ssr={true} // means to render carousel on server-side.
+        infinite={true}
+        autoPlay={true}
+        keyBoardControl={true}
+        customTransition="all .5"
+        transitionDuration={3000}
+        containerClass="carousel-container"
+        removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-40-px"
+      >
         {skills.map((skill) => (
-          <Col key={skill._id} sm={6} md={4} lg={3} className="my-3">
+          <div key={skill._id} className="m-3">
             <SkillBadge skill={skill} />
-          </Col>
+          </div>
         ))}
-      </Row>
+      </Carousel>
     </Container>
   );
 };
