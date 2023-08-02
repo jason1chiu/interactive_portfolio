@@ -101,7 +101,7 @@ const resolvers = {
 
         // Resize the avatar using sharp
         const outputPath = `resized_avatar.jpg`;
-        await sharp(buffer).resize(500).toFile(outputPath);
+        await sharp(buffer).resize(200).toFile(outputPath);
 
         let result = await cloudinary.uploader.upload(outputPath);
 
@@ -136,7 +136,7 @@ const resolvers = {
 
         // Resize the avatar using sharp
         const outputPath = `resized_avatar.jpg`;
-        await sharp(buffer).resize(500).toFile(outputPath);
+        await sharp(buffer).resize(200).toFile(outputPath);
 
         let result = await cloudinary.uploader.upload(outputPath);
 
