@@ -1,31 +1,11 @@
 import React, { useEffect } from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col, Image, Accordion, Card } from "react-bootstrap";
 import InformationCard from "./components/InformationCard";
 import BackgroundTable from "./components/BackgroundTable";
 import EducationTable from "./components/EducationTable";
 import InterestsCard from "./components/InterestsCard";
 import { useQuery } from "@apollo/client";
 import { GET_PORTFOLIO } from "../../../utils/queries";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 1,
-    slidesToSlide: 1,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 1,
-    slidesToSlide: 1,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-    slidesToSlide: 1,
-  },
-};
 
 const About = () => {
   const { loading, data, refetch } = useQuery(GET_PORTFOLIO);
@@ -46,7 +26,6 @@ const About = () => {
   return (
     <Container id="about-section">
       <h1 className="text-center subheading">About Me</h1>
-
       <Row className="my-3">
         <Col
           md={12}
@@ -64,35 +43,43 @@ const About = () => {
             }}
           />
         </Col>
+      </Row>
+      <Row>
         <Col md={12}>
-          <Carousel
-            swipeable={true}
-            draggable={true}
-            showDots={false}
-            responsive={responsive}
-            infinite={true}
-            autoPlay={true}
-            keyBoardControl={true}
-            customTransition="all .5"
-            transitionDuration={4500}
-            removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
-            containerClass="carousel-container"
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-40-px"
-          >
-            <div>
-              <InformationCard />
-            </div>
-            <div>
-              <BackgroundTable />
-            </div>
-            <div>
-              <EducationTable />
-            </div>
-            <div>
-              <InterestsCard />
-            </div>
-          </Carousel>
+          <Accordion defaultActiveKey="0">
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="0">
+                Information
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="0">
+                <InformationCard />
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="1">
+                Background
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="1">
+                <BackgroundTable />
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="2">
+                Education
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="2">
+                <EducationTable />
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="3">
+                Interests
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="3">
+                <InterestsCard />
+              </Accordion.Collapse>
+            </Card>
+          </Accordion>
         </Col>
       </Row>
     </Container>

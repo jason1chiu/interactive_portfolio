@@ -27,21 +27,6 @@ const BackgroundTable = () => {
 
   return (
     <Card className="h-100">
-      <Card.Header className="d-flex justify-content-between align-items-center">
-        <h3 className="subheading">Background</h3>
-        {Auth.loggedIn() && (
-          <div>
-            <Button
-              className="customButton mr-2"
-              variant="primary"
-              onClick={() => setShowAdd(true)}
-            >
-              <MdAddCircle />
-            </Button>
-            <AddBackgroundForm show={showAdd} setShow={setShowAdd} />
-          </div>
-        )}
-      </Card.Header>
       <div className="table-responsive">
         <Table striped bordered hover variant="light">
           <thead>
@@ -88,6 +73,20 @@ const BackgroundTable = () => {
           </tbody>
         </Table>
       </div>
+      {Auth.loggedIn() && (
+        <Card.Footer className="d-flex justify-content-between align-items-center">
+          <div>
+            <Button
+              className="customButton mr-2"
+              variant="primary"
+              onClick={() => setShowAdd(true)}
+            >
+              <MdAddCircle />
+            </Button>
+            <AddBackgroundForm show={showAdd} setShow={setShowAdd} />
+          </div>
+        </Card.Footer>
+      )}
     </Card>
   );
 };

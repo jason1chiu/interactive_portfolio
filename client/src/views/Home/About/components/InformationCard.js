@@ -36,9 +36,14 @@ const InformationCard = () => {
 
   return (
     <Card className="h-100">
-      <Card.Header className="d-flex justify-content-between align-items-center">
-        <h3 className="subheading">Information</h3>
-        {Auth.loggedIn() && (
+      <Card.Body>
+        <Card.Text>Name: {name}</Card.Text>
+        <Card.Text>Title: {title}</Card.Text>
+        <Card.Text>Location: {location}</Card.Text>
+      </Card.Body>
+
+      {Auth.loggedIn() && (
+        <Card.Footer className="d-flex justify-content-between align-items-center">
           <div>
             {name || title || location ? (
               <>
@@ -65,14 +70,8 @@ const InformationCard = () => {
               </>
             )}
           </div>
-        )}
-      </Card.Header>
-
-      <Card.Body>
-        <Card.Text>Name: {name}</Card.Text>
-        <Card.Text>Title: {title}</Card.Text>
-        <Card.Text>Location: {location}</Card.Text>
-      </Card.Body>
+        </Card.Footer>
+      )}
     </Card>
   );
 };

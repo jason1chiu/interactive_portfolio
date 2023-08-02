@@ -27,21 +27,6 @@ const InterestsCard = () => {
 
   return (
     <Card className="h-100 shadow">
-      <Card.Header className="d-flex justify-content-between align-items-center">
-        <h3 className="subheading">Interests</h3>
-        {Auth.loggedIn() && (
-          <div>
-            <Button
-              className="customButton mr-2"
-              variant="primary"
-              onClick={() => setShowAdd(true)}
-            >
-              <MdAddCircle />
-            </Button>
-            <AddInterestForm show={showAdd} setShow={setShowAdd} />
-          </div>
-        )}
-      </Card.Header>
       <Card.Body>
         <ListGroup variant="flush">
           {interests.map((interest) => (
@@ -77,6 +62,20 @@ const InterestsCard = () => {
           ))}
         </ListGroup>
       </Card.Body>
+      {Auth.loggedIn() && (
+        <Card.Footer className="d-flex justify-content-between align-items-center">
+          <div>
+            <Button
+              className="customButton mr-2"
+              variant="primary"
+              onClick={() => setShowAdd(true)}
+            >
+              <MdAddCircle />
+            </Button>
+            <AddInterestForm show={showAdd} setShow={setShowAdd} />
+          </div>
+        </Card.Footer>
+      )}
     </Card>
   );
 };
