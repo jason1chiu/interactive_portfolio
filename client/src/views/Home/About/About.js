@@ -64,17 +64,17 @@ const About = () => {
             }}
           />
         </Col>
-        <Col md={12} className="my-3">
+        <Col md={12}>
           <Carousel
-            swipeable={false}
-            draggable={false}
+            swipeable={true}
+            draggable={true}
             showDots={true}
             responsive={responsive}
             infinite={true}
             autoPlay={true}
             keyBoardControl={true}
             customTransition="all .5"
-            transitionDuration={6000}
+            transitionDuration={4500}
             removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
             containerClass="carousel-container"
             dotListClass="custom-dot-list-style"
