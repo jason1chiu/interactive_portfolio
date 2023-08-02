@@ -68,7 +68,7 @@ const About = () => {
           <Carousel
             swipeable={true}
             draggable={true}
-            showDots={true}
+            showDots={false}
             responsive={responsive}
             infinite={true}
             autoPlay={true}
