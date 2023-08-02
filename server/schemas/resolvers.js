@@ -301,7 +301,7 @@ const resolvers = {
     
     addProject: async (
       parent,
-      { name, description, image, liveLink, codeLink },
+      { name, description, image, liveLink, codeLink, technologies },
       context
     ) => {
       if (context.user) {
@@ -324,6 +324,7 @@ const resolvers = {
           image: result.url,
           liveLink,
           codeLink,
+          technologies,
         });
 
         await User.findOneAndUpdate(
@@ -337,7 +338,7 @@ const resolvers = {
 
     updateProject: async (
       parent,
-      { _id, name, description, image, liveLink, codeLink },
+      { _id, name, description, image, liveLink, codeLink, technologies },
       context
     ) => {
       if (context.user) {
@@ -362,6 +363,7 @@ const resolvers = {
             image: result.url,
             liveLink,
             codeLink,
+            technologies,
           },
           { new: true }
         );

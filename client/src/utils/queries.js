@@ -44,6 +44,7 @@ export const GET_ME = gql`
         image
         liveLink
         codeLink
+        technologies
       }
     }
   }
@@ -90,6 +91,7 @@ export const GET_PORTFOLIO = gql`
         image
         liveLink
         codeLink
+        technologies
       }
     }
   }
@@ -150,6 +152,7 @@ export const GET_PROJECT = gql`
       image
       liveLink
       codeLink
+      technologies
     }
   }
 `;

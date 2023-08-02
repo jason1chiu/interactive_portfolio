@@ -56,6 +56,7 @@ const typeDefs = gql`
     image: String
     liveLink: String
     codeLink: String
+    technologies: String
   }
 
   type ContactMessage {
@@ -145,6 +146,7 @@ const typeDefs = gql`
       image: String!
       liveLink: String
       codeLink: String
+      technologies: String!
     ): Project
     updateProject(
       _id: ID!
@@ -153,6 +155,7 @@ const typeDefs = gql`
       image: String!
       liveLink: String
       codeLink: String
+      technologies: String!
     ): Project
     deleteProject(_id: ID!): Project
     addContactMessage(

@@ -19,6 +19,10 @@ const projectSchema = new Schema({
   codeLink: {
     type: String,
   },
+  technologies: {
+    type: String,
+    required: true,
+  },
 });
 
 const Project = model('Project', projectSchema);

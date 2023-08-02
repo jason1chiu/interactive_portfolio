@@ -195,6 +195,7 @@ export const ADD_PROJECT = gql`
     $image: String!
     $liveLink: String
     $codeLink: String
+    $technologies: String!
   ) {
     addProject(
       name: $name
@@ -202,12 +203,14 @@ export const ADD_PROJECT = gql`
       image: $image
       liveLink: $liveLink
       codeLink: $codeLink
+      technologies: $technologies
     ) {
       name
       description
       image
       liveLink
       codeLink
+      technologies
     }
   }
 `;
@@ -220,6 +223,7 @@ export const UPDATE_PROJECT = gql`
     $image: String!
     $liveLink: String
     $codeLink: String
+    $technologies: String!
   ) {
     updateProject(
       _id: $_id
@@ -228,6 +232,7 @@ export const UPDATE_PROJECT = gql`
       image: $image
       liveLink: $liveLink
       codeLink: $codeLink
+      technologies: $technologies
     ) {
       _id
       name
@@ -235,6 +240,7 @@ export const UPDATE_PROJECT = gql`
       image
       liveLink
       codeLink
+      technologies
     }
   }
 `;

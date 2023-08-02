@@ -13,6 +13,7 @@ const AddProjectForm = ({ show, setShow }) => {
     image: "",
     liveLink: "",
     codeLink: "",
+    technologies: "",
   });
   const [, setFile] = useState();
   const [fileName, setFileName] = useState("");
@@ -61,6 +62,7 @@ const AddProjectForm = ({ show, setShow }) => {
         image: "",
         liveLink: "",
         codeLink: "",
+        technologies: "",
       });
 
       setShow(false);
@@ -116,6 +118,16 @@ const AddProjectForm = ({ show, setShow }) => {
                 placeholder="Live Link"
                 name="liveLink"
                 value={project.liveLink}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Technologies</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Technologies"
+                name="technologies"
+                value={project.technologies}
                 onChange={handleInputChange}
               />
             </Form.Group>

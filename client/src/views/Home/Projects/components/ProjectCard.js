@@ -26,6 +26,7 @@ const ProjectCard = ({ project }) => {
     image = "https://via.placeholder.com/500",
     liveLink = "https://github.com",
     codeLink = "https://github.com",
+    technologies = "Technologies Used",
   } = project || {};
 
   return (
@@ -47,6 +48,12 @@ const ProjectCard = ({ project }) => {
         </Card.Title>
         <Card.Text as={"div"} style={{ fontSize: "1rem", marginBottom: "1rem" }}>
           <Typist key={description} cursor={{ hideWhenDone: true }}>{description}</Typist>
+        </Card.Text>
+        <Card.Title as={"div"} style={{ fontSize: "1rem", fontWeight: "bold" }}>
+          <Typist key={technologies} cursor={{ hideWhenDone: true }}>Technologies Used</Typist>
+        </Card.Title>
+        <Card.Text as={"div"} style={{ fontSize: "1rem", marginBottom: "1rem" }}>
+          <Typist key={technologies} cursor={{ hideWhenDone: true }}>{technologies}</Typist>
         </Card.Text>
         <Row>
           <Col className="text-left">

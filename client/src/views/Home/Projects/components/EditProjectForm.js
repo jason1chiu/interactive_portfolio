@@ -13,6 +13,7 @@ const EditProjectForm = ({ projectId, show, setShow }) => {
     image: "",
     liveLink: "",
     codeLink: "",
+    technologies: "",
   });
 
   const [, setFile] = useState();
@@ -141,6 +142,16 @@ const EditProjectForm = ({ projectId, show, setShow }) => {
               onChange={handleInputChange}
             />
           </Form.Group>
+          <Form.Group>
+              <Form.Label>Technologies</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Technologies"
+                name="technologies"
+                value={project.technologies}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
           <Form.Group>
             <Form.Label>Image</Form.Label>
             <Form.File
