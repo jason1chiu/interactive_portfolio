@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
-import { UPDATE_BACKGROUND } from "../../../../utils/mutations";
+import { UPDATE_BACKGROUND, DELETE_BACKGROUND } from "../../../../utils/mutations";
 import { Button, Modal, Form } from "react-bootstrap";
-import { MdUpdate } from "react-icons/md";
+import { MdUpdate, MdDelete } from "react-icons/md";
 
 const EditBackgroundForm = ({ show, setShow, id }) => {
   const { data } = useQuery(GET_PORTFOLIO);
@@ -12,6 +12,11 @@ const EditBackgroundForm = ({ show, setShow, id }) => {
   );
   const [updateBackground] = useMutation(UPDATE_BACKGROUND, {
     variables: { _id: id, ...formData },
+    refetchQueries: [{ query: GET_PORTFOLIO }],
+  });
+
+  const [deleteBackground] = useMutation(DELETE_BACKGROUND, {
+    variables: { _id: id },
     refetchQueries: [{ query: GET_PORTFOLIO }],
   });
 
@@ -30,6 +35,15 @@ const EditBackgroundForm = ({ show, setShow, id }) => {
     try {
       await updateBackground();
       setFormData({});
+      setShow(false);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      await deleteBackground();
       setShow(false);
     } catch (e) {
       console.error(e);
@@ -91,8 +105,11 @@ const EditBackgroundForm = ({ show, setShow, id }) => {
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Button className="customButton" variant="primary" type="submit">
+          <Button className="customButton mr-2" variant="primary" type="submit">
             <MdUpdate />
+          </Button>
+          <Button className="customButton" variant="danger" onClick={handleDeleteClick}>
+            <MdDelete />
           </Button>
         </Form>
       </Modal.Body>
@@ -101,3 +118,4 @@ const EditBackgroundForm = ({ show, setShow, id }) => {
 };
 
 export default EditBackgroundForm;
+

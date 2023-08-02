@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
-import { UPDATE_EDUCATION } from "../../../../utils/mutations";
+import { DELETE_EDUCATION, UPDATE_EDUCATION } from "../../../../utils/mutations";
 import { Button, Modal, Form } from "react-bootstrap";
-import { MdUpdate } from "react-icons/md";
+import { MdUpdate, MdDelete } from "react-icons/md";
 
 const EditEducationForm = ({ show, setShow, id }) => {
   const { data } = useQuery(GET_PORTFOLIO);
@@ -12,6 +12,11 @@ const EditEducationForm = ({ show, setShow, id }) => {
   );
   const [updateEducation] = useMutation(UPDATE_EDUCATION, {
     variables: { _id: id, ...formData },
+    refetchQueries: [{ query: GET_PORTFOLIO }],
+  });
+
+  const [deleteEducation] = useMutation(DELETE_EDUCATION, {
+    variables: { _id: id },
     refetchQueries: [{ query: GET_PORTFOLIO }],
   });
 
@@ -35,6 +40,16 @@ const EditEducationForm = ({ show, setShow, id }) => {
       console.error(e);
     }
   };
+
+  const handleDeleteClick = async () => {
+    try {
+      await deleteEducation();
+      setShow(false);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
 
   return (
     <Modal show={show} onHide={() => setShow(false)}>
@@ -91,8 +106,11 @@ const EditEducationForm = ({ show, setShow, id }) => {
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Button className="customButton" variant="primary" type="submit">
+          <Button className="customButton mr-2" variant="primary" type="submit">
             <MdUpdate />
+          </Button>
+          <Button className="customButton" variant="danger" onClick={handleDeleteClick}>
+            <MdDelete />
           </Button>
         </Form>
       </Modal.Body>

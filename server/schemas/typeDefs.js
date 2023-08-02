@@ -121,8 +121,10 @@ const typeDefs = gql`
       startYear: Int!
       endYear: Int!
     ): Education
+    deleteEducation(_id: ID!): Education
     addInterest(interest: String!): Interest
     updateInterest(_id: ID!, interest: String!): Interest
+    deleteInterest(_id: ID!): Interest
     addBackground(
       jobTitle: String!
       company: String!
@@ -138,6 +140,7 @@ const typeDefs = gql`
       endYear: Int!
       description: String!
     ): Background
+    deleteBackground( _id: ID!): Background
     addSkill(name: String!, iconClassName: String!): Skill
     addProject(
       name: String!

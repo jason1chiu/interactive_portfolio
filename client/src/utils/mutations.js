@@ -103,6 +103,14 @@ export const UPDATE_BACKGROUND = gql`
   }
 `;
 
+export const DELETE_BACKGROUND = gql`
+  mutation deleteBackground($_id: ID!) {
+    deleteBackground(_id: $_id) {
+      _id
+    }
+  }
+`;
+
 export const ADD_EDUCATION = gql`
   mutation addEducation(
     $school: String!
@@ -153,6 +161,14 @@ export const UPDATE_EDUCATION = gql`
   }
 `;
 
+export const DELETE_EDUCATION = gql`
+  mutation deleteEducation($_id: ID!) {
+    deleteEducation(_id: $_id) {
+      _id
+    }
+  }
+`;
+
 export const ADD_INTEREST = gql`
   mutation addInterest($interest: String!) {
     addInterest(interest: $interest) {
@@ -166,6 +182,14 @@ export const UPDATE_INTEREST = gql`
   mutation updateInterest($_id: ID!, $interest: String!) {
     updateInterest(_id: $_id, interest: $interest) {
       interest
+    }
+  }
+`;
+
+export const DELETE_INTEREST = gql`
+  mutation deleteInterest($_id: ID!) {
+    deleteInterest(_id: $_id) {
+      _id
     }
   }
 `;
@@ -225,15 +249,6 @@ export const DELETE_PROJECT = gql`
   mutation deleteProject($_id: ID!) {
     deleteProject(_id: $_id) {
       _id
-    }
-  }
-`;
-
-export const UPLOAD_IMAGE = gql`
-  mutation uploadImage($image: String!) {
-    uploadImage(image: $image) {
-      _id
-      image
     }
   }
 `;

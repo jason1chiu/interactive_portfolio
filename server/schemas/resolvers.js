@@ -197,6 +197,15 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
+    deleteBackground: async (parent, { _id }, context) => {
+      if (context.user) {
+        // Assuming you have a function in your controller to handle deleting a project
+        let background = await Background.findByIdAndDelete(_id);
+        return background;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+
     addEducation: async (
       parent,
       { school, degree, fieldOfStudy, startYear, endYear },
@@ -238,6 +247,15 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
+    deleteEducation: async (parent, { _id }, context) => {
+      if (context.user) {
+        // Assuming you have a function in your controller to handle deleting a project
+        let education = await Education.findByIdAndDelete(_id);
+        return education;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+
     addInterest: async (parent, { interest }, context) => {
       if (context.user) {
         const newInterest = await Interests.create({
@@ -271,6 +289,15 @@ const resolvers = {
       }
     
       throw new AuthenticationError("You need to be logged in!");
+    },
+
+    deleteInterest: async (parent, { _id }, context) => {
+      if (context.user) {
+        // Assuming you have a function in your controller to handle deleting a project
+        let interest = await Interests.findByIdAndDelete(_id);
+        return interest;
+      }
+      throw new AuthenticationError("Not logged in");
     },
     
     addProject: async (

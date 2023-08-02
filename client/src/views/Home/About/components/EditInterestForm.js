@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
-import { UPDATE_INTEREST } from "../../../../utils/mutations";
+import { UPDATE_INTEREST, DELETE_INTEREST } from "../../../../utils/mutations";
 import { Button, Modal, Form } from "react-bootstrap";
-import { MdUpdate } from "react-icons/md";
+import { MdUpdate, MdDelete } from "react-icons/md";
 
 const EditInterestForm = ({ show, setShow, id }) => {
   const { data } = useQuery(GET_PORTFOLIO);
@@ -12,6 +12,11 @@ const EditInterestForm = ({ show, setShow, id }) => {
   );
   const [updateInterest] = useMutation(UPDATE_INTEREST, {
     variables: { _id: id, interest: formData.interest },
+    refetchQueries: [{ query: GET_PORTFOLIO }],
+  });
+
+  const [deleteInterest] = useMutation(DELETE_INTEREST, {
+    variables: { _id: id },
     refetchQueries: [{ query: GET_PORTFOLIO }],
   });
 
@@ -28,9 +33,17 @@ const EditInterestForm = ({ show, setShow, id }) => {
     event.preventDefault();
 
     try {
-      const response = await updateInterest();
-      console.log(response);
+      await updateInterest();
       setFormData({});
+      setShow(false);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      await deleteInterest();
       setShow(false);
     } catch (e) {
       console.error(e);
@@ -54,8 +67,11 @@ const EditInterestForm = ({ show, setShow, id }) => {
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Button className="customButton" variant="primary" type="submit">
+          <Button className="customButton mr-2" variant="primary" type="submit">
             <MdUpdate />
+          </Button>
+          <Button className="customButton" variant="danger" onClick={handleDeleteClick}>
+            <MdDelete />
           </Button>
         </Form>
       </Modal.Body>
