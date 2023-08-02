@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import { Button, Modal, Form } from "react-bootstrap";
 import { ADD_BACKGROUND } from "../../../../utils/mutations";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
+import { MdAddCircle } from "react-icons/md";
 
 const AddBackgroundForm = ({ show, setShow }) => {
   const [formData, setFormData] = useState({});
@@ -14,7 +15,8 @@ const AddBackgroundForm = ({ show, setShow }) => {
     const { name, value } = event.target;
     setFormData({
       ...formData,
-      [name]: name === "startYear" || name === "endYear" ? parseInt(value) : value,
+      [name]:
+        name === "startYear" || name === "endYear" ? parseInt(value) : value,
     });
   };
 
@@ -88,7 +90,7 @@ const AddBackgroundForm = ({ show, setShow }) => {
             />
           </Form.Group>
           <Button className="customButton" variant="primary" type="submit">
-            Submit
+            <MdAddCircle />
           </Button>
         </Form>
       </Modal.Body>

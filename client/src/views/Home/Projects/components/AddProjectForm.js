@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../../../../utils/mutations";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Image } from "react-bootstrap";
+import defaultImage from "../../../../assets/defaultImage.png";
+import { MdAddCircle } from "react-icons/md";
 
 const AddProjectForm = ({ show, setShow }) => {
-
   const [project, setProject] = useState({
     name: "",
     description: "",
@@ -26,7 +27,7 @@ const AddProjectForm = ({ show, setShow }) => {
       console.error(error);
     },
     refetchQueries: [{ query: GET_PORTFOLIO }],
-  });  
+  });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -42,7 +43,7 @@ const AddProjectForm = ({ show, setShow }) => {
     reader.onload = () => {
       project.image = reader.result;
       setProject({ ...project });
-    }
+    };
     reader.readAsDataURL(file);
     setFile(file);
     setFileName(file.name);
@@ -126,9 +127,15 @@ const AddProjectForm = ({ show, setShow }) => {
                 custom
                 onChange={handleFileChange}
               />
+              <Image
+                className="mt-3"
+                style={{ width: "100px", borderRadius: "5%" }}
+                src={project.image || defaultImage}
+                alt="image"
+              />
             </Form.Group>
             <Button className="customButton" variant="primary" type="submit">
-              Submit
+            <MdAddCircle />
             </Button>
           </Form>
         </Modal.Body>

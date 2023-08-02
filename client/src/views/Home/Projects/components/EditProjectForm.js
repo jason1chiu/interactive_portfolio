@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_PORTFOLIO, GET_PROJECT } from "../../../../utils/queries";
 import { UPDATE_PROJECT, DELETE_PROJECT } from "../../../../utils/mutations";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Image } from "react-bootstrap";
 import { MdUpdate, MdDelete } from "react-icons/md";
+import defaultImage from "../../../../assets/defaultImage.png";
 
 const EditProjectForm = ({ projectId, show, setShow }) => {
   const [project, setProject] = useState({
@@ -148,8 +149,14 @@ const EditProjectForm = ({ projectId, show, setShow }) => {
               custom
               onChange={handleFileChange}
             />
+            <Image
+              className="mt-3"
+              style={{ width: "100px", borderRadius: "5%" }}
+              src={project.image || defaultImage}
+              alt="image"
+            />
           </Form.Group>
-          <Button className="customButton" variant="primary" type="submit">
+          <Button className="customButton mr-2" variant="primary" type="submit">
             <MdUpdate />
           </Button>
           <Button

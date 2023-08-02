@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
 import { UPDATE_INTEREST } from "../../../../utils/mutations";
 import { Button, Modal, Form } from "react-bootstrap";
+import { MdUpdate } from "react-icons/md";
 
 const EditInterestForm = ({ show, setShow, id }) => {
   const { data } = useQuery(GET_PORTFOLIO);
@@ -13,19 +14,19 @@ const EditInterestForm = ({ show, setShow, id }) => {
     variables: { _id: id, interest: formData.interest },
     refetchQueries: [{ query: GET_PORTFOLIO }],
   });
-  
-  
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
       ...formData,
-      [name]: name === "startYear" || name === "endYear" ? parseInt(value) : value,
+      [name]:
+        name === "startYear" || name === "endYear" ? parseInt(value) : value,
     });
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
       const response = await updateInterest();
       console.log(response);
@@ -54,7 +55,7 @@ const EditInterestForm = ({ show, setShow, id }) => {
             />
           </Form.Group>
           <Button className="customButton" variant="primary" type="submit">
-            Submit
+            <MdUpdate />
           </Button>
         </Form>
       </Modal.Body>

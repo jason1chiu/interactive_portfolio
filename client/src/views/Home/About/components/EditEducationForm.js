@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
 import { UPDATE_EDUCATION } from "../../../../utils/mutations";
 import { Button, Modal, Form } from "react-bootstrap";
+import { MdUpdate } from "react-icons/md";
 
 const EditEducationForm = ({ show, setShow, id }) => {
   const { data } = useQuery(GET_PORTFOLIO);
@@ -91,7 +92,7 @@ const EditEducationForm = ({ show, setShow, id }) => {
             />
           </Form.Group>
           <Button className="customButton" variant="primary" type="submit">
-            Submit
+            <MdUpdate />
           </Button>
         </Form>
       </Modal.Body>

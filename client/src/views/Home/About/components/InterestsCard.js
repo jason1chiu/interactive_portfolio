@@ -22,7 +22,8 @@ const InterestsCard = () => {
     return <div>Loading...</div>;
   }
 
-  const interests = data && data.getPortfolio ? data.getPortfolio.interests : [];
+  const interests =
+    data && data.getPortfolio ? data.getPortfolio.interests : [];
 
   return (
     <Card className="h-100 shadow">
@@ -44,7 +45,10 @@ const InterestsCard = () => {
       <Card.Body>
         <ListGroup variant="flush">
           {interests.map((interest) => (
-            <ListGroupItem key={interest._id} className="d-flex justify-content-between align-items-center">
+            <ListGroupItem
+              key={interest._id}
+              className="d-flex justify-content-between align-items-center"
+            >
               {interest.interest}
               {Auth.loggedIn() && (
                 <div>

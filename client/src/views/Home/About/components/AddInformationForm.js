@@ -3,6 +3,8 @@ import { useMutation } from "@apollo/client";
 import { ADD_INFORMATION } from "../../../../utils/mutations";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
 import { Button, Modal, Form, Image } from "react-bootstrap";
+import defaultAvatar from "../../../../assets/defaultAvatar.png";
+import { MdAddCircle } from "react-icons/md";
 
 const AddInformationForm = ({ show, setShow }) => {
   const [formData, setFormData] = useState({});
@@ -91,13 +93,14 @@ const AddInformationForm = ({ show, setShow }) => {
               onChange={handleFileChange}
             />
             <Image
+              className="mt-3"
               style={{ width: "100px", borderRadius: "5%" }}
-              src={formData.avatar}
+              src={formData.avatar || defaultAvatar}
               alt="avatar"
             />
           </Form.Group>
           <Button className="customButton" variant="primary" type="submit">
-            Submit
+            <MdAddCircle />
           </Button>
         </Form>
       </Modal.Body>

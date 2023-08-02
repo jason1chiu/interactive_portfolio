@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Button, Modal, Form, Image } from "react-bootstrap";
 import { GET_PORTFOLIO } from "../../../../utils/queries";
 import { UPDATE_INFORMATION } from "../../../../utils/mutations";
+import { MdUpdate } from "react-icons/md";
 
 const EditInformationForm = ({ show, setShow }) => {
   const { data } = useQuery(GET_PORTFOLIO);
@@ -104,13 +105,14 @@ const EditInformationForm = ({ show, setShow }) => {
               onChange={handleFileChange}
             />
             <Image
+              className="mt-3"
               style={{ width: "100px", borderRadius: "5%" }}
               src={formData.avatar}
               alt="avatar"
             />
           </Form.Group>
           <Button className="customButton" variant="primary" type="submit">
-            Submit
+            <MdUpdate />
           </Button>
         </Form>
       </Modal.Body>
