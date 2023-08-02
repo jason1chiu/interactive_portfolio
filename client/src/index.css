@@ -68,5 +68,6 @@ h6 {
 }
 
 .carousel-item-padding-40-px {
-  padding: 0 1rem; /* This adds a 15px space on the left and right of each card */
+  padding: 0 1rem;
+  font-size: 1rem;
 }

@@ -40,7 +40,7 @@ const Skills = () => {
 
   return (
     <Container id="skills-section" className="text-center">
-      <h1 className="subheading">My Skills</h1>
+      <h1 className="subheading">Skills</h1>
       {Auth.loggedIn() && (
         <div className="text-center">
           <Button
